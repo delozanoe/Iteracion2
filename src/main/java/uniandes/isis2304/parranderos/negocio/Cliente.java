@@ -17,7 +17,7 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 
 
 	/**
@@ -26,7 +26,7 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private char pazYSalvo;
 
 	/**
@@ -35,7 +35,7 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<String> planConsumo;
 
 	/**
@@ -44,7 +44,7 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Habitacion habitacion;
 
 	/**
@@ -53,9 +53,9 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<ReservaHabitacion> reservaHabitacion;
-	
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,12 +63,15 @@ public class Cliente extends Usuario
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<ReservaServicio> reservas;
 
+	private ArrayList<Convencion> convenciones;
+
 	public Cliente( Integer id, char pazYSalvo, ArrayList<String> planConsumo, Habitacion habitacion,
-			ArrayList<ReservaHabitacion> reserva, ArrayList<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo) {
-		
+			ArrayList<ReservaHabitacion> reserva, ArrayList<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, ArrayList<Convencion> convenciones)
+			 {
+
 		super(nombre, nombre, numeroDocumento, nombre, id);
 		this.id = id;
 		this.nombre = nombre;
@@ -77,9 +80,10 @@ public class Cliente extends Usuario
 		this.habitacion = habitacion;
 		this.reservaHabitacion = reserva;
 		this.reservas = reservas;
+		this.convenciones = convenciones;
 	}
 
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -103,7 +107,7 @@ public class Cliente extends Usuario
 		{
 			return 'T';
 		}
-		else 
+		else
 		{
 			return 'F';
 		}
@@ -145,13 +149,21 @@ public class Cliente extends Usuario
 		this.reservas = reservas;
 	}
 
+	public ArrayList<Convencion> getConvencion()
+	{
+		return convenciones;
+	}
+
+	public void setConvenciones(ArrayList<Convencion> convenciones)
+	{
+		this.convenciones = convenciones;
+	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	
-	
+
+
 
 }
-

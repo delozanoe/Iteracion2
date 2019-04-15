@@ -17,7 +17,7 @@ public class ReservaHabitacion
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String fechaEntrada;
 
 	/**
@@ -26,7 +26,7 @@ public class ReservaHabitacion
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String fechaSalida;
 
 	/**
@@ -35,7 +35,7 @@ public class ReservaHabitacion
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private int numeroPersonas;
 
 	/**
@@ -44,7 +44,7 @@ public class ReservaHabitacion
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Hotel hotel;
 
 	/**
@@ -53,11 +53,13 @@ public class ReservaHabitacion
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Cliente cliente;
 
+	private Convencion convencion;
+
 	public ReservaHabitacion(String fechaEntrada, String fechaSalida, Integer numeroPersonas, Hotel hotel,
-			Cliente cliente, Integer id) throws Exception {
+			Cliente cliente, Integer id, Convencion convencion) throws Exception {
 		super();
 		this.id= id;
 		this.fechaEntrada = fechaEntrada;
@@ -65,10 +67,11 @@ public class ReservaHabitacion
 		this.numeroPersonas = numeroPersonas;
 		this.hotel = hotel;
 		this.cliente = cliente;
-		
+		this.convencion = convencion;
+
 	}
 
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -119,13 +122,21 @@ public class ReservaHabitacion
 		this.cliente = cliente;
 	}
 
+	public Convencion getConvencion()
+	{
+		return convencion;
+	}
+
+	public void setConvencion(Convencion convencion)
+	{
+		this.convencion = convencion;
+	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	
-	
-	
-}
 
+
+
+}

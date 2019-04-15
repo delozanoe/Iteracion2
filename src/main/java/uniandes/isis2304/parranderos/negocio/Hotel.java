@@ -17,7 +17,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String pais;
 
 	/**
@@ -26,7 +26,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String ciudad;
 
 	/**
@@ -35,7 +35,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private int ofertaHabitacional;
 
 	/**
@@ -44,7 +44,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<Habitacion> habitaciones;
 
 	/**
@@ -53,7 +53,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<ReservaHabitacion> reservas;
 
 	/**
@@ -62,7 +62,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<Empleado> empleados;
 
 	/**
@@ -71,7 +71,7 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<Servicio> servicios;
 
 	/**
@@ -80,14 +80,16 @@ public class Hotel
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<PlanConsumo> planesConsumo;
-	
+
 	private ArrayList<TipoEmpleado> tiposEmpleados;
+
+	private ArrayList<Convencion> convenciones; 
 
 	public Hotel(Integer id, String pais, String ciudad, int ofertaHabitacional, ArrayList<Habitacion> habitaciones,
 			ArrayList<ReservaHabitacion> reservas, ArrayList<Empleado> empleado, ArrayList<Servicio> servicios,
-			ArrayList<PlanConsumo> planesConsumo, ArrayList<TipoEmpleado> tiposEmpleados) {
+			ArrayList<PlanConsumo> planesConsumo, ArrayList<TipoEmpleado> tiposEmpleados, ArrayList<Convencion> convenciones) {
 		super();
 		this.id= id;
 		this.pais = pais;
@@ -99,9 +101,10 @@ public class Hotel
 		this.servicios = servicios;
 		this.planesConsumo = planesConsumo;
 		this.tiposEmpleados = tiposEmpleados;
+		this.convenciones = convenciones;
 	}
-	
-	
+
+
 
 	public ArrayList<Empleado> getEmpleados() {
 		return empleados;
@@ -214,7 +217,16 @@ public class Hotel
 	public void setPlanConsumo(ArrayList<PlanConsumo> planConsumo) {
 		this.planesConsumo = planConsumo;
 	}
-	
+
+	public ArrayList<Convencion> getConvencion()
+	{
+		return convenciones;
+	}
+
+	public void setConvenciones(ArrayList<Convencion> concenciones)
+	{
+		this.convenciones = concenciones;
+	}
 	
 
 	/**
@@ -222,8 +234,7 @@ public class Hotel
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	
-	
+
+
 
 }
-

@@ -16,7 +16,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String horaInicio;
 
 	/**
@@ -25,7 +25,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private int duracion;
 
 	/**
@@ -34,7 +34,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String dia;
 
 	/**
@@ -43,7 +43,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Integer id;
 
 	/**
@@ -52,7 +52,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private String lugar;
 
 	/**
@@ -61,7 +61,7 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Cliente cliente;
 
 	/**
@@ -70,11 +70,13 @@ public class ReservaServicio
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Servicio servicio;
 
+	private Convencion convencion;
+
 	public ReservaServicio(String horaInicio, int duracion, String dia, Integer id, String lugar, Cliente cliente,
-			Servicio servicio) {
+			Servicio servicio, Convencion convencion) {
 		super();
 		this.horaInicio = horaInicio;
 		this.duracion = duracion;
@@ -83,8 +85,9 @@ public class ReservaServicio
 		this.lugar = lugar;
 		this.cliente = cliente;
 		this.servicio = servicio;
-		
-		
+		this.convencion = convencion;
+
+
 	}
 
 	public String getHoraInicio() {
@@ -143,12 +146,20 @@ public class ReservaServicio
 		this.servicio = servicio;
 	}
 
+	public Convencion getConvencion()
+	{
+		return convencion;
+	}
+
+	public void setConvencion(Convencion nuevaConvencion)
+	{
+		this.convencion = nuevaConvencion;
+	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	
+
 
 }
-

@@ -17,9 +17,9 @@ public class PlanConsumo
 	 * @generated
 	 * @ordered
 	 */
-	
-	
-	
+
+
+
 	private String descripcion;
 
 	/**
@@ -28,7 +28,7 @@ public class PlanConsumo
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private Hotel hotel;
 
 	/**
@@ -37,19 +37,22 @@ public class PlanConsumo
 	 * @generated
 	 * @ordered
 	 */
-	
+
 	private ArrayList<Habitacion> habitacion;
 
-	public PlanConsumo(String descripcion, Hotel hotel, ArrayList<Habitacion> habitacion, Integer id) {
+	private ArrayList<Convencion> convenciones;
+
+	public PlanConsumo(String descripcion, Hotel hotel, ArrayList<Habitacion> habitacion, Integer id, ArrayList<Convencion> convenciones) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.hotel = hotel;
 		this.habitacion = habitacion;
+		this.convenciones = convenciones;
 	}
 
-	
-	
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -89,6 +92,14 @@ public class PlanConsumo
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	
-}
+	 public ArrayList<Convencion> getConvencion()
+	 {
+		return convenciones;
+	 }
 
+	 public void setConvenciones(ArrayList<Convencion> convenciones)
+	 {
+		 this.convenciones = convenciones; 
+	 }
+
+}

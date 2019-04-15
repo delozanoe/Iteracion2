@@ -577,7 +577,7 @@ public class PersistenciaCadenaHotelera
 
             log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new Hotel(id, pais, ciudad, ofertaHabitacional, null, null, null, null, null, null);
+            return new Hotel(id, pais, ciudad, ofertaHabitacional, null, null, null, null, null, null, null);
         }
         catch (Exception e)
         {
