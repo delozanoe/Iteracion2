@@ -1,0 +1,19 @@
+﻿{
+	"title": "Nombres de las tablas de Cadena Hotelera Uniandes para pruebas de la aplicación cuando la base de datos no existe o está caida",
+	"unidadPersistencia": "CadenaHoteleraErrorDS",
+	"tablas":
+	[
+		"CadenaHotera_sequence",
+		"X_CLIENTE",
+		"X_CONSUMOPORHABITACION",
+		"X_HOTEL",
+		"X_PLANCONSUMO",
+		"X_PRODUCTOCONSUMOPORHABITACION",
+		"X_RESERVA",
+		"X_RESERVAHABITACION",
+		"X_SERVICIO",
+		"X_SERVICIOCONSUMO",
+		"X_SERVICIOPRODUCTO",
+		"X_USUARIO"
+	]
+}

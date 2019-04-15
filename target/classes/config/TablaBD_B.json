@@ -1,0 +1,19 @@
+{
+	"title": "Nombres de las tablas de CadenaHotelera Uniandes para la aplicación ",
+	"unidadPersistencia": "CadenaHotelera",
+	"tablas":
+	[
+		"CadenaHotera_sequence",
+		"B_CLIENTE",
+		"B_CONSUMOPORHABITACION",
+		"B_HOTEL",
+		"B_PLANCONSUMO",
+		"B_PRODUCTOCONSUMOPORHABITACION",
+		"B_RESERVA",
+		"B_RESERVAHABITACION",
+		"B_SERVICIO",
+		"B_SERVICIOCONSUMO",
+		"B_SERVICIOPRODUCTO",
+		"B_USUARIO"
+	]
+}
