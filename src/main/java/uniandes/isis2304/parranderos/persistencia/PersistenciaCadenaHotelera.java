@@ -93,6 +93,10 @@ public class PersistenciaCadenaHotelera
 	
 	private SQLTipoHabitacion sqlTipoHabitacion;
 	
+	private SQLConvencion sqlConvencion; 
+	
+	private SQLMantenimiento sqlMantenimiento;
+	
 	
 	private PersistenciaCadenaHotelera()
 	{
@@ -119,6 +123,8 @@ public class PersistenciaCadenaHotelera
 		tablas.add("TIPOEMPLEADO");
 		tablas.add("TIPOSERVICIO");
 		tablas.add("TIPOHABITACION");
+		tablas.add("CONVENCION");
+		tablas.add("MANTENIMIENTO");
 
 		
 	}
@@ -203,6 +209,9 @@ public class PersistenciaCadenaHotelera
 		sqlTipoEmpleado = new SQLTipoEmpleado(this);
 		sqlTipoHabitacion = new SQLTipoHabitacion(this);
 		sqlTipoServicio = new SQLTipoServicio(this);
+		
+		sqlMantenimiento = new SQLMantenimiento(this);
+		sqlConvencion = new SQLConvencion(this);
 	}
 
 
@@ -303,6 +312,16 @@ public class PersistenciaCadenaHotelera
 	public String getSqlTipoHabitacion()
 	{
 		return tablas.get(19);
+	}
+	
+	public String getSqlConvencion()
+	{
+		return tablas.get(20);
+	}
+	
+	public String getSQLMantenimiento()
+	{
+		return tablas.get(21);
 	}
 	
 
