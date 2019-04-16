@@ -41,16 +41,28 @@ public class PlanConsumo
 	private ArrayList<Habitacion> habitacion;
 
 	private ArrayList<Convencion> convenciones;
+	
+	private ArrayList<Servicio> servicios ;
 
-	public PlanConsumo(String descripcion, Hotel hotel, ArrayList<Habitacion> habitacion, Integer id, ArrayList<Convencion> convenciones) {
+	public PlanConsumo(String descripcion, Hotel hotel, ArrayList<Habitacion> habitacion, Integer id, ArrayList<Convencion> convenciones, ArrayList<Servicio> servicios) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.hotel = hotel;
 		this.habitacion = habitacion;
 		this.convenciones = convenciones;
+		this.servicios = servicios;
 	}
 
+	public ArrayList<Servicio> getServicios()
+	{
+		return servicios;
+	}
+	
+	public void setServicios(ArrayList<Servicio> servicios)
+	{
+		this.servicios = servicios;
+	}
 
 
 	public Integer getId() {

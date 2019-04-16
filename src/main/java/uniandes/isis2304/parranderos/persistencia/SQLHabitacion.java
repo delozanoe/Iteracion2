@@ -18,10 +18,10 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	{
 		this.pha = pha;
 	}
-	public long adicionarHabitacion(PersistenceManager pm, Integer id, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idHotel, Integer idConsumoHabitacion, Integer idTipoHabitacion, Integer idPlanConsumo) 
+	public long adicionarHabitacion(PersistenceManager pm, Integer id, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idHotel, Integer idConsumoHabitacion, Integer idTipoHabitacion, Integer idPlanConsumo, char estado) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlHabitacion()+ "(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoPorHabitacion, idTipoHabitacion, idPlanConsumo) values (?, ?, ?,?,?,?,?,?)");
-        q.setParameters(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoHabitacion, idTipoHabitacion, idPlanConsumo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlHabitacion()+ "(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoPorHabitacion, idTipoHabitacion, idPlanConsumo, estado) values (?, ?, ?,?,?,?,?,?,?)");
+        q.setParameters(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoHabitacion, idTipoHabitacion, idPlanConsumo, estado);
         return (long) q.executeUnique();
 	}
 	

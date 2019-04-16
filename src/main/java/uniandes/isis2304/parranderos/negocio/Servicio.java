@@ -127,10 +127,15 @@ public class Servicio
 	 */
 	
 	private ArrayList<Producto> comsumos;
+	
+	private ArrayList<Mantenimiento> mantenimientos;
+	
+	private ArrayList<PlanConsumo> planesDeConsumo;
+	
 
 	public Servicio(Integer id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
 			double costo, TipoServicio tipo, char costoIncluido, ArrayList<ReservaServicio> reservas, Hotel hotel,
-			ArrayList<Producto> productos, ArrayList<Producto> comsumos) {
+			ArrayList<Producto> productos, ArrayList<Producto> comsumos,ArrayList<PlanConsumo> planesDeConsumo,  ArrayList<Mantenimiento> mantenimientos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -145,6 +150,28 @@ public class Servicio
 		this.hotel = hotel;
 		this.productos = productos;
 		this.comsumos = comsumos;
+		this.mantenimientos = mantenimientos;
+		this.planesDeConsumo = planesDeConsumo;
+	}
+
+	public ArrayList<Mantenimiento> getMantenimientos() {
+		return mantenimientos;
+	}
+
+	public void setMantenimientos(ArrayList<Mantenimiento> mantenimientos) {
+		this.mantenimientos = mantenimientos;
+	}
+
+	public ArrayList<PlanConsumo> getPlanesDeConsumo() {
+		return planesDeConsumo;
+	}
+
+	public void setPlanesDeConsumo(ArrayList<PlanConsumo> planesDeConsumo) {
+		this.planesDeConsumo = planesDeConsumo;
+	}
+
+	public char getCostoIncluido() {
+		return costoIncluido;
 	}
 
 	public Integer getId() {

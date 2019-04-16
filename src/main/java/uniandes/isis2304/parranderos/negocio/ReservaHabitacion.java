@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class ReservaHabitacion
 	 * @ordered
 	 */
 
-	private String fechaEntrada;
+	private Date fechaEntrada;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ public class ReservaHabitacion
 	 * @ordered
 	 */
 
-	private String fechaSalida;
+	private Date fechaSalida;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -57,9 +58,11 @@ public class ReservaHabitacion
 	private Cliente cliente;
 
 	private Convencion convencion;
+	
+	private TipoHabitacion tipoHabitacion;
 
-	public ReservaHabitacion(String fechaEntrada, String fechaSalida, Integer numeroPersonas, Hotel hotel,
-			Cliente cliente, Integer id, Convencion convencion) throws Exception {
+	public ReservaHabitacion(Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Hotel hotel,
+			Cliente cliente, Integer id, Convencion convencion, TipoHabitacion tipoHabitacion) throws Exception {
 		super();
 		this.id= id;
 		this.fechaEntrada = fechaEntrada;
@@ -68,10 +71,21 @@ public class ReservaHabitacion
 		this.hotel = hotel;
 		this.cliente = cliente;
 		this.convencion = convencion;
+		this.tipoHabitacion = tipoHabitacion;
 
 	}
 
 
+	public TipoHabitacion getTipoHabitacion()
+	{
+		return tipoHabitacion;
+	}
+	
+	public void setTipoHabitacion(TipoHabitacion tipoHabitacion)
+	{
+		this.tipoHabitacion = tipoHabitacion;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -82,19 +96,19 @@ public class ReservaHabitacion
 	}
 
 
-	public String getFechaEntrada() {
+	public Date getFechaEntrada() {
 		return fechaEntrada;
 	}
 
-	public void setFechaEntrada(String fechaEntrada) {
+	public void setFechaEntrada(Date fechaEntrada) {
 		this.fechaEntrada = fechaEntrada;
 	}
 
-	public String getFechaSalida() {
+	public Date getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(String fechaSalida) {
+	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 

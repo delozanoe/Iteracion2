@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.parranderos.negocio.Convencion;
 import uniandes.isis2304.parranderos.negocio.PlanConsumo;
+import uniandes.isis2304.parranderos.negocio.Servicio;
 
 
 
@@ -23,7 +25,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	
 	public long adicionarPlanConsumo(PersistenceManager pm, Integer id, Integer idHotel, String descripcion) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlPlanConsumo()+ "(id, idHotel, descripcion) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlPlanConsumo()+ "(id, idHotel, descripcion,) values (?, ?, ?)");
         q.setParameters(id, idHotel, descripcion);
         return (long) q.executeUnique();
 	}

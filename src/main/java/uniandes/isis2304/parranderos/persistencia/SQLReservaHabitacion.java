@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.jdo.PersistenceManager;
@@ -19,12 +20,12 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarReservaHabitacion(PersistenceManager pm, Integer id, String fechaEntrada, String fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente) 
+	public long adicionarReservaHabitacion(PersistenceManager pm, Integer id, Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente, Integer idConvencion, Integer idTipoHabitacion) 
 	{
 		
 		
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlReservaHabitacion()+ "(id, fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente) values (?, ?, ?,?,?,?)");
-        q.setParameters(id, fechaEntrada,fechaSalida,numeroPersonas, idHotel,idCliente);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlReservaHabitacion()+ "(id, fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente, idConvencion, idTipoHabitacion) values (?, ?, ?,?,?,?)");
+        q.setParameters(id, fechaEntrada,fechaSalida,numeroPersonas, idHotel,idCliente, idConvencion, idTipoHabitacion);
         return (long) q.executeUnique();
 	}
 	

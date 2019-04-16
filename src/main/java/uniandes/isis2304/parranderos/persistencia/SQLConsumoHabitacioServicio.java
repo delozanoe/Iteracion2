@@ -24,14 +24,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	
 	public long adicionarConsumoPorHabitacionServicio(PersistenceManager pm, Integer idConsumoHabitacion, Integer idServicio) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConsumoPorHabitacion() + "(idConsumoHabitacion, idServicio) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConsumoHabitacionServicio() + "(idConsumoHabitacion, idServicio) values (?, ?)");
         q.setParameters(idConsumoHabitacion, idServicio);
         return (long) q.executeUnique();
 	}
 	
 	public ArrayList<ConsumoHabitacionServicio> darConsumoHabitacionServicio (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlConsumoHabitacioServicio ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlConsumoHabitacionServicio ());
 		q.setResultClass(ConsumoHabitacionServicio.class);
 		return (ArrayList<ConsumoHabitacionServicio>) q.execute();
 	}

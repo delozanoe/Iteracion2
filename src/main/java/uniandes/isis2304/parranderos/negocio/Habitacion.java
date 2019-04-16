@@ -89,15 +89,20 @@ public class Habitacion
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 * @ordered
+	 * 
 	 */
+	
+	private char estado;
 	
 	private PlanConsumo planConsumo;
 	
 	private TipoHabitacion tipoHabitacion;
+	
+	private ArrayList<Mantenimiento> mantenimientos ;
 
 	public Habitacion(int capacidad, double costoPorNoche, ArrayList<Servicio> servicios,
 			double cuenta, Hotel hotel, ArrayList<Cliente> clientes, ConsumoHabitacion consumoHabitacion,
-			PlanConsumo planConsumo, Integer id, TipoHabitacion tipoHabitacion) {
+			PlanConsumo planConsumo, Integer id, TipoHabitacion tipoHabitacion, char estado) {
 		super();
 		this.id = id;
 		this.capacidad = capacidad;
@@ -109,8 +114,28 @@ public class Habitacion
 		this.consumoHabitacion = consumoHabitacion;
 		this.planConsumo = planConsumo;
 		this.tipoHabitacion = tipoHabitacion;
+		this.estado = estado;
 	}
 	
+	public ArrayList<Mantenimiento> getMantenimientos()
+	{
+		return mantenimientos;
+	}
+	
+	public void setMantenimientos(ArrayList<Mantenimiento> mantenimientos)
+	{
+		this.mantenimientos=mantenimientos;
+	}
+	
+	public char getEstado()
+	{
+		return estado;
+	}
+	
+	public void setEstado (char estado)
+	{
+		this.estado = estado;
+	}
 	
 
 	public TipoHabitacion getTipoHabitacion() {

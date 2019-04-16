@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -117,9 +118,9 @@ public class CadenaHotelera
 	//------------------------------------------------
 	//Habitacion
 	//------------------------------------------------
-	public Habitacion adicionarHabitacion(Integer idHotel, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idPlanConsumo, Integer idConsumoHabitacion, Integer idTipoHabitacion)
+	public Habitacion adicionarHabitacion(Integer idHotel, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idPlanConsumo, Integer idConsumoHabitacion, Integer idTipoHabitacion, char estado)
 	{
-		Habitacion nuevaHabitacion = pha.adicionarHabitacion(idHotel, capacidad, costoPorNoche, cuenta, numero, idPlanConsumo, idConsumoHabitacion, idTipoHabitacion);
+		Habitacion nuevaHabitacion = pha.adicionarHabitacion(idHotel, capacidad, costoPorNoche, cuenta, numero, idPlanConsumo, idConsumoHabitacion, idTipoHabitacion, estado);
 		return nuevaHabitacion;
 	}
 	
@@ -157,9 +158,9 @@ public class CadenaHotelera
 	//Plan Consumo
 	//-----------------------------------------------
 	
-	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion)
+	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion, ArrayList<Servicio> servicios)
 	{
-		PlanConsumo nuevoPlanConsumo = pha.adicionarPlanConsumo(idHotel, descripcion);
+		PlanConsumo nuevoPlanConsumo = pha.adicionarPlanConsumo(idHotel, descripcion, null,servicios);
 		return nuevoPlanConsumo;
 	}
 	
@@ -211,9 +212,9 @@ public class CadenaHotelera
 	//-------------------------------------------------------
 	//Reserva Habitacion
 	//-----------------------------------------------------
-	public ReservaHabitacion adicionarReservaHabitacion(String fechaEntrada, String fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente)
+	public ReservaHabitacion adicionarReservaHabitacion(Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente,Integer id, Integer idConvencion, Integer idTipoHabitacion )
 	{
-		ReservaHabitacion nuevaReserva = pha.adicionarReservaHabitacion(fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente);
+		ReservaHabitacion nuevaReserva = pha.adicionarReservaHabitacion(fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente,idConvencion, idTipoHabitacion );
 		return nuevaReserva;
 	}
 	
@@ -232,9 +233,9 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, String dia, String lugar, Integer idCliente, Integer idServicio)
+	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, String dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
 	{
-		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio);
+		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
 	}
 	

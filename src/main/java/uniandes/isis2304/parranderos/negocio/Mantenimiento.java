@@ -1,31 +1,73 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Mantenimiento 
 {
-	private String estados;
+	
+	private Integer id;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
+	}
+
+	private char estado;
 	
 	private Date fechaInicio; 
 	
 	private Date fechaFin; 
 	
 	private String descripcion;
+	
+	private Habitacion habitacion;
+	
+	private Servicio servicio;
 
-	public Mantenimiento(String estados, Date fechaInicio, Date fechaFin, String descripcion) {
+	public Mantenimiento(Integer id, char estado, Date fechaInicio, Date fechaFin, String descripcion, Habitacion habitacion, Servicio servicio) {
 		super();
-		this.estados = estados;
+		this.id = id;
+		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.descripcion = descripcion;
+		this.habitacion = habitacion;
+		this.servicio = servicio;
 	}
 
-	public String getEstados() {
-		return estados;
+	public Habitacion getHabitacion() {
+		return habitacion;
 	}
 
-	public void setEstados(String estados) {
-		this.estados = estados;
+	public void setHabitacion(Habitacion habitacion) {
+		this.habitacion = habitacion;
+	}
+
+	public Servicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
+	}
+
+	public char getEstados() {
+		return estado;
+	}
+
+	public void setEstados(char estados) {
+		this.estado = estados;
 	}
 
 	public Date getFechaInicio() {

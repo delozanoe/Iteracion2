@@ -17,9 +17,9 @@ public class Convencion
 
 	private double cuenta;
 
-	private boolean pazYSalvo;
+	private char pazYSalvo;
 
-	private String estado;
+	private char estado;
 
 	private ArrayList<Hotel> hotelesConvencion;
 
@@ -32,7 +32,7 @@ public class Convencion
 	private ArrayList<ReservaServicio> reservasServicio;
 
 	public Convencion(Integer id, String tematica, Integer numeroParticipantes, Date fechaInicio, Date fechaFin,
-			double cuenta, boolean pazYSalvo, String estado, ArrayList<Hotel> hotelesConvencion,
+			double cuenta, char pazYSalvo, char estado, ArrayList<Hotel> hotelesConvencion,
 			ArrayList<ReservaHabitacion> reservasHabitaciones, ArrayList<Cliente> clientes, PlanConsumo planConsumo,
 			ArrayList<ReservaServicio> reservasServicio) {
 		super();
@@ -99,19 +99,19 @@ public class Convencion
 		this.cuenta = cuenta;
 	}
 
-	public boolean isPazYSalvo() {
+	public char isPazYSalvo() {
 		return pazYSalvo;
 	}
 
-	public void setPazYSalvo(boolean pazYSalvo) {
+	public void setPazYSalvo(char pazYSalvo) {
 		this.pazYSalvo = pazYSalvo;
 	}
 
-	public String getEstado() {
+	public char getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(char estado) {
 		this.estado = estado;
 	}
 
