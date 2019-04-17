@@ -43,4 +43,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (ArrayList<Cliente>) q.executeList();
 	}
 	
+	public long cambiarHabitacion (PersistenceManager pm, Integer idCliente, Integer idHabitacion)
+	{
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlCliente () + " SET idHabitacion = ? WHERE id = ?");
+        q.setParameters(idHabitacion,idCliente);
+        return (long) q.executeUnique();
+	}
+	
 }

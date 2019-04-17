@@ -39,4 +39,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		q.setResultClass(Habitacion.class);
 		return (ArrayList<Habitacion>) q.executeList();
 	}
+	
+	public long cambiarEstadoAMantenimiento (PersistenceManager pm, Integer idHabitacion)
+	{
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET estado = 1 WHERE id = ?");
+        q.setParameters(idHabitacion);
+        return (long) q.executeUnique();
+	}
 }

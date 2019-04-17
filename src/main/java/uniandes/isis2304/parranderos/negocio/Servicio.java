@@ -99,6 +99,8 @@ public class Servicio
 	 * @ordered
 	 */
 	
+	private Integer estado;
+	
 	private ArrayList<ReservaServicio> reservas;
 
 	/**
@@ -135,7 +137,7 @@ public class Servicio
 
 	public Servicio(Integer id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
 			double costo, TipoServicio tipo, char costoIncluido, ArrayList<ReservaServicio> reservas, Hotel hotel,
-			ArrayList<Producto> productos, ArrayList<Producto> comsumos,ArrayList<PlanConsumo> planesDeConsumo,  ArrayList<Mantenimiento> mantenimientos) {
+			ArrayList<Producto> productos, ArrayList<Producto> comsumos,ArrayList<PlanConsumo> planesDeConsumo,  ArrayList<Mantenimiento> mantenimientos, Integer estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -152,6 +154,15 @@ public class Servicio
 		this.comsumos = comsumos;
 		this.mantenimientos = mantenimientos;
 		this.planesDeConsumo = planesDeConsumo;
+		this.estado = estado;
+	}
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
 	}
 
 	public ArrayList<Mantenimiento> getMantenimientos() {

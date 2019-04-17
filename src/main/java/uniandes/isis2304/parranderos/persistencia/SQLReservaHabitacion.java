@@ -43,4 +43,19 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		q.setResultClass(ReservaHabitacion.class);
 		return (ArrayList<ReservaHabitacion>) q.executeList();
 	}
+	
+	public long eliminarReservaPorIdConvencion (PersistenceManager pm, Integer idConvencion)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlReservaHabitacion() + " WHERE idConvencion = ?");
+        q.setParameters(idConvencion);
+        return (long) q.executeUnique();
+	}
+	
+	public long eliminarReservaPorId (PersistenceManager pm, Integer idReserva)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlReservaHabitacion() + " WHERE id = ?");
+        q.setParameters(idReserva);
+        return (long) q.executeUnique();
+	}
+	
 }

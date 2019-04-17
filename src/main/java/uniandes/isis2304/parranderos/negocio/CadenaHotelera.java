@@ -3,6 +3,9 @@ package uniandes.isis2304.parranderos.negocio;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.jdo.PersistenceManager;
+import javax.jdo.Transaction;
+
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
@@ -229,6 +232,8 @@ public class CadenaHotelera
 		return pha.darReservaHabitacion(idReserva);
 	}
 	
+	
+	
 	//------------------------------------------------------------
 	//Reserva Servicio
 	//----------------------------------------------------------
@@ -253,9 +258,9 @@ public class CadenaHotelera
 	//Servicio
 	//----------------------------------------------------------
 	
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, Integer capacidad, Double costo, char costoIncluido, Integer idHotel, Integer idTipoServicio)
+	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, Integer capacidad, Double costo, char costoIncluido, Integer idHotel, Integer idTipoServicio, Integer estado)
 	{
-		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio);
+		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
 		return  nuevoSerivcio; 
 	}
 	
