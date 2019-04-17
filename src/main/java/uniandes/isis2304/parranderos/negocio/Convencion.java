@@ -9,11 +9,11 @@ import java.sql.Timestamp;
 
 public class Convencion
 {
-	private Integer id;
+	private long id;
 
 	private String tematica;
 
-	private Integer numeroParticipantes;
+	private long numeroParticipantes;
 
 	private Timestamp fechaInicio;
 
@@ -21,9 +21,9 @@ public class Convencion
 
 	private BigDecimal cuenta;
 
-	private char pazYSalvo;
+	private String pazYSalvo;
 
-	private char estado;
+	private String estado;
 
 	private List<Hotel> hotelesConvencion;
 
@@ -31,31 +31,31 @@ public class Convencion
 
 	private List<Cliente> clientes;
 
-	private PlanConsumo planConsumo;
+	private long idPlanConsumo;
 
 	private List<ReservaServicio> reservasServicio;
 	
 	public Convencion() {
-		super();
+		
 		this.id = 0;
 		this.tematica = "";
 		this.numeroParticipantes = 0;
 		this.fechaInicio =  new Timestamp (0);
 		this.fechaFin = new Timestamp (0);
 		this.cuenta = new BigDecimal(0);
-		this.pazYSalvo = ' ';
-		this.estado = ' ';
+		this.pazYSalvo = " ";
+		this.estado = " ";
 		this.hotelesConvencion = new LinkedList<>();
-		this.reservasHabitaciones = new LinkedList<>();;
+		this.reservasHabitaciones = new LinkedList<>();
 		this.clientes = new LinkedList<>();;
-		this.planConsumo = (PlanConsumo) new Object();
-		this.reservasServicio = new LinkedList<>();;
+		//TODO MIRAR PLAN CINSUMO
+		this.idPlanConsumo =0;
+		this.reservasServicio = new LinkedList<>();
 	}
 
-	public Convencion(Integer id, String tematica, Integer numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin,
-			BigDecimal cuenta, char pazYSalvo, char estado, List<Hotel> hotelesConvencion,
-			List<ReservaHabitacion> reservasHabitaciones, List<Cliente> clientes, PlanConsumo planConsumo,
-			List<ReservaServicio> reservasServicio) {
+	public Convencion(String tematica, long numeroParticipantes,
+			Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta
+			, String pazYSalvo, String estado, long id, long idPlanConsumo) {
 		super();
 		this.id = id;
 		this.tematica = tematica;
@@ -65,18 +65,28 @@ public class Convencion
 		this.cuenta = cuenta;
 		this.pazYSalvo = pazYSalvo;
 		this.estado = estado;
-		this.hotelesConvencion = hotelesConvencion;
-		this.reservasHabitaciones = reservasHabitaciones;
-		this.clientes = clientes;
-		this.planConsumo = planConsumo;
-		this.reservasServicio = reservasServicio;
+		this.hotelesConvencion = new LinkedList<>();
+		this.reservasHabitaciones =new LinkedList<>();
+		this.clientes =new LinkedList<>();
+	//TODO plan consumo
+		this.idPlanConsumo= idPlanConsumo;
+		
+		this.reservasServicio = new LinkedList<>();
 	}
 
-	public Integer getId() {
+	public long getIdPlanConsumo() {
+		return idPlanConsumo;
+	}
+
+	public void setIdPlanConsumo(long idPlanConsumo) {
+		this.idPlanConsumo = idPlanConsumo;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -88,11 +98,11 @@ public class Convencion
 		this.tematica = tematica;
 	}
 
-	public Integer getNumeroParticipantes() {
+	public long getNumeroParticipantes() {
 		return numeroParticipantes;
 	}
 
-	public void setNumeroParticipantes(Integer numeroParticipantes) {
+	public void setNumeroParticipantes(long numeroParticipantes) {
 		this.numeroParticipantes = numeroParticipantes;
 	}
 
@@ -120,19 +130,19 @@ public class Convencion
 		this.cuenta = cuenta;
 	}
 
-	public char isPazYSalvo() {
+	public String getPazYSalvo() {
 		return pazYSalvo;
 	}
 
-	public void setPazYSalvo(char pazYSalvo) {
+	public void setPazYSalvo(String pazYSalvo) {
 		this.pazYSalvo = pazYSalvo;
 	}
 
-	public char getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(char estado) {
+	public void setEstado(String  estado) {
 		this.estado = estado;
 	}
 
@@ -160,13 +170,13 @@ public class Convencion
 		this.clientes = clientes;
 	}
 
-	public PlanConsumo getPlanConsumo() {
-		return planConsumo;
-	}
-
-	public void setPlanConsumo(PlanConsumo planConsumo) {
-		this.planConsumo = planConsumo;
-	}
+//	public PlanConsumo getPlanConsumo() {
+//		return planConsumo;
+//	}
+//
+//	public void setPlanConsumo(PlanConsumo planConsumo) {
+//		this.planConsumo = planConsumo;
+//	}
 
 	public List<ReservaServicio> getReservasServicio() {
 		return reservasServicio;

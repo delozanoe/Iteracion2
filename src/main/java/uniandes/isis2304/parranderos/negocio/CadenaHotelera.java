@@ -380,7 +380,7 @@ public class CadenaHotelera
 	
 	}
 	
-	public Convencion adicionarConvencion(String tematica, int numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, char pazYSalvo, char estado, int idPlanConsumo )
+	public Convencion adicionarConvencion(String tematica, int numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, int idPlanConsumo )
 	{
 		Convencion nuevaConvencion = pha.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);	
 		return nuevaConvencion;

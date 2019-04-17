@@ -22,7 +22,7 @@ class SQLConvencion
 		this.pha= pha; 
 	}
 	
-	public long adicionarConvencion(PersistenceManager pm, Integer id, Integer idPlanConsumo, char estado, char pazYSalvo, BigDecimal cuenta, Timestamp fechaInicio, Timestamp fechaFin, Integer numeroParticipantes, String tematica ) 
+	public long adicionarConvencion(PersistenceManager pm, long id, long idPlanConsumo, String estado, String pazYSalvo, BigDecimal cuenta, Timestamp fechaInicio, Timestamp fechaFin, long numeroParticipantes, String tematica ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConvencion() + "(id, idPlanConsumo, estado, pazYSalvo, cuenta, fechaInicio, fechaFin, numeroParticipantes, tematica) values (?, ?, ?, ? , ?, ?, ?, ?, ?)");
         q.setParameters(id, idPlanConsumo, estado, pazYSalvo, cuenta, fechaInicio, fechaFin, numeroParticipantes, tematica);
@@ -41,7 +41,7 @@ class SQLConvencion
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlConvencion());
 		q.setResultClass(Convencion.class);
-		System.out.println(q.executeList().size());
+
 		return (List<Convencion>) q.executeList();
 	}
 }

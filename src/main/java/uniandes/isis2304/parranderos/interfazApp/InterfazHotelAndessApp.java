@@ -27,6 +27,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -47,6 +48,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 import org.apache.log4j.Logger;
 
@@ -656,9 +658,9 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panel.add(tematica);
 			panel.add(new JLabel("2. Numero Participantes:"));
 			panel.add(numeroParticipantes);
-			panel.add(new JLabel("3. Fecha inicio (Use el formato dd/mm/yyyy):"));
+			panel.add(new JLabel("3. Fecha inicio (Use el formato yyyy-MM-dd hh:mm:ss.SSS):"));
 			panel.add(fechaInicio);
-			panel.add(new JLabel("4. Fecha fin (Use el formato dd/mm/yyyy):"));
+			panel.add(new JLabel("4. Fecha fin (Use el formato yyyy-MM-dd hh:mm:ss.SSS):"));
 			panel.add(fechaFin);
 			panel.add(new JLabel("5. Cuenta (INICIAR ESTO EN 0):"));
 
@@ -675,7 +677,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 				System.out.println( " " + tematica.getText()   + " " + numeroParticipantes.getText());
 				if (result != 0)
 				{
-					convencion = cadenaHotelera.adicionarConvencion(tematica.getText(), Integer.parseInt(numeroParticipantes.getText()), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), 0, 'T', 'I', combo.getSelectedIndex()); 
+					convencion = cadenaHotelera.adicionarConvencion(tematica.getText(), Integer.parseInt(numeroParticipantes.getText()), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex()); 
 					if (convencion == null)
 					{
 						throw new Exception ("No se puedo adicionar la convencion " );
@@ -703,55 +705,111 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	private  Timestamp convertirADate(String fecha)
 	{
-	
-		Timestamp fechaDate = null;
+
+		Timestamp timestamp = null;
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		    Date parsedDate = dateFormat.parse(fecha);
-		    Timestamp timestamp = new Timestamp(parsedDate.getTime());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+			java.util.Date parsedDate = dateFormat.parse(fecha);
+			timestamp = new Timestamp(parsedDate.getTime());
 		} catch(Exception e) { //this generic but you can control another types of exception
-		    // look the origin of excption 
+			// look the origin of excption 
 		}
-		return fechaDate;
+		return timestamp;
 	}
 
 	public void finalizarConvencion()
 	{
-		JPanel panel = new  JPanel(new GridLayout(0, 1 ));
-		JLabel titulo = new JLabel("Check out de la convencion");
-		List<Convencion> convenciones =cadenaHotelera.darConvenciones();
-		if(convenciones.isEmpty())
+		try
 		{
-			System.out.println("Paila perro");
+
+
+			JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+			JLabel titulo = new JLabel("Check out de la convencion");
+			List<Convencion> convenciones =cadenaHotelera.darConvenciones();
+			if(convenciones.isEmpty())
+			{
+				System.out.println("Paila perro");
+			}
+			String[] items = new String[convenciones.size()];
+			for (int i = 0; i < convenciones.size(); i++) 
+			{
+				items[i] = convenciones.get(i).getTematica();
+			}
+
+			JComboBox<String> combo = new JComboBox<>(items);
+
+			panel.add(titulo);
+			panel.add(combo);
+
+			int result = JOptionPane.showConfirmDialog(null, panel, "Check out de la convencion",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (result == JOptionPane.OK_OPTION)
+			{
+
+			}
+
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
 		}
-		String[] items = new String[convenciones.size()];
-		for (int i = 0; i < convenciones.size(); i++) 
-		{
-			items[i] = convenciones.get(i).getTematica();
-		}
-
-		JComboBox<String> combo = new JComboBox<>(items);
-
-		panel.add(titulo);
-		panel.add(combo);
-
-		int result = JOptionPane.showConfirmDialog(null, panel, "Check out de la convencion",
-				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		if (result == JOptionPane.OK_OPTION)
-		{
-			
-		}
-
-		else
-		{
-			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
 		}
 
 	}
 
 	public void registrarMantenimientoHabitacion()
 	{
+		JCheckBox piscina = new JCheckBox("Piscina"); 
+		JCheckBox gimnasio = new JCheckBox("Gimnasio"); 
+		JCheckBox internet = new JCheckBox("Internet"); 
+		JCheckBox bar = new JCheckBox("Bar"); 
+		JCheckBox restaurante = new JCheckBox("Restaurante"); 
+		JCheckBox supermercado = new JCheckBox("Supermercado"); 
+		JCheckBox tienda = new JCheckBox("Tienda"); 
+		JCheckBox spa = new JCheckBox("SPA"); 
+		JCheckBox lavanderia = new JCheckBox("Lavanderia"); 
+		JCheckBox prestamo = new JCheckBox("Prestamo");
+		JCheckBox salonReuniones = new JCheckBox("Salon reuniones");
+		JCheckBox salonConferencias = new JCheckBox("Salon conferencias");
+		
+		JLabel tituloHab =  new JLabel("Dijite las habitaciones que se van a tener mantenimieto y seprarelas por una coma");
+		JTextField habitacion = new JTextField( );
 
+
+		JPanel servicios = new JPanel(new GridLayout(4, 2));
+		JPanel habitaciones = new JPanel(new GridLayout(0,1));
+		JPanel panel = new JPanel(new BorderLayout());
+
+		servicios.add(piscina);
+		servicios.add(gimnasio);
+		servicios.add(internet);
+		servicios.add(bar);
+		servicios.add(restaurante);
+		servicios.add(supermercado);
+		servicios.add(tienda);
+		servicios.add(spa);
+		servicios.add(lavanderia);
+		servicios.add(prestamo);
+		servicios.add(salonReuniones);
+		servicios.add(salonConferencias);
+		
+		servicios.setBorder(new TitledBorder("Servicios"));
+		habitaciones.add(tituloHab);
+		habitaciones.add(habitacion);
+		habitaciones.setBorder(new TitledBorder("Habitaciones"));
+		
+		panel.add(servicios, BorderLayout.NORTH);
+		panel.add(habitaciones, BorderLayout.SOUTH);
+		
+		
+		int result = JOptionPane.showConfirmDialog(null, panel, "Selecione el servicio o habitacion en mantenimiento",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		
 	}
 
 	public void finalizarMantenimiento() 

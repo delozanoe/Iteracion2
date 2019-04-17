@@ -30,7 +30,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         return (long) q.executeUnique();
 	}
 	
-	public PlanConsumo darPlanConsumoPorId (PersistenceManager pm, Integer id) 
+	public PlanConsumo darPlanConsumoPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlPlanConsumo() + " WHERE id = ?");
 		q.setResultClass(PlanConsumo.class);

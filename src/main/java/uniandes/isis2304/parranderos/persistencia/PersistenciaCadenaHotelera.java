@@ -1418,21 +1418,21 @@ public class PersistenciaCadenaHotelera
 	}
 
 
-	public Convencion adicionarConvencion(String tematica, Integer numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin,
-			BigDecimal cuenta, char pazYSalvo, char estado, Integer idPlanConsumo)
+	public Convencion adicionarConvencion(String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin,
+			BigDecimal cuenta, String  pazYSalvo, String estado, long idPlanConsumo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            Integer id = this.nextval();
+            long id = this.nextval();
             long tuplasInsertadas = sqlConvencion.adicionarConvencion(pm, id, idPlanConsumo,estado,pazYSalvo, cuenta, fechaInicio, fechaFin, numeroParticipantes,tematica);
             tx.commit();
             
             log.trace ("Inserción de convencion: " + fechaInicio + fechaFin + ": " + tuplasInsertadas+" tuplas insertadas");
             
-            return new Convencion (id,tematica ,numeroParticipantes,fechaInicio,fechaFin,cuenta,pazYSalvo, estado, null, null, null, sqlPlanConsumo.darPlanConsumoPorId(pm, idPlanConsumo) ,null);
+            return new Convencion (tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, id, idPlanConsumo);
         }
         catch (Exception e)
         {
@@ -1706,7 +1706,7 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 
-	public void registrarReservaConvenvion(Hashtable<TipoHabitacion, Integer> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, Integer numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, char pazYSalvo, char estado, Integer idPlanConsumo, Integer idHotel)
+	public void registrarReservaConvenvion(Hashtable<TipoHabitacion, Integer> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, Integer numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, Integer idPlanConsumo, Integer idHotel)
 	{
 		Convencion convencion= this.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);
 		PersistenceManager pm= pmf.getPersistenceManager();
@@ -1768,7 +1768,7 @@ public class PersistenciaCadenaHotelera
 
 		}
 
-		if(esPosible = true)
+		if(esPosible = true) 
 		{
 			while(iter.hasNext())
 			{

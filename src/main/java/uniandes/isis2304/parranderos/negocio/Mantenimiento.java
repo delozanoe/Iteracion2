@@ -7,22 +7,8 @@ public class Mantenimiento
 {
 	
 	private Integer id;
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public char getEstado() {
-		return estado;
-	}
-
-	public void setEstado(char estado) {
-		this.estado = estado;
-	}
-
+	
+	
 	private char estado;
 	
 	private Date fechaInicio; 
@@ -45,6 +31,22 @@ public class Mantenimiento
 		this.habitacion = habitacion;
 		this.servicio = servicio;
 	}
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
+	}
+
 
 	public Habitacion getHabitacion() {
 		return habitacion;
