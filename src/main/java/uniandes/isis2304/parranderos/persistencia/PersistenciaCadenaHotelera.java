@@ -453,6 +453,34 @@ public class PersistenciaCadenaHotelera
 		return sqlCliente.darClientePorId (pmf.getPersistenceManager(), idCliente);
 	}
  
+	public long cambiarHabitacionCliente (Integer idCliente, Integer idHabitacion)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCliente.cambiarHabitacion(pm, idCliente, idHabitacion);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	} 
+	
+	
 	public ConsumoHabitacionServicio adicionarConsumoPorHabitacionServicio(Integer idConsumoHabitacion, Integer idServicio)
 	{
 			PersistenceManager pm = pmf.getPersistenceManager();
@@ -614,14 +642,41 @@ public class PersistenciaCadenaHotelera
 	{
 		return sqlHabitacion.darHabitacionPorId(pmf.getPersistenceManager(), idHabitacion);
 	}
-	public long cambiarHabitacionAMantenimiento (Integer idHabitacion)
+	public long cambiarEstadoHabitacion (char estado,Integer idHabitacion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlHabitacion.cambiarEstadoAMantenimiento(pm, idHabitacion);
+            long resp = sqlHabitacion.cambiarEstado(pm, estado,idHabitacion);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	} 
+	 
+	public long moverConsumos (Integer idHabitacion, Integer idHabitacionNueva, Integer idConsumoHabitacion)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlHabitacion.moverConsumos(pm, idHabitacion, idHabitacionNueva, idConsumoHabitacion);
             tx.commit();
             return resp;
         }
@@ -1004,6 +1059,33 @@ public class PersistenciaCadenaHotelera
 	
 	}
 	
+	public long cambiarServicioReserva (Integer idServicio, Integer idReservaServicio)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlReservaServicio.cambiarServicio(pm, idServicio, idReservaServicio);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	} 
+	
 	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, Integer capacidad, Double costo, char costoIncluido, Integer idHotel, Integer idTipoServicio, Integer estado) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1251,14 +1333,14 @@ public class PersistenciaCadenaHotelera
 	
 	}
 	
-	public long cambiarServicioAMantenimiento (Integer idServicio)
+	public long cambiarEstadoServicio (Integer estado,Integer idServicio)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlServicio.cambiarEstadoAMantenimiento(pm, idServicio);
+            long resp = sqlServicio.cambiarEstado(pm, estado,idServicio);
             tx.commit();
             return resp;
         }

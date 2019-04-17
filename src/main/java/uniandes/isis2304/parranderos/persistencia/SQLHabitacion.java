@@ -40,10 +40,19 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (ArrayList<Habitacion>) q.executeList();
 	}
 	
-	public long cambiarEstadoAMantenimiento (PersistenceManager pm, Integer idHabitacion)
+	public long cambiarEstado (PersistenceManager pm,char estado, Integer idHabitacion)
 	{
-        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET estado = 1 WHERE id = ?");
-        q.setParameters(idHabitacion);
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET estado = ? WHERE id = ?");
+        q.setParameters(estado, idHabitacion);
+        return (long) q.executeUnique();
+	}
+	
+	public long moverConsumos (PersistenceManager pm, Integer idHabitacion, Integer idHabitacionNueva, Integer idConsumoHabitacion)
+	{
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET idConsumoHabitacion = ? WHERE id = ?");
+        q.setParameters(idConsumoHabitacion,idHabitacionNueva);
+        Query q2 = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET idConsumoHabitacion = ? WHERE id = ?");
+        q2.setParameters(null, idHabitacion);
         return (long) q.executeUnique();
 	}
 }

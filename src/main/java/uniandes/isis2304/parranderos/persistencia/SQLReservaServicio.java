@@ -52,4 +52,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         q.setParameters(idReserva);
         return (long) q.executeUnique();
 	}
+	
+	public long cambiarServicio (PersistenceManager pm, Integer idServicio, Integer idReserva)
+	{
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlReservaServicio () + " SET idServicio = ? WHERE id = ?");
+        q.setParameters(idServicio,idReserva);
+        return (long) q.executeUnique();
+	}
 }

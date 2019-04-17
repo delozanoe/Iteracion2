@@ -40,10 +40,10 @@ class SQLServicio
 		return (ArrayList<Servicio>) q.executeList();
 	}
 	
-	public long cambiarEstadoAMantenimiento (PersistenceManager pm, Integer idServicio)
+	public long cambiarEstado (PersistenceManager pm, Integer estado, Integer idServicio)
 	{
-        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlServicio () + " SET estado = 1 WHERE id = ?");
-        q.setParameters(idServicio);
+        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlServicio () + " SET estado = ? WHERE id = ?");
+        q.setParameters(estado, idServicio);
         return (long) q.executeUnique();
 	}
 }
