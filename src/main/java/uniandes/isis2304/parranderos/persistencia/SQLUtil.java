@@ -14,11 +14,11 @@ class SQLUtil
 		this.pha = pha;
 	}
 	
-	public Integer nextval (PersistenceManager pm)
+	public long nextval (PersistenceManager pm)
 	{
         Query q = pm.newQuery(SQL, "SELECT "+ pha.darSeqCadenaHotelera() + ".nextval FROM DUAL");
         q.setResultClass(Long.class);
-        Integer resp = (Integer) q.executeUnique();
+        long resp = (long) q.executeUnique();
         return resp;
 	}
 

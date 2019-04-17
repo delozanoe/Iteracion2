@@ -68,7 +68,7 @@ public class Cliente extends Usuario
 
 	private List<Convencion> convenciones;
 
-	public Cliente( Integer id, char pazYSalvo, List<String> planConsumo, Habitacion habitacion,
+	public Cliente( long id, char pazYSalvo, List<String> planConsumo, Habitacion habitacion,
 			List<ReservaHabitacion> reserva, List<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, List<Convencion> convenciones)
 			 {
 
@@ -84,12 +84,12 @@ public class Cliente extends Usuario
 	}
 
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -20,7 +20,7 @@ public class SQLTipoHabitacion
 		this.pha = pha;
 	}
 
-	public long adicionarTipoHabitacion(PersistenceManager pm, Integer id, String nombre) 
+	public long adicionarTipoHabitacion(PersistenceManager pm, long id, String nombre) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlTipoHabitacion()+ "(id, nombre) values (?, ?)");
 		q.setParameters(id, nombre);
@@ -28,7 +28,7 @@ public class SQLTipoHabitacion
 	}
 
 
-	public TipoHabitacion darTipoHabitacionPorId (PersistenceManager pm, Integer idUsuario) 
+	public TipoHabitacion darTipoHabitacionPorId (PersistenceManager pm, long idUsuario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlTipoHabitacion () + " WHERE id = ?");
 		q.setResultClass(TipoHabitacion.class);

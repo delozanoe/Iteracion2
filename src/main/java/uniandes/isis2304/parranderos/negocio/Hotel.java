@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Hotel
 {
-	private Integer id;
+	private long id;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -87,7 +87,7 @@ public class Hotel
 
 	private List<Convencion> convenciones; 
 
-	public Hotel(Integer id, String pais, String ciudad, int ofertaHabitacional, List<Habitacion> habitaciones,
+	public Hotel(long id, String pais, String ciudad, int ofertaHabitacional, List<Habitacion> habitaciones,
 			List<ReservaHabitacion> reservas, List<Empleado> empleado, List<Servicio> servicios,
 			List<PlanConsumo> planesConsumo, List<TipoEmpleado> tiposEmpleados, List<Convencion> convenciones) {
 		super();
@@ -142,13 +142,13 @@ public class Hotel
 
 
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

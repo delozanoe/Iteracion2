@@ -11,7 +11,7 @@ import java.util.List;
 public class ConsumoHabitacion
 {
 	
-	private Integer id;
+	private long id;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -41,7 +41,7 @@ public class ConsumoHabitacion
 	
 	private List<Servicio> servicios;
 
-	public ConsumoHabitacion(double valorTotal, Habitacion habitacion, List<Servicio> servicios, Integer id) {
+	public ConsumoHabitacion(double valorTotal, Habitacion habitacion, List<Servicio> servicios, long id) {
 		super();
 		this.id = id;
 		this.valorTotal = valorTotal;
@@ -49,12 +49,12 @@ public class ConsumoHabitacion
 		this.servicios = servicios;
 	}
 	
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

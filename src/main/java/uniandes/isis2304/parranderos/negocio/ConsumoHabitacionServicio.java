@@ -2,29 +2,29 @@ package uniandes.isis2304.parranderos.negocio;
 
 public class ConsumoHabitacionServicio 
 {
-	private Integer idConsumoHabitacion; 
+	private long idConsumoHabitacion; 
 	
-	private Integer idServicio;
+	private long idServicio;
 
-	public ConsumoHabitacionServicio(Integer idConsumoHabitacion, Integer idServicio) {
+	public ConsumoHabitacionServicio(long idConsumoHabitacion, long idServicio) {
 		super();
 		this.idConsumoHabitacion = idConsumoHabitacion;
 		this.idServicio = idServicio;
 	}
 
-	public Integer getIdConsumoHabitacion() {
+	public long getIdConsumoHabitacion() {
 		return idConsumoHabitacion;
 	}
 
-	public void setIdConsumoHabitacion(Integer idConsumoHabitacion) {
+	public void setIdConsumoHabitacion(long idConsumoHabitacion) {
 		this.idConsumoHabitacion = idConsumoHabitacion;
 	}
 
-	public Integer getIdServicio() {
+	public long getIdServicio() {
 		return idServicio;
 	}
 
-	public void setIdServicio(Integer idServicio) {
+	public void setIdServicio(long idServicio) {
 		this.idServicio = idServicio;
 	}
 	

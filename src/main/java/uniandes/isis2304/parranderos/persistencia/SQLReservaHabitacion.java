@@ -21,7 +21,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarReservaHabitacion(PersistenceManager pm, Integer id, Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente, Integer idConvencion, Integer idTipoHabitacion) 
+	public long adicionarReservaHabitacion(PersistenceManager pm, long id, Timestamp fechaEntrada, Timestamp fechaSalida, long numeroPersonas, long idHotel, long idCliente, long idConvencion, long idTipoHabitacion) 
 	{
 		
 		
@@ -30,7 +30,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         return (long) q.executeUnique();
 	}
 	
-	public ReservaHabitacion darReservaHabitacionPorId (PersistenceManager pm, Integer id) 
+	public ReservaHabitacion darReservaHabitacionPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlReservaHabitacion() + " WHERE id = ?");
 		q.setResultClass(ReservaHabitacion.class);
@@ -45,14 +45,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (List<ReservaHabitacion>) q.executeList();
 	}
 	
-	public long eliminarReservaPorIdConvencion (PersistenceManager pm, Integer idConvencion)
+	public long eliminarReservaPorIdConvencion (PersistenceManager pm, long idConvencion)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlReservaHabitacion() + " WHERE idConvencion = ?");
         q.setParameters(idConvencion);
         return (long) q.executeUnique();
 	}
 	
-	public long eliminarReservaPorId (PersistenceManager pm, Integer idReserva)
+	public long eliminarReservaPorId (PersistenceManager pm, long idReserva)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlReservaHabitacion() + " WHERE id = ?");
         q.setParameters(idReserva);

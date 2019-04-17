@@ -52,9 +52,9 @@ public class Usuario
 	 * @ordered
 	 */
 	
-	protected  Integer id;
+	protected  long id;
 
-	public Usuario(String nombre, String tipoDocumento, long numeroDocumento, String correo, Integer id) {
+	public Usuario(String nombre, String tipoDocumento, long numeroDocumento, String correo, long id) {
 		super();
 		this.nombre = nombre;
 		this.tipoDocumento = tipoDocumento;
@@ -95,11 +95,11 @@ public class Usuario
 		this.correo = correo;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

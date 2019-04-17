@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ReservaHabitacion
 {
-	private Integer id;
+	private long id;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -38,7 +38,7 @@ public class ReservaHabitacion
 	 * @ordered
 	 */
 
-	private int numeroPersonas;
+	private long numeroPersonas;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,8 +62,8 @@ public class ReservaHabitacion
 	
 	private TipoHabitacion tipoHabitacion;
 
-	public ReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Hotel hotel,
-			Cliente cliente, Integer id, Convencion convencion, TipoHabitacion tipoHabitacion) throws Exception {
+	public ReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, long numeroPersonas, Hotel hotel,
+			Cliente cliente, long id, Convencion convencion, TipoHabitacion tipoHabitacion) throws Exception {
 		super();
 		this.id= id;
 		this.fechaEntrada = fechaEntrada;
@@ -87,12 +87,12 @@ public class ReservaHabitacion
 		this.tipoHabitacion = tipoHabitacion;
 	}
 	
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -113,11 +113,11 @@ public class ReservaHabitacion
 		this.fechaSalida = fechaSalida;
 	}
 
-	public int getNumeroPersonas() {
+	public long getNumeroPersonas() {
 		return numeroPersonas;
 	}
 
-	public void setNumeroPersonas(int numeroPersonas) {
+	public void setNumeroPersonas(long numeroPersonas) {
 		this.numeroPersonas = numeroPersonas;
 	}
 

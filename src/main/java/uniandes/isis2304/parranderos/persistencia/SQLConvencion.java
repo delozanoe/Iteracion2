@@ -29,7 +29,7 @@ class SQLConvencion
         return (long) q.executeUnique();
 	}
 	
-	public Convencion darConvencionPorId (PersistenceManager pm, Integer id) 
+	public Convencion darConvencionPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlConvencion() + " WHERE id = ?");
 		q.setResultClass(Convencion.class);
@@ -46,7 +46,7 @@ class SQLConvencion
 	}
 	
 	
-	public long eliminarConvencionPorId (PersistenceManager pm, Integer idConvencion)
+	public long eliminarConvencionPorId (PersistenceManager pm, long idConvencion)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlConvencion() + " WHERE id = ?");
         q.setParameters(idConvencion);

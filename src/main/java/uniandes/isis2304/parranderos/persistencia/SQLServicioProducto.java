@@ -18,7 +18,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	{
 		this.pha = pha;
 	}
-	public long adicionarServicioProducto (PersistenceManager pm, Integer idServicio, Integer idProducto) 
+	public long adicionarServicioProducto (PersistenceManager pm, long idServicio, long idProducto) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlServicioProducto() + "(idServicio, idProdcuto) values (?, ?)");
         q.setParameters(idServicio, idProducto);

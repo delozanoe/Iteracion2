@@ -2,12 +2,12 @@ package uniandes.isis2304.parranderos.negocio;
 
 public class ConvencionCliente 
 {
-	private Integer idConvencion;
+	private long idConvencion;
 	
-	private Integer idCliente;
+	private long idCliente;
 	
 	
-	public ConvencionCliente(Integer idConvencion, Integer idCliente)
+	public ConvencionCliente(long idConvencion, long idCliente)
 	{
 		super();
 		this.idCliente = idCliente;
@@ -15,22 +15,22 @@ public class ConvencionCliente
 	}
 
 
-	public Integer getIdConvencion() {
+	public long getIdConvencion() {
 		return idConvencion;
 	}
 
 
-	public void setIdConvencion(Integer idConvencion) {
+	public void setIdConvencion(long idConvencion) {
 		this.idConvencion = idConvencion;
 	}
 
 
-	public Integer getIdCliente() {
+	public long getIdCliente() {
 		return idCliente;
 	}
 
 
-	public void setIdCliente(Integer idCliente) {
+	public void setIdCliente(long idCliente) {
 		this.idCliente = idCliente;
 	}
 	

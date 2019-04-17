@@ -21,14 +21,14 @@ class SQLMantenimiento
 		this.pha=pha; 
 	}
 	
-	public long adicionarMantenimiento(PersistenceManager pm, Integer id, char estado, Date fechaInicio, Date fechaFin, String descripcion, Integer idHabitacion, Integer idServicio) 
+	public long adicionarMantenimiento(PersistenceManager pm, long id, char estado, Date fechaInicio, Date fechaFin, String descripcion, long idHabitacion, long idServicio) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlMantenimiento() + "(id,estado,fechaInicio, fechaFin, descripcion, idHabitacion, idServicio) values (?, ?, ?, ? , ?, ?, ?)");
         q.setParameters(id,estado,fechaInicio, fechaFin, descripcion, idHabitacion, idServicio);
         return (long) q.executeUnique();
 	}
 	
-	public Mantenimiento darMantenimientoPorId (PersistenceManager pm, Integer id) 
+	public Mantenimiento darMantenimientoPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlMantenimiento() + " WHERE id = ?");
 		q.setResultClass(Mantenimiento.class);

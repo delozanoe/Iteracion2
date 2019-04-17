@@ -6,7 +6,7 @@ import java.util.List;
 public class Mantenimiento 
 {
 	
-	private Integer id;
+	private long id;
 	
 	
 	private char estado;
@@ -21,7 +21,7 @@ public class Mantenimiento
 	
 	private Servicio servicio;
 
-	public Mantenimiento(Integer id, char estado, Date fechaInicio, Date fechaFin, String descripcion, Habitacion habitacion, Servicio servicio) {
+	public Mantenimiento(long id, char estado, Date fechaInicio, Date fechaFin, String descripcion, Habitacion habitacion, Servicio servicio) {
 		super();
 		this.id = id;
 		this.estado = estado;
@@ -31,11 +31,11 @@ public class Mantenimiento
 		this.habitacion = habitacion;
 		this.servicio = servicio;
 	}
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -18,7 +18,7 @@ public class SQLConvencionCliente
 		this.pha = pha;
 	}
 
-	public long adicionarConvencionCliente(PersistenceManager pm, Integer idConvencion, Integer idCliente) 
+	public long adicionarConvencionCliente(PersistenceManager pm, long idConvencion, long idCliente) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConvencionCliente() + "(idConvencion, idCliente) values (?, ?)");
 		q.setParameters(idConvencion,idCliente);

@@ -22,14 +22,14 @@ class SQLProducto
 		this.pha = pha;
 	}
 	
-	public long adicionarProducto(PersistenceManager pm, Integer id, String nombre, Double costo) 
+	public long adicionarProducto(PersistenceManager pm, long id, String nombre, Double costo) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlProducto()+ "(id, nombre, costo) values (?, ?, ?)");
         q.setParameters(id, nombre, costo);
         return (long) q.executeUnique();
 	}
 	
-	public Producto darProductoPorId (PersistenceManager pm, Integer id) 
+	public Producto darProductoPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlProducto() + " WHERE id = ?");
 		q.setResultClass(Producto.class);

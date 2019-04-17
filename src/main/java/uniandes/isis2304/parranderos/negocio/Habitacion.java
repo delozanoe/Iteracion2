@@ -12,7 +12,7 @@ import java.util.List;
 public class Habitacion
 {
 	
-	private Integer id;
+	private long id;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -102,7 +102,7 @@ public class Habitacion
 
 	public Habitacion(int capacidad, double costoPorNoche, List<Servicio> servicios,
 			double cuenta, Hotel hotel, List<Cliente> clientes, ConsumoHabitacion consumoHabitacion,
-			PlanConsumo planConsumo, Integer id, TipoHabitacion tipoHabitacion, char estado) {
+			PlanConsumo planConsumo, long id, TipoHabitacion tipoHabitacion, char estado) {
 		super();
 		this.id = id;
 		this.capacidad = capacidad;
@@ -150,13 +150,13 @@ public class Habitacion
 
 
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

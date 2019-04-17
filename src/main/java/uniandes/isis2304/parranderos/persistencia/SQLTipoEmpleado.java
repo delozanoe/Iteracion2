@@ -22,7 +22,7 @@ public class SQLTipoEmpleado
 		this.pha = pha;
 	}
 
-	public long adicionarTipoEmpleado(PersistenceManager pm, Integer id, String nombre) 
+	public long adicionarTipoEmpleado(PersistenceManager pm, long id, String nombre) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlTipoEmpleado()+ "(id, nombre) values (?, ?)");
 		q.setParameters(id, nombre);
@@ -30,7 +30,7 @@ public class SQLTipoEmpleado
 	}
 
 
-	public TipoEmpleado darTipoEmpleadoPorId (PersistenceManager pm, Integer idUsuario) 
+	public TipoEmpleado darTipoEmpleadoPorId (PersistenceManager pm, long idUsuario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlTipoEmpleado () + " WHERE id = ?");
 		q.setResultClass(TipoEmpleado.class);
