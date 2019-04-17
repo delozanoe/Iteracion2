@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -33,11 +33,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (Habitacion) q.executeUnique();
 	}
 	
-	public ArrayList<Habitacion> darHabitaciones (PersistenceManager pm)
+	public List<Habitacion> darHabitaciones (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlHabitacion());
 		q.setResultClass(Habitacion.class);
-		return (ArrayList<Habitacion>) q.executeList();
+		return (List<Habitacion>) q.executeList();
 	}
 	
 	public long cambiarEstado (PersistenceManager pm,char estado, Integer idHabitacion)

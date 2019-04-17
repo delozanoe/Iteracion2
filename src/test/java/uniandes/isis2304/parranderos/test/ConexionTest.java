@@ -48,22 +48,22 @@ public class ConexionTest
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia existe y el esquema de la BD también
 	 */
-	private static final String CONFIG_TABLAS_A = "./src/main/resources/config/TablasBD_A.json"; 
+	private static final String CONFIG_TABLAS_A = "./src/main/resources/config/TablaBD_A.json"; 
 	
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia existe, pero el esquema de la BD no se ha creado
 	 */
-	private static final String CONFIG_TABLAS_B = "./src/main/resources/config/TablasBD_B.json"; 
+	private static final String CONFIG_TABLAS_B = "./src/main/resources/config/TablaBD_B.json"; 
 	
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia NO existe
 	 */
-	private static final String CONFIG_TABLAS_ERR_DS = "./src/main/resources/config/TablasBD_ErrorDataStore.json"; 
+	private static final String CONFIG_TABLAS_ERR_DS = "./src/main/resources/config/TablaBD_ErrorDataStore.json"; 
 	
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia NO existe
 	 */
-	private static final String CONFIG_TABLAS_ERR_USER = "./src/main/resources/config/TablasBD_ErrorInvalidUser.json"; 
+	private static final String CONFIG_TABLAS_ERR_USER = "./src/main/resources/config/TablaBD_ErrorInvalidUser.json"; 
 	
 	/* ****************************************************************
 	 * 			Atributos
@@ -93,7 +93,7 @@ public class ConexionTest
 			cadenaHotelera = new CadenaHotelera(openConfig (CONFIG_TABLAS_A));
 			log.info ("Conexión realizada correstamente");
 			log.info ("Cerrando la conexión");
-			
+			System.out.println("SI FUENCIONA ESTA MONDA");
 			cadenaHotelera.cerrarUnidadPersistencia ();
 			log.info ("Conexión cerrada");
 		}
@@ -104,8 +104,8 @@ public class ConexionTest
 			log.info ("La causa es: " + e.getCause ().toString ());
 
 			String msg = "Prueba de acceso normal a la base de datos falló !! Revise persistence.xml.\n";
-			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción";
-//			System.out.println (msg);
+			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción AYUDAAA";
+			System.out.println (msg);
 			fail (msg);
 		}
   	}
@@ -229,10 +229,12 @@ public class ConexionTest
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
 			log.info ("Se encontró un archivo de configuración de tablas válido");
+			
 		} 
 		catch (Exception e)
 		{
-//			e.printStackTrace ();
+			e.printStackTrace ();
+			System.out.println("Ayudaaaaaa maldita sea");
 			log.info ("NO se encontró un archivo de configuración válido");			
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de tablas válido: ", "TipoBebidaTest", JOptionPane.ERROR_MESSAGE);
 		}	

@@ -53,12 +53,26 @@
 					"event": "registrarMantenimientoHabitacion"
 				},
 				{
-					"label": "Registrar un mantenimiento habitacion",
-					"event": "registrarMantenimientoHabitacion"
-				},
-				{
 					"label": "Finalizar mantenimiento",
 					"event": "finalizarMantenimiento"
+				}
+			]
+		},
+		{
+			"menuTitle": "Analisis del hotel",
+			"options": 
+			[
+				{
+					"label": "Analizar la operacion del hotel",
+					"event": "analizarHotelAndes"
+				},
+				{
+					"label": "Encontrar buenos clientes",
+					"event": "buenosClientes"
+				},
+				{
+					"label": "Servicios con poca demanda",
+					"event": "pocaDemandaServicios"
 				}
 			]
 		}

@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +45,7 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private ArrayList<Habitacion> habitaciones;
+	private List<Habitacion> habitaciones;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private ArrayList<ReservaHabitacion> reservas;
+	private List<ReservaHabitacion> reservas;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private ArrayList<Empleado> empleados;
+	private List<Empleado> empleados;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +72,7 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private ArrayList<Servicio> servicios;
+	private List<Servicio> servicios;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,15 +81,15 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private ArrayList<PlanConsumo> planesConsumo;
+	private List<PlanConsumo> planesConsumo;
 
-	private ArrayList<TipoEmpleado> tiposEmpleados;
+	private List<TipoEmpleado> tiposEmpleados;
 
-	private ArrayList<Convencion> convenciones; 
+	private List<Convencion> convenciones; 
 
-	public Hotel(Integer id, String pais, String ciudad, int ofertaHabitacional, ArrayList<Habitacion> habitaciones,
-			ArrayList<ReservaHabitacion> reservas, ArrayList<Empleado> empleado, ArrayList<Servicio> servicios,
-			ArrayList<PlanConsumo> planesConsumo, ArrayList<TipoEmpleado> tiposEmpleados, ArrayList<Convencion> convenciones) {
+	public Hotel(Integer id, String pais, String ciudad, int ofertaHabitacional, List<Habitacion> habitaciones,
+			List<ReservaHabitacion> reservas, List<Empleado> empleado, List<Servicio> servicios,
+			List<PlanConsumo> planesConsumo, List<TipoEmpleado> tiposEmpleados, List<Convencion> convenciones) {
 		super();
 		this.id= id;
 		this.pais = pais;
@@ -106,37 +106,37 @@ public class Hotel
 
 
 
-	public ArrayList<Empleado> getEmpleados() {
+	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
 
 
 
-	public void setEmpleados(ArrayList<Empleado> empleados) {
+	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 
 
 
-	public ArrayList<PlanConsumo> getPlanesConsumo() {
+	public List<PlanConsumo> getPlanesConsumo() {
 		return planesConsumo;
 	}
 
 
 
-	public void setPlanesConsumo(ArrayList<PlanConsumo> planesConsumo) {
+	public void setPlanesConsumo(List<PlanConsumo> planesConsumo) {
 		this.planesConsumo = planesConsumo;
 	}
 
 
 
-	public ArrayList<TipoEmpleado> getTiposEmpleados() {
+	public List<TipoEmpleado> getTiposEmpleados() {
 		return tiposEmpleados;
 	}
 
 
 
-	public void setTiposEmpleados(ArrayList<TipoEmpleado> tiposEmpleados) {
+	public void setTiposEmpleados(List<TipoEmpleado> tiposEmpleados) {
 		this.tiposEmpleados = tiposEmpleados;
 	}
 
@@ -178,52 +178,52 @@ public class Hotel
 		this.ofertaHabitacional = ofertaHabitacional;
 	}
 
-	public ArrayList<Habitacion> getHabitaciones() {
+	public List<Habitacion> getHabitaciones() {
 		return habitaciones;
 	}
 
-	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
+	public void setHabitaciones(List<Habitacion> habitaciones) {
 		this.habitaciones = habitaciones;
 	}
 
-	public ArrayList<ReservaHabitacion> getReservas() {
+	public List<ReservaHabitacion> getReservas() {
 		return reservas;
 	}
 
-	public void setReservas(ArrayList<ReservaHabitacion> reservas) {
+	public void setReservas(List<ReservaHabitacion> reservas) {
 		this.reservas = reservas;
 	}
 
-	public ArrayList<Empleado> getEmpleado() {
+	public List<Empleado> getEmpleado() {
 		return empleados;
 	}
 
-	public void setEmpleado(ArrayList<Empleado> empleado) {
+	public void setEmpleado(List<Empleado> empleado) {
 		this.empleados = empleado;
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<Servicio> servicios) {
+	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 
-	public ArrayList<PlanConsumo> getPlanConsumo() {
+	public List<PlanConsumo> getPlanConsumo() {
 		return planesConsumo;
 	}
 
-	public void setPlanConsumo(ArrayList<PlanConsumo> planConsumo) {
+	public void setPlanConsumo(List<PlanConsumo> planConsumo) {
 		this.planesConsumo = planConsumo;
 	}
 
-	public ArrayList<Convencion> getConvencion()
+	public List<Convencion> getConvencion()
 	{
 		return convenciones;
 	}
 
-	public void setConvenciones(ArrayList<Convencion> concenciones)
+	public void setConvenciones(List<Convencion> concenciones)
 	{
 		this.convenciones = concenciones;
 	}

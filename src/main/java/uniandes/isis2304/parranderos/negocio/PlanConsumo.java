@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,13 +38,13 @@ public class PlanConsumo
 	 * @ordered
 	 */
 
-	private ArrayList<Habitacion> habitacion;
+	private List<Habitacion> habitacion;
 
-	private ArrayList<Convencion> convenciones;
+	private List<Convencion> convenciones;
 	
-	private ArrayList<Servicio> servicios ;
+	private List<Servicio> servicios ;
 
-	public PlanConsumo(String descripcion, Hotel hotel, ArrayList<Habitacion> habitacion, Integer id, ArrayList<Convencion> convenciones, ArrayList<Servicio> servicios) {
+	public PlanConsumo(String descripcion, Hotel hotel, List<Habitacion> habitacion, Integer id, List<Convencion> convenciones, List<Servicio> servicios) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -54,12 +54,12 @@ public class PlanConsumo
 		this.servicios = servicios;
 	}
 
-	public ArrayList<Servicio> getServicios()
+	public List<Servicio> getServicios()
 	{
 		return servicios;
 	}
 	
-	public void setServicios(ArrayList<Servicio> servicios)
+	public void setServicios(List<Servicio> servicios)
 	{
 		this.servicios = servicios;
 	}
@@ -91,11 +91,11 @@ public class PlanConsumo
 		this.hotel = hotel;
 	}
 
-	public ArrayList<Habitacion> getHabitacion() {
+	public List<Habitacion> getHabitacion() {
 		return habitacion;
 	}
 
-	public void setHabitacion(ArrayList<Habitacion> habitacion) {
+	public void setHabitacion(List<Habitacion> habitacion) {
 		this.habitacion = habitacion;
 	}
 
@@ -104,12 +104,12 @@ public class PlanConsumo
 	 * <!--  end-user-doc  -->
 	 * @generated
 	 */
-	 public ArrayList<Convencion> getConvencion()
+	 public List<Convencion> getConvencion()
 	 {
 		return convenciones;
 	 }
 
-	 public void setConvenciones(ArrayList<Convencion> convenciones)
+	 public void setConvenciones(List<Convencion> convenciones)
 	 {
 		 this.convenciones = convenciones; 
 	 }

@@ -1,5 +1,5 @@
 package uniandes.isis2304.parranderos.negocio;
-import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -36,7 +36,7 @@ public class Cliente extends Usuario
 	 * @ordered
 	 */
 
-	private ArrayList<String> planConsumo;
+	private List<String> planConsumo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class Cliente extends Usuario
 	 * @ordered
 	 */
 
-	private ArrayList<ReservaHabitacion> reservaHabitacion;
+	private List<ReservaHabitacion> reservaHabitacion;
 
 
 	/**
@@ -64,12 +64,12 @@ public class Cliente extends Usuario
 	 * @ordered
 	 */
 
-	private ArrayList<ReservaServicio> reservas;
+	private List<ReservaServicio> reservas;
 
-	private ArrayList<Convencion> convenciones;
+	private List<Convencion> convenciones;
 
-	public Cliente( Integer id, char pazYSalvo, ArrayList<String> planConsumo, Habitacion habitacion,
-			ArrayList<ReservaHabitacion> reserva, ArrayList<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, ArrayList<Convencion> convenciones)
+	public Cliente( Integer id, char pazYSalvo, List<String> planConsumo, Habitacion habitacion,
+			List<ReservaHabitacion> reserva, List<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, List<Convencion> convenciones)
 			 {
 
 		super(nombre, nombre, numeroDocumento, nombre, id);
@@ -117,11 +117,11 @@ public class Cliente extends Usuario
 		this.pazYSalvo = pazYSalvo;
 	}
 
-	public ArrayList<String> getPlanConsumo() {
+	public List<String> getPlanConsumo() {
 		return planConsumo;
 	}
 
-	public void setPlanConsumo(ArrayList<String> planConsumo) {
+	public void setPlanConsumo(List<String> planConsumo) {
 		this.planConsumo = planConsumo;
 	}
 
@@ -133,28 +133,28 @@ public class Cliente extends Usuario
 		this.habitacion = habitacion;
 	}
 
-	public ArrayList<ReservaHabitacion> getReserva() {
+	public List<ReservaHabitacion> getReserva() {
 		return reservaHabitacion;
 	}
 
-	public void setReserva(ArrayList<ReservaHabitacion> reserva) {
+	public void setReserva(List<ReservaHabitacion> reserva) {
 		this.reservaHabitacion = reserva;
 	}
 
-	public ArrayList<ReservaServicio> getReservas() {
+	public List<ReservaServicio> getReservas() {
 		return reservas;
 	}
 
-	public void setReservas(ArrayList<ReservaServicio> reservas) {
+	public void setReservas(List<ReservaServicio> reservas) {
 		this.reservas = reservas;
 	}
 
-	public ArrayList<Convencion> getConvencion()
+	public List<Convencion> getConvencion()
 	{
 		return convenciones;
 	}
 
-	public void setConvenciones(ArrayList<Convencion> convenciones)
+	public void setConvenciones(List<Convencion> convenciones)
 	{
 		this.convenciones = convenciones;
 	}

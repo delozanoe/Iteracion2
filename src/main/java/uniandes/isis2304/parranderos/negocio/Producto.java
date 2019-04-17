@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public class Producto
 	 * @ordered
 	 */
 	
-	private ArrayList<Servicio> serviciosProductos;
+	private List<Servicio> serviciosProductos;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,10 +55,10 @@ public class Producto
 	 * @ordered
 	 */
 	
-	private ArrayList<Servicio> serviciosConsumos;
+	private List<Servicio> serviciosConsumos;
 
 	public Producto(String nombre, Double costo,Integer id,
-			ArrayList<Servicio> serviciosProductos, ArrayList<Servicio> serviciosConsumos) {
+			List<Servicio> serviciosProductos, List<Servicio> serviciosConsumos) {
 		super();
 		this.nombre = nombre;
 		this.costo = costo;
@@ -92,19 +92,19 @@ public class Producto
 		this.id = id;
 	}
 
-	public ArrayList<Servicio> getServiciosProductos() {
+	public List<Servicio> getServiciosProductos() {
 		return serviciosProductos;
 	}
 
-	public void setServiciosProductos(ArrayList<Servicio> serviciosProductos) {
+	public void setServiciosProductos(List<Servicio> serviciosProductos) {
 		this.serviciosProductos = serviciosProductos;
 	}
 
-	public ArrayList<Servicio> getServiciosConsumos() {
+	public List<Servicio> getServiciosConsumos() {
 		return serviciosConsumos;
 	}
 
-	public void setServiciosConsumos(ArrayList<Servicio> serviciosConsumos) {
+	public void setServiciosConsumos(List<Servicio> serviciosConsumos) {
 		this.serviciosConsumos = serviciosConsumos;
 	}
 

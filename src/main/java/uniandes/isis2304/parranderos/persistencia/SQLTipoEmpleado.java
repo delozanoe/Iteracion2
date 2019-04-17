@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -38,10 +38,10 @@ public class SQLTipoEmpleado
 		return (TipoEmpleado) q.executeUnique();
 	}
 
-	public ArrayList<TipoEmpleado> darTipoEmpleado (PersistenceManager pm)
+	public List<TipoEmpleado> darTipoEmpleado (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlTipoEmpleado());
 		q.setResultClass(TipoEmpleado.class);
-		return (ArrayList<TipoEmpleado>) q.executeList();
+		return (List<TipoEmpleado>) q.executeList();
 	}
 }

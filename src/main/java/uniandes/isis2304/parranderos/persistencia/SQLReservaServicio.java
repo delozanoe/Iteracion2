@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.util.List;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -33,11 +34,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (ReservaServicio) q.executeUnique();
 	}
 	
-	public ArrayList<ReservaServicio> darReservasServicios(PersistenceManager pm)
+	public List<ReservaServicio> darReservasServicios(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlReservaServicio());
 		q.setResultClass(ReservaServicio.class);
-		return (ArrayList<ReservaServicio>) q.executeList();
+		return (List<ReservaServicio>) q.executeList();
 	}
 	
 	public long eliminarReservaPorIdConvencion (PersistenceManager pm, Integer idConvencion)

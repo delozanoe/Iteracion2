@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -24,10 +24,10 @@ public class SQLPlanConsumoServicio
 		return (long) q.executeUnique();
 	}
 
-	public ArrayList<PlanConsumoServicio> darPlanConsumoServicio (PersistenceManager pm)
+	public List<PlanConsumoServicio> darPlanConsumoServicio (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlPlanConsumoServicio ());
 		q.setResultClass(PlanConsumoServicio.class);
-		return (ArrayList<PlanConsumoServicio>) q.execute();
+		return (List<PlanConsumoServicio>) q.execute();
 	}
 }

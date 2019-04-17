@@ -1,5 +1,5 @@
 package uniandes.isis2304.parranderos.negocio;
-import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -101,7 +101,7 @@ public class Servicio
 	
 	private Integer estado;
 	
-	private ArrayList<ReservaServicio> reservas;
+	private List<ReservaServicio> reservas;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,7 +119,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private ArrayList<Producto> productos;
+	private List<Producto> productos;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,16 +128,16 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private ArrayList<Producto> comsumos;
+	private List<Producto> comsumos;
 	
-	private ArrayList<Mantenimiento> mantenimientos;
+	private List<Mantenimiento> mantenimientos;
 	
-	private ArrayList<PlanConsumo> planesDeConsumo;
+	private List<PlanConsumo> planesDeConsumo;
 	
 
 	public Servicio(Integer id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
-			double costo, TipoServicio tipo, char costoIncluido, ArrayList<ReservaServicio> reservas, Hotel hotel,
-			ArrayList<Producto> productos, ArrayList<Producto> comsumos,ArrayList<PlanConsumo> planesDeConsumo,  ArrayList<Mantenimiento> mantenimientos, Integer estado) {
+			double costo, TipoServicio tipo, char costoIncluido, List<ReservaServicio> reservas, Hotel hotel,
+			List<Producto> productos, List<Producto> comsumos,List<PlanConsumo> planesDeConsumo,  List<Mantenimiento> mantenimientos, Integer estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -165,19 +165,19 @@ public class Servicio
 		this.estado = estado;
 	}
 
-	public ArrayList<Mantenimiento> getMantenimientos() {
+	public List<Mantenimiento> getMantenimientos() {
 		return mantenimientos;
 	}
 
-	public void setMantenimientos(ArrayList<Mantenimiento> mantenimientos) {
+	public void setMantenimientos(List<Mantenimiento> mantenimientos) {
 		this.mantenimientos = mantenimientos;
 	}
 
-	public ArrayList<PlanConsumo> getPlanesDeConsumo() {
+	public List<PlanConsumo> getPlanesDeConsumo() {
 		return planesDeConsumo;
 	}
 
-	public void setPlanesDeConsumo(ArrayList<PlanConsumo> planesDeConsumo) {
+	public void setPlanesDeConsumo(List<PlanConsumo> planesDeConsumo) {
 		this.planesDeConsumo = planesDeConsumo;
 	}
 
@@ -257,11 +257,11 @@ public class Servicio
 		this.costoIncluido = costoIncluido;
 	}
 
-	public ArrayList<ReservaServicio> getReservas() {
+	public List<ReservaServicio> getReservas() {
 		return reservas;
 	}
 
-	public void setReservas(ArrayList<ReservaServicio> reservas) {
+	public void setReservas(List<ReservaServicio> reservas) {
 		this.reservas = reservas;
 	}
 
@@ -273,19 +273,19 @@ public class Servicio
 		this.hotel = hotel;
 	}
 
-	public ArrayList<Producto> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(ArrayList<Producto> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
-	public ArrayList<Producto> getComsumos() {
+	public List<Producto> getComsumos() {
 		return comsumos;
 	}
 
-	public void setComsumos(ArrayList<Producto> comsumos) {
+	public void setComsumos(List<Producto> comsumos) {
 		this.comsumos = comsumos;
 	}
 

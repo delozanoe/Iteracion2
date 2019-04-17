@@ -1,7 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Convencion
 {
@@ -21,20 +21,20 @@ public class Convencion
 
 	private char estado;
 
-	private ArrayList<Hotel> hotelesConvencion;
+	private List<Hotel> hotelesConvencion;
 
-	private ArrayList<ReservaHabitacion> reservasHabitaciones;
+	private List<ReservaHabitacion> reservasHabitaciones;
 
-	private ArrayList<Cliente> clientes;
+	private List<Cliente> clientes;
 
 	private PlanConsumo planConsumo;
 
-	private ArrayList<ReservaServicio> reservasServicio;
+	private List<ReservaServicio> reservasServicio;
 
 	public Convencion(Integer id, String tematica, Integer numeroParticipantes, Date fechaInicio, Date fechaFin,
-			double cuenta, char pazYSalvo, char estado, ArrayList<Hotel> hotelesConvencion,
-			ArrayList<ReservaHabitacion> reservasHabitaciones, ArrayList<Cliente> clientes, PlanConsumo planConsumo,
-			ArrayList<ReservaServicio> reservasServicio) {
+			double cuenta, char pazYSalvo, char estado, List<Hotel> hotelesConvencion,
+			List<ReservaHabitacion> reservasHabitaciones, List<Cliente> clientes, PlanConsumo planConsumo,
+			List<ReservaServicio> reservasServicio) {
 		super();
 		this.id = id;
 		this.tematica = tematica;
@@ -115,27 +115,27 @@ public class Convencion
 		this.estado = estado;
 	}
 
-	public ArrayList<Hotel> getHotelesConvencion() {
+	public List<Hotel> getHotelesConvencion() {
 		return hotelesConvencion;
 	}
 
-	public void setHotelesConvencion(ArrayList<Hotel> hotelesConvencion) {
+	public void setHotelesConvencion(List<Hotel> hotelesConvencion) {
 		this.hotelesConvencion = hotelesConvencion;
 	}
 
-	public ArrayList<ReservaHabitacion> getReservasHabitaciones() {
+	public List<ReservaHabitacion> getReservasHabitaciones() {
 		return reservasHabitaciones;
 	}
 
-	public void setReservasHabitaciones(ArrayList<ReservaHabitacion> reservasHabitaciones) {
+	public void setReservasHabitaciones(List<ReservaHabitacion> reservasHabitaciones) {
 		this.reservasHabitaciones = reservasHabitaciones;
 	}
 
-	public ArrayList<Cliente> getClientes() {
+	public List<Cliente> getClientes() {
 		return clientes;
 	}
 
-	public void setClientes(ArrayList<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 
@@ -147,11 +147,11 @@ public class Convencion
 		this.planConsumo = planConsumo;
 	}
 
-	public ArrayList<ReservaServicio> getReservasServicio() {
+	public List<ReservaServicio> getReservasServicio() {
 		return reservasServicio;
 	}
 
-	public void setReservasServicio(ArrayList<ReservaServicio> reservasServicio) {
+	public void setReservasServicio(List<ReservaServicio> reservasServicio) {
 		this.reservasServicio = reservasServicio;
 	}
 
