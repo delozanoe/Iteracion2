@@ -1886,14 +1886,14 @@ public class PersistenciaCadenaHotelera
 		{
 			if(habitaciones.get(i).getEstado() == 'D')				
 			{
-				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), null);
+				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
 				habitaciones.get(i).setEstado('M');
 				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
 			}
 			
 			else if(habitaciones.get(i).getEstado() == 'O')
 			{
-				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), null);
+				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
 				habitaciones.get(i).setEstado('M');
 				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
 				
