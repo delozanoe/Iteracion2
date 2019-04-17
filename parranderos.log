@@ -311,3 +311,11 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 12:45:12,493 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
 12:45:50,694 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
 12:45:50,709 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:24:12,570 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+13:24:12,594 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:28:21,154 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+13:28:21,179 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:10:48,624 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+14:10:48,651 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:11:14,447 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+14:11:14,469 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
