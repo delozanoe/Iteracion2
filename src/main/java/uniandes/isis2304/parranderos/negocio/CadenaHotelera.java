@@ -1,6 +1,8 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.List;
 
@@ -378,11 +380,13 @@ public class CadenaHotelera
 	
 	}
 	
-	public Convencion adicionarConvencion(String tematica, int numeroParticipantes, Date fechaInicio, Date fechaFin, double cuenta, char pazYSalvo, char estado, int idPlanConsumo )
+	public Convencion adicionarConvencion(String tematica, int numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, char pazYSalvo, char estado, int idPlanConsumo )
 	{
 		Convencion nuevaConvencion = pha.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);	
 		return nuevaConvencion;
 	}
+
+	
 	
 	public void adicionarHabitacionConvencion()
 	{

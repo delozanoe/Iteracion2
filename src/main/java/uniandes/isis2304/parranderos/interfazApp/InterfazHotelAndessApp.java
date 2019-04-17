@@ -28,6 +28,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -700,17 +701,16 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	}
 
 
-	private  Date convertirADate(String fecha)
+	private  Timestamp convertirADate(String fecha)
 	{
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechaDate = null;
+	
+		Timestamp fechaDate = null;
 		try {
-			fechaDate = (Date) formato.parse(fecha);
-			System.out.println(fechaDate);
-		} 
-		catch (ParseException ex) 
-		{
-			System.out.println(ex);
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		    Date parsedDate = dateFormat.parse(fecha);
+		    Timestamp timestamp = new Timestamp(parsedDate.getTime());
+		} catch(Exception e) { //this generic but you can control another types of exception
+		    // look the origin of excption 
 		}
 		return fechaDate;
 	}

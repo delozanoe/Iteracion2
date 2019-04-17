@@ -1,6 +1,8 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.List;
 
@@ -20,7 +22,7 @@ class SQLConvencion
 		this.pha= pha; 
 	}
 	
-	public long adicionarConvencion(PersistenceManager pm, Integer id, Integer idPlanConsumo, char estado, char pazYSalvo, Double cuenta, Date fechaInicio, Date fechaFin, Integer numeroParticipantes, String tematica ) 
+	public long adicionarConvencion(PersistenceManager pm, Integer id, Integer idPlanConsumo, char estado, char pazYSalvo, BigDecimal cuenta, Timestamp fechaInicio, Timestamp fechaFin, Integer numeroParticipantes, String tematica ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConvencion() + "(id, idPlanConsumo, estado, pazYSalvo, cuenta, fechaInicio, fechaFin, numeroParticipantes, tematica) values (?, ?, ?, ? , ?, ?, ?, ?, ?)");
         q.setParameters(id, idPlanConsumo, estado, pazYSalvo, cuenta, fechaInicio, fechaFin, numeroParticipantes, tematica);
