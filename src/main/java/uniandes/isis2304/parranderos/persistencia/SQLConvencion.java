@@ -44,4 +44,12 @@ class SQLConvencion
 
 		return (List<Convencion>) q.executeList();
 	}
+	
+	
+	public long eliminarConvencionPorId (PersistenceManager pm, Integer idConvencion)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pha.getSqlConvencion() + " WHERE id = ?");
+        q.setParameters(idConvencion);
+        return (long) q.executeUnique();
+	}
 }

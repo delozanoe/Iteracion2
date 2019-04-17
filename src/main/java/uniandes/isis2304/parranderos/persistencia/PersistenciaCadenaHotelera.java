@@ -1492,6 +1492,34 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
+	public long eliminarConvencionPorId (Integer idConvencion) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlConvencion.eliminarConvencionPorId(pm, idConvencion);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 	public List<Mantenimiento> darMantenimientos ()
 	{
 		return sqlMantenimiento.darMantenimientos(pmf.getPersistenceManager());
@@ -1836,9 +1864,98 @@ public class PersistenciaCadenaHotelera
 			}
 		}
 		
+	}
+	
+	public void finConvencion (Integer idConvencion)
+	{
+		Convencion convencion =sqlConvencion.darConvencionPorId(pmf.getPersistenceManager(), idConvencion);
+		BigDecimal cero = new BigDecimal(0);
 		
+		if(convencion.getCuenta() ==cero && convencion.isPazYSalvo() == 'T' )
+		{
+			this.eliminarConvencionPorId(idConvencion);
+		}
 		
 	}
+	
+	public void ponerEnMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios, Date fechaInicio, Date fechaFin)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		
+		for(int i =0; i <habitaciones.size();i++)
+		{
+			if(habitaciones.get(i).getEstado() == 'D')				
+			{
+				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), null);
+				habitaciones.get(i).setEstado('M');
+				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
+			}
+			
+			else if(habitaciones.get(i).getEstado() == 'O')
+			{
+				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), null);
+				habitaciones.get(i).setEstado('M');
+				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
+				
+				Query q1 = pm.newQuery(SQL, "SELECT DISTINCT id FROM " + this.getSqlCliente() + "WHERE idHabitacion =?");
+				q1.setParameters(habitaciones.get(i).getId());
+				Integer idCliente= (Integer) q1.executeUnique();
 
+				
+				List<Habitacion> habitacionesRevisar = this.darHabitaciones();
+				Integer idHabitacionNueva = 0;
+				
+				for(int j=0; j<habitacionesRevisar.size();j++)
+				{
+					Habitacion nueva = habitaciones.get(j);
+					char estadoNueva = habitaciones.get(j).getEstado();
+					if(estadoNueva=='D' && nueva.getTipoHabitacion() == (habitaciones.get(i).getTipoHabitacion()))
+					{
+						 idHabitacionNueva = nueva.getId();
+					}
+				}
+				
+				
+				this.cambiarHabitacionCliente(idCliente, idHabitacionNueva);
+				this.moverConsumos(habitaciones.get(i).getId(), idHabitacionNueva, habitaciones.get(i).getConsumoHabitacion().getId());
+			}
+		}
+		
+		for(int i =0; i <servicios.size();i++)
+		{
+			this.cambiarEstadoServicio(1, servicios.get(i).getId());
+			
+			Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlReservaServicio() + "WHERE idServicio =? AND dia>= ? AND dia <= ?");
+			q1.setParameters(servicios.get(i).getId(), fechaInicio, fechaFin);
+			List <Integer>idsReservaServicios= (List<Integer>) q1.executeUnique();
+			
+			for(int j =0; j <idsReservaServicios.size();j++)
+			{
+				Integer idReservaServicio = idsReservaServicios.get(j);
+				Integer idTipoServicio = sqlReservaServicio.darReservaServicioPorId(pm, idReservaServicio).getServicio().getTipo().getId();
+				
+				Query q2 = pm.newQuery(SQL, "SELECT DISTINCT id FROM " + this.getSqlServicio() + "WHERE idTipoServicio =? AND estado=0");
+				q2.setParameters(idTipoServicio);
+				Integer idServicioNuevo= (Integer) q2.executeUnique();
+				
+				this.cambiarServicioReserva(idServicioNuevo, idReservaServicio);
+				
+			}
+			
+		}
+	}
+
+	public void sacarDeMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios)
+	{
+		for (int i =0; i<habitaciones.size();i++)
+		{
+			this.cambiarEstadoHabitacion('D', habitaciones.get(i).getId());
+		}
+		
+		for (int i =0; i <servicios.size(); i++)
+		{
+			this.cambiarEstadoServicio(0, servicios.get(i).getId());
+		}
+	}
 
 }
