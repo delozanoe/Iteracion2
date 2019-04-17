@@ -1957,5 +1957,6 @@ public class PersistenciaCadenaHotelera
 			this.cambiarEstadoServicio(0, servicios.get(i).getId());
 		}
 	}
+	
 
 }
