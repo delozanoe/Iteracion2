@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
 import uniandes.isis2304.parranderos.persistencia.PersistenciaCadenaHotelera;
+import uniandes.isis2304.parranderos.test.ConexionTest;
 
 
 
@@ -238,7 +239,7 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, String dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
+	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Date dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
 	{
 		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
@@ -376,7 +377,21 @@ public class CadenaHotelera
 	
 	}
 	
+	public Convencion adicionarConvencion(String tematica, int numeroParticipantes, Date fechaInicio, Date fechaFin, double cuenta, char pazYSalvo, char estado, int idPlanConsumo )
+	{
+		Convencion nuevaConvencion = pha.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);	
+		return nuevaConvencion;
+	}
 	
+	public void adicionarHabitacionConvencion()
+	{
+		
+	}
+	
+	public Mantenimiento adicionarMantenimiento()
+	{
+		return null; 
+	}
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

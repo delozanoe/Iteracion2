@@ -18,6 +18,7 @@ package uniandes.isis2304.parranderos.interfazApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -26,15 +27,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
@@ -48,6 +56,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.CadenaHotelera;
+import uniandes.isis2304.parranderos.negocio.Convencion;
+
 
 
 
@@ -67,97 +77,97 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	 * Logger para escribir la traza de la ejecución
 	 */
 	private static Logger log = Logger.getLogger(InterfazHotelAndessApp.class.getName());
-	
+
 	/**
 	 * Ruta al archivo de configuración de la interfaz
 	 */
 	private static final String CONFIG_INTERFAZ = "./src/main/resources/config/interfaceConfigApp.json"; 
-	
+
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos
 	 */
 	private static final String CONFIG_TABLAS = "./src/main/resources/config/TablaBD_A.json"; 
-	
+
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-    /**
-     * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
-     */
-    private JsonObject tableConfig;
-    
-    /**
-     * Asociación a la clase principal del negocio.
-     */
-    private CadenaHotelera cadenaHotelera;
-    
+	/**
+	 * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
+	 */
+	private JsonObject tableConfig;
+
+	/**
+	 * Asociación a la clase principal del negocio.
+	 */
+	private CadenaHotelera cadenaHotelera;
+
 	/* ****************************************************************
 	 * 			Atributos de interfaz
 	 *****************************************************************/
-    /**
-     * Objeto JSON con la configuración de interfaz de la app.
-     */
-    private JsonObject guiConfig;
-    
-    /**
-     * Panel de despliegue de interacción para los requerimientos
-     */
-    private PanelDatos panelDatos;
-    
-    /**
-     * Menú de la aplicación
-     */
-    private JMenuBar menuBar;
+	/**
+	 * Objeto JSON con la configuración de interfaz de la app.
+	 */
+	private JsonObject guiConfig;
+
+	/**
+	 * Panel de despliegue de interacción para los requerimientos
+	 */
+	private PanelDatos panelDatos;
+
+	/**
+	 * Menú de la aplicación
+	 */
+	private JMenuBar menuBar;
 
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-    /**
-     * Construye la ventana principal de la aplicación. <br>
-     * <b>post:</b> Todos los componentes de la interfaz fueron inicializados.
-     */
-    public InterfazHotelAndessApp( )
-    {
-        // Carga la configuración de la interfaz desde un archivo JSON
-        guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
-        
-        // Configura la apariencia del frame que contiene la interfaz gráfica
-        configurarFrame ( );
-        if (guiConfig != null) 	   
-        {
-     	   crearMenu( guiConfig.getAsJsonArray("menuBar") );
-        }
-        
-        tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
-        
-        cadenaHotelera = new CadenaHotelera(tableConfig);
-        
-    	String path = guiConfig.get("bannerPath").getAsString();
-        panelDatos = new PanelDatos ( );
+	/**
+	 * Construye la ventana principal de la aplicación. <br>
+	 * <b>post:</b> Todos los componentes de la interfaz fueron inicializados.
+	 */
+	public InterfazHotelAndessApp( )
+	{
+		// Carga la configuración de la interfaz desde un archivo JSON
+		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
 
-        setLayout (new BorderLayout());
-        add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-        add( panelDatos, BorderLayout.CENTER );        
-    }
-    
+		// Configura la apariencia del frame que contiene la interfaz gráfica
+		configurarFrame ( );
+		if (guiConfig != null) 	   
+		{
+			crearMenu( guiConfig.getAsJsonArray("menuBar") );
+		}
+
+		tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
+
+		cadenaHotelera = new CadenaHotelera(tableConfig);
+
+		String path = guiConfig.get("bannerPath").getAsString();
+		panelDatos = new PanelDatos ( );
+
+		setLayout (new BorderLayout());
+		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
+		add( panelDatos, BorderLayout.CENTER );        
+	}
+
 	/* ****************************************************************
 	 * 			Métodos de configuración de la interfaz
 	 *****************************************************************/
-    /**
-     * Lee datos de configuración para la aplicació, a partir de un archivo JSON o con valores por defecto si hay errores.
-     * @param tipo - El tipo de configuración deseada
-     * @param archConfig - Archivo Json que contiene la configuración
-     * @return Un objeto JSON con la configuración del tipo especificado
-     * 			NULL si hay un error en el archivo.
-     */
-    private JsonObject openConfig (String tipo, String archConfig)
-    {
-    	JsonObject config = null;
+	/**
+	 * Lee datos de configuración para la aplicació, a partir de un archivo JSON o con valores por defecto si hay errores.
+	 * @param tipo - El tipo de configuración deseada
+	 * @param archConfig - Archivo Json que contiene la configuración
+	 * @return Un objeto JSON con la configuración del tipo especificado
+	 * 			NULL si hay un error en el archivo.
+	 */
+	private JsonObject openConfig (String tipo, String archConfig)
+	{
+		JsonObject config = null;
 		try 
 		{
 			Gson gson = new Gson( );
 			FileReader file = new FileReader(archConfig);
-			
+
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
 			log.info ("Se encontró un archivo de configuración válido: " + tipo);
@@ -168,83 +178,83 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			log.info ("NO se encontró un archivo de configuración válido");			
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Cadena hotelera App", JOptionPane.ERROR_MESSAGE);
 		}	
-        return config;
-    }
-    
-    /**
-     * Método para configurar el frame principal de la aplicación
-     */
-    private void configurarFrame(  )
-    {
-    	int alto = 0;
-    	int ancho = 0;
-    	String titulo = "";	
-    	
-    	if ( guiConfig == null )
-    	{
-//    		log.info ( "Se aplica configuración por defecto" );			
+		return config;
+	}
+
+	/**
+	 * Método para configurar el frame principal de la aplicación
+	 */
+	private void configurarFrame(  )
+	{
+		int alto = 0;
+		int ancho = 0;
+		String titulo = "";	
+
+		if ( guiConfig == null )
+		{
+			//    		log.info ( "Se aplica configuración por defecto" );			
 			titulo = "CadenaHotelera APP Default";
 			alto = 300;
 			ancho = 500;
-    	}
-    	else
-    	{
-//			log.info ( "Se aplica configuración indicada en el archivo de configuración" );
-    		titulo = guiConfig.get("title").getAsString();
+		}
+		else
+		{
+			//			log.info ( "Se aplica configuración indicada en el archivo de configuración" );
+			titulo = guiConfig.get("title").getAsString();
 			alto= guiConfig.get("frameH").getAsInt();
 			ancho = guiConfig.get("frameW").getAsInt();
-    	}
-    	
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        setLocation (50,50);
-        setResizable( true );
-        setBackground( Color.WHITE );
+		}
 
-        setTitle( titulo );
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setLocation (50,50);
+		setResizable( true );
+		setBackground( Color.WHITE );
+
+		setTitle( titulo );
 		setSize ( ancho, alto);        
-    }
+	}
 
-    /**
-     * Método para crear el menú de la aplicación con base em el objeto JSON leído
-     * Genera una barra de menú y los menús con sus respectivas opciones
-     * @param jsonMenu - Arreglo Json con los menùs deseados
-     */
-    private void crearMenu(  JsonArray jsonMenu )
-    {    	
-    	// Creación de la barra de menús
-        menuBar = new JMenuBar();       
-        for (JsonElement men : jsonMenu)
-        {
-        	// Creación de cada uno de los menús
-        	JsonObject jom = men.getAsJsonObject(); 
+	/**
+	 * Método para crear el menú de la aplicación con base em el objeto JSON leído
+	 * Genera una barra de menú y los menús con sus respectivas opciones
+	 * @param jsonMenu - Arreglo Json con los menùs deseados
+	 */
+	private void crearMenu(  JsonArray jsonMenu )
+	{    	
+		// Creación de la barra de menús
+		menuBar = new JMenuBar();       
+		for (JsonElement men : jsonMenu)
+		{
+			// Creación de cada uno de los menús
+			JsonObject jom = men.getAsJsonObject(); 
 
-        	String menuTitle = jom.get("menuTitle").getAsString();        	
-        	JsonArray opciones = jom.getAsJsonArray("options");
-        	
-        	JMenu menu = new JMenu( menuTitle);
-        	
-        	for (JsonElement op : opciones)
-        	{       	
-        		// Creación de cada una de las opciones del menú
-        		JsonObject jo = op.getAsJsonObject(); 
-        		String lb =   jo.get("label").getAsString();
-        		String event = jo.get("event").getAsString();
-        		
-        		JMenuItem mItem = new JMenuItem( lb );
-        		mItem.addActionListener( this );
-        		mItem.setActionCommand(event);
-        		
-        		menu.add(mItem);
-        	}       
-        	menuBar.add( menu );
-        }        
-        setJMenuBar ( menuBar );	
-    }
-    
+			String menuTitle = jom.get("menuTitle").getAsString();        	
+			JsonArray opciones = jom.getAsJsonArray("options");
+
+			JMenu menu = new JMenu( menuTitle);
+
+			for (JsonElement op : opciones)
+			{       	
+				// Creación de cada una de las opciones del menú
+				JsonObject jo = op.getAsJsonObject(); 
+				String lb =   jo.get("label").getAsString();
+				String event = jo.get("event").getAsString();
+
+				JMenuItem mItem = new JMenuItem( lb );
+				mItem.addActionListener( this );
+				mItem.setActionCommand(event);
+
+				menu.add(mItem);
+			}       
+			menuBar.add( menu );
+		}        
+		setJMenuBar ( menuBar );	
+	}
+
 	/* ****************************************************************
 	 * 			CRUD de TipoBebida
 	 *****************************************************************/
-   
+
 
 	/* ****************************************************************
 	 * 			Métodos administrativos
@@ -256,7 +266,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("cadenaHotelera.log");
 	}
-	
+
 	/**
 	 * Muestra el log de datanucleus
 	 */
@@ -264,7 +274,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("datanucleus.log");
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de parranderos
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -281,7 +291,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia el contenido del log de datanucleus
 	 * Muestra en el panel de datos la traza de la ejecución
@@ -298,7 +308,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
+
 	/**
 	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
@@ -307,9 +317,9 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-    		// Ejecución de la demo y recolección de los resultados
+			// Ejecución de la demo y recolección de los resultados
 			long eliminados [] = cadenaHotelera.limpiarCadenaHotelera();
-			
+
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
 			resultado += eliminados [0] + " Consumo habitacion de un servicio eliminados\n";
@@ -328,17 +338,17 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			resultado += eliminados [13] + " Servicio eliminados\n";
 			resultado += eliminados [14] + " Usuario eliminados\n";
 			resultado += "\nLimpieza terminada";
-   
+
 			panelDatos.actualizarInterfaz(resultado);
 		} 
 		catch (Exception e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/**
 	 * Muestra la presentación general del proyecto
 	 */
@@ -346,7 +356,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/00-ST-CadenaHoteleraJDO.pdf");
 	}
-	
+
 	/**
 	 * Muestra el modelo conceptual de Parranderos
 	 */
@@ -354,7 +364,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/Modelo Conceptual Cadena Hotelera.pdf");
 	}
-	
+
 	/**
 	 * Muestra el esquema de la base de datos de Parranderos
 	 */
@@ -362,7 +372,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/Esquema BD Cadena Hotelera.pdf");
 	}
-	
+
 	/**
 	 * Muestra el script de creación de la base de datos
 	 */
@@ -370,7 +380,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/EsquemaCadenaHotelera.sql");
 	}
-	
+
 	/**
 	 * Muestra la arquitectura de referencia para Parranderos
 	 */
@@ -378,7 +388,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
 	}
-	
+
 	/**
 	 * Muestra la documentación Javadoc del proyectp
 	 */
@@ -386,16 +396,16 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("doc/index.html");
 	}
-	
+
 	/**
-     * Muestra la información acerca del desarrollo de esta apicación
-     */
-    public void acercaDe ()
-    {
+	 * Muestra la información acerca del desarrollo de esta apicación
+	 */
+	public void acercaDe ()
+	{
 		String resultado = "\n\n ************************************\n\n";
 		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
 		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
-		
+
 		resultado += " * \n";		
 		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
 		resultado += " * Proyecto: Cadena Hotelera Uniandes\n";
@@ -403,37 +413,368 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		resultado += " * @author Valentian Duarte, Daniel Lozano";
 		resultado += " * Marzo de 2019\n";
 		resultado += " * \n";
-		
+
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
-    }
-    
+	}
 
+	public void reservarAlojamientoServicio()
+	{
+		Convencion convencion =registrarConvencion(); 
+		habitacionConvencion(convencion, "Registrar");
+		servicioConvencion(convencion, "Registrar");		
+
+	}
+
+	public void cancelarReservasConvencion()
+	{
+		//SELECCIONAR LA CONVENCION
+		JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+		JLabel titulo = new JLabel("Desea modificar o eliminar la reserva");
+		JCheckBox eliminar = new JCheckBox("Eliminar");
+		JCheckBox modifcar = new JCheckBox("Modificar");
+		panel.add(titulo);
+		panel.add(eliminar);
+		panel.add(modifcar);
+		JOptionPane.showConfirmDialog(null, panel, "Modificar o eliminar reserva",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		if(eliminar.isSelected())
+		{
+				System.out.println("ELIMINADO");
+		}
+		else if(modifcar.isSelected())
+		{
+//			habitacionConvencion(convencion, "Modificar");
+				//		servicioConvencion(convencion, "Modificar");
+			System.out.println("MODIFICAR");
+		}
+	
+	}
+
+	
+	private void servicioConvencion(Convencion convencion, String tipo)
+	{
+		try 
+		{
+			JCheckBox piscina = new JCheckBox("Piscina"); 
+			JCheckBox gimnasio = new JCheckBox("Gimnasio"); 
+			JCheckBox internet = new JCheckBox("Internet"); 
+			JCheckBox bar = new JCheckBox("Bar"); 
+			JCheckBox restaurante = new JCheckBox("Restaurante"); 
+			JCheckBox supermercado = new JCheckBox("Supermercado"); 
+			JCheckBox tienda = new JCheckBox("Tienda"); 
+			JCheckBox spa = new JCheckBox("SPA"); 
+			JCheckBox lavanderia = new JCheckBox("Lavanderia"); 
+			JCheckBox prestamo = new JCheckBox("Prestamo");
+			JCheckBox salonReuniones = new JCheckBox("Salon reuniones");
+			JCheckBox salonConferencias = new JCheckBox("Salon conferencias");
+
+
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+
+
+			panel.add(piscina);
+			panel.add(gimnasio);
+			panel.add(internet);
+			panel.add(bar);
+			panel.add(restaurante);
+			panel.add(supermercado);
+			panel.add(tienda);
+			panel.add(spa);
+			panel.add(lavanderia);
+			panel.add(prestamo);
+			panel.add(salonReuniones);
+			panel.add(salonConferencias);
+
+			if(tipo.equals("Registrar"))
+			{
+
+				int result = JOptionPane.showConfirmDialog(null, panel, "Registrar necesarios servicios convencion",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if (result == JOptionPane.OK_OPTION)
+				{
+
+					if (result != 0)
+					{
+						//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
+						//					if (convencion == null)
+						//					{
+						//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+						//					}
+						String resultado = "En adicionarHabitacionesConvencion\n\n";
+						resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
+			}
+			else if(tipo.equals("Modificar"))
+			{
+				int result = JOptionPane.showConfirmDialog(null, panel, "Registrar necesarios servicios convencion",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if (result == JOptionPane.OK_OPTION)
+				{
+
+					if (result != 0)
+					{
+						//LLAMAR AL METODO DE ELIMINAR SERVICIOS
+						//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
+						//					if (convencion == null)
+						//					{
+						//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+						//					}
+						String resultado = "En adicionarHabitacionesConvencion\n\n";
+						resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private void habitacionConvencion(Convencion convencion, String tipo)
+	{
+		try 
+		{
+
+			JTextField SUITEPRESIDENCIAL = new JTextField( );
+			JTextField SUITE = new JTextField( );
+			JTextField FAMILIAR = new JTextField( );
+			JTextField DOBLE = new JTextField( );
+			JTextField SENCILLA = new JTextField( );
+
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+
+
+			//            panel.add(combo);
+			panel.add(new JLabel("1. Suite Presicencial:"));
+			panel.add(SUITEPRESIDENCIAL);
+			panel.add(new JLabel("2. Suite"));
+			panel.add(SUITE);
+			panel.add(new JLabel("3. Familiar"));
+			panel.add(FAMILIAR);
+			panel.add(new JLabel("4. Doble"));
+			panel.add(DOBLE);
+			panel.add(new JLabel("5. Sencilla"));
+			panel.add(SENCILLA);
+			if(tipo.equals("Registrar"))
+			{
+				int result = JOptionPane.showConfirmDialog(null, panel, "Registrar habitaciones convencion",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if (result == JOptionPane.OK_OPTION)
+				{
+
+					if (result != 0)
+					{
+
+						//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
+						//					if (convencion == null)
+						//					{
+						//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+						//					}
+						String resultado = "En adicionarHabitacionesConvencion\n\n";
+						resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
+			}
+			else if(tipo.equals("Modificar"))
+			{
+				int result = JOptionPane.showConfirmDialog(null, panel, "Eliminar habitaciones convencion",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if (result == JOptionPane.OK_OPTION)
+				{
+
+					if (result != 0)
+					{
+						//LLAMAR ELIMINAR CONVENCION
+
+						//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
+						//					if (convencion == null)
+						//					{
+						//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+						//					}
+						String resultado = "En adicionarHabitacionesConvencion\n\n";
+						resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
+	private Convencion registrarConvencion( )
+	{
+		Convencion convencion = null; 
+		try 
+		{
+			String[] items = {"1. Especial", "2. Ejecutivo", "3. Premium", "4. Platinum", "5. Diamante", "6. Rubí"};
+			JComboBox<String> combo = new JComboBox<>(items);
+			JTextField tematica = new JTextField( );
+			JTextField numeroParticipantes = new JTextField( );
+			JTextField fechaInicio = new JTextField( );
+			JTextField fechaFin = new JTextField( );
+
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+
+
+			//            panel.add(combo);
+			panel.add(new JLabel("1. Tematica:"));
+			panel.add(tematica);
+			panel.add(new JLabel("2. Numero Participantes:"));
+			panel.add(numeroParticipantes);
+			panel.add(new JLabel("3. Fecha inicio (Use el formato dd/mm/yyyy):"));
+			panel.add(fechaInicio);
+			panel.add(new JLabel("4. Fecha fin (Use el formato dd/mm/yyyy):"));
+			panel.add(fechaFin);
+			panel.add(new JLabel("5. Cuenta (INICIAR ESTO EN 0):"));
+
+			panel.add(new JLabel("6. Paz y salvo (INICIAR EN TRUE)"));
+			panel.add(new JLabel("7. Plan de consumo:"));
+			panel.add(combo);
+
+
+
+			int result = JOptionPane.showConfirmDialog(null, panel, "Registrar convencion",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (result == JOptionPane.OK_OPTION)
+			{
+				System.out.println( " " + tematica.getText()   + " " + numeroParticipantes.getText());
+				if (result != 0)
+				{
+					convencion = cadenaHotelera.adicionarConvencion(tematica.getText(), Integer.parseInt(numeroParticipantes.getText()), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), 0, 'T', 'I', combo.getSelectedIndex()); 
+					if (convencion == null)
+					{
+						throw new Exception ("No se puedo adicionar la convencion " );
+					}
+					String resultado = "En adicionarConvencion\n\n";
+					resultado += "La convencion fue adicionada exitosamente: " + convencion.getTematica() ;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		return convencion;
+	}
+
+	
+	private  Date convertirADate(String fecha)
+	{
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaDate = null;
+		try {
+			fechaDate = (Date) formato.parse(fecha);
+			System.out.println(fechaDate);
+		} 
+		catch (ParseException ex) 
+		{
+			System.out.println(ex);
+		}
+		return fechaDate;
+	}
+
+	public void finalizarConvencion()
+	{
+		JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+		JLabel titulo = new JLabel("Check out de la convencion");
+//		String[] items = cadenaHotelera.darConvenciones();
+//		JComboBox<String> combo = new JComboBox<>(items);
+		
+		panel.add(titulo);
+		
+		JOptionPane.showConfirmDialog(null, panel, "Check out de la convencion",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		
+	}
+
+	public void registrarMantenimientoHabitacion()
+	{
+		
+	}
+	
+	public void finalizarMantenimiento() 
+	{
+		
+	}
+	
+	public void pocaDemandaServicios()
+	{
+		
+	}
+	
+	public void analizarHotelAndes()
+	{
+		
+	}
+	
+	public void buenosClientes()
+	{
+		
+	}
 	/* ****************************************************************
 	 * 			Métodos privados para la presentación de resultados y otras operaciones
 	 *****************************************************************/
-//    /**
-//     * Genera una cadena de caracteres con la lista de los tipos de bebida recibida: una línea por cada tipo de bebida
-//     * @param lista - La lista con los tipos de bebida
-//     * @return La cadena con una líea para cada tipo de bebida recibido
-//     */
-//    private String listarTiposBebida(List<VOTipoBebida> lista) 
-//    {
-//    	String resp = "Los tipos de bebida existentes son:\n";
-//    	int i = 1;
-//        for (VOTipoBebida tb : lista)
-//        {
-//        	resp += i++ + ". " + tb.toString() + "\n";
-//        }
-//        return resp;
-//	}
+	//    /**
+	//     * Genera una cadena de caracteres con la lista de los tipos de bebida recibida: una línea por cada tipo de bebida
+	//     * @param lista - La lista con los tipos de bebida
+	//     * @return La cadena con una líea para cada tipo de bebida recibido
+	//     */
+	//    private String listarTiposBebida(List<VOTipoBebida> lista) 
+	//    {
+	//    	String resp = "Los tipos de bebida existentes son:\n";
+	//    	int i = 1;
+	//        for (VOTipoBebida tb : lista)
+	//        {
+	//        	resp += i++ + ". " + tb.toString() + "\n";
+	//        }
+	//        return resp;
+	//	}
 
-    /**
-     * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
-     * @param e - La excepción recibida
-     * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
-     */
+	/**
+	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
+	 * @param e - La excepción recibida
+	 * @return La descripción de la excepción, cuando es javax.jdo.JDODataStoreException, "" de lo contrario
+	 */
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -475,7 +816,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		} 
 		catch (IOException e) 
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			return false;
 		}
 	}
@@ -500,46 +841,46 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	/* ****************************************************************
 	 * 			Métodos de la Interacción
 	 *****************************************************************/
-    /**
-     * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
-     * Invoca al método correspondiente según el evento recibido
-     * @param pEvento - El evento del usuario
-     */
-    @Override
+	/**
+	 * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
+	 * Invoca al método correspondiente según el evento recibido
+	 * @param pEvento - El evento del usuario
+	 */
+	@Override
 	public void actionPerformed(ActionEvent pEvento)
 	{
 		String evento = pEvento.getActionCommand( );		
-        try 
-        {
+		try 
+		{
 			Method req = InterfazHotelAndessApp.class.getMethod ( evento );			
 			req.invoke ( this );
 		} 
-        catch (Exception e) 
-        {
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		} 
 	}
-    
+
 	/* ****************************************************************
 	 * 			Programa principal
 	 *****************************************************************/
-    /**
-     * Este método ejecuta la aplicación, creando una nueva interfaz
-     * @param args Arreglo de argumentos que se recibe por línea de comandos
-     */
-    public static void main( String[] args )
-    {
-        try
-        {
-        	
-            // Unifica la interfaz para Mac y para Windows.
-            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
-            InterfazHotelAndessApp interfaz = new InterfazHotelAndessApp( );
-            interfaz.setVisible( true );
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace( );
-        }
-    }
+	/**
+	 * Este método ejecuta la aplicación, creando una nueva interfaz
+	 * @param args Arreglo de argumentos que se recibe por línea de comandos
+	 */
+	public static void main( String[] args )
+	{
+		try
+		{
+
+			// Unifica la interfaz para Mac y para Windows.
+			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
+			InterfazHotelAndessApp interfaz = new InterfazHotelAndessApp( );
+			interfaz.setVisible( true );
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace( );
+		}
+	}
 }

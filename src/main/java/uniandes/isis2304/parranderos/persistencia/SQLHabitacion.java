@@ -55,4 +55,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         q2.setParameters(null, idHabitacion);
         return (long) q.executeUnique();
 	}
+	
+	public Integer darNumeroHabitacionesTipo(PersistenceManager pm, Integer idTipoHabitacion)
+	{
+		Query q = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + pha.getSqlHabitacion () + "WHERE idTipoHabitacion = ?");
+        q.setParameters(idTipoHabitacion);
+        return (int) q.executeUnique();
+	}
 }
