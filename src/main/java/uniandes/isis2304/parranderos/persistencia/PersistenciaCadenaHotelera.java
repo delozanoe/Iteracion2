@@ -1,7 +1,7 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -119,27 +119,35 @@ public class PersistenciaCadenaHotelera
 		tablas.add("CadenaHotelera_sequence");
 		tablas.add("CLIENTE");
 		tablas.add("CONSUMOPORHABITACION");
+		tablas.add("CONSUMOHABITACIONSERVICIO");
+		tablas.add("CONVENCION");
+		tablas.add("CONVENCIONCLIENTE");
+		tablas.add("CONVENCIONHOTEL");
 		tablas.add("EMPLEADO");
 		tablas.add("HABITACION");
 		tablas.add("HOTEL");
+		tablas.add("MANTENIMIENTO");
 		tablas.add("PLANCONSUMO");
+		tablas.add("PLANCONSUMOSERVICIO");
 		tablas.add("PRODUCTO");
-		tablas.add("PRODUCTOCONSUMOPORHABITACION");
-		tablas.add("RESERVASERVICIO	");
+		
+		tablas.add("PRODUCTOCONSUMOHABITACION");
 		tablas.add("RESERVAHABITACION");
+		tablas.add("RESERVASERVICIO");
+		
 		tablas.add("SERVICIO");
 		tablas.add("SERVICIOCONSUMO");
 		tablas.add("SERVICIOPRODUCTO");
-		tablas.add("USUARIO");
-		tablas.add("CONSUMOHABITACIOSERVICIO");
+		
+		
 		tablas.add("TIPOEMPLEADO");
 		tablas.add("TIPOSERVICIO");
+		tablas.add("USUARIO");
 		tablas.add("TIPOHABITACION");
-		tablas.add("CONVENCION");
-		tablas.add("MANTENIMIENTO");
-		tablas.add("CONVENCIONCLIENTE");
-		tablas.add("CONVENCIONHOTEL");
-		tablas.add("PLANCONSUMOSERVICIO");
+		tablas.add("UTIL");
+		
+		
+
 
 		
 	}
@@ -260,102 +268,102 @@ public class PersistenciaCadenaHotelera
 	}
 
 	public String getSqlEmpleado() {
-		return tablas.get(3);
-	}
-
-	public String getSqlHabitacion() {
-		return tablas.get(4);
-	}
-
-	public String getSqlHotel() {
-		return tablas.get(5);
-	}
-
-	public String getSqlPlanConsumo() {
-		return tablas.get(6);
-	}
-
-	public String getSqlProducto() {
 		return tablas.get(7);
 	}
 
-	public String getSqlProductoConsumoPorHabitacion() {
+	public String getSqlHabitacion() {
 		return tablas.get(8);
 	}
 
-	public String getSqlReservaServicio() {
+	public String getSqlHotel() {
 		return tablas.get(9);
 	}
 
-	public String getSqlReservaHabitacion() {
-		return tablas.get(10);
-	}
-
-	public String getSqlServicio() {
+	public String getSqlPlanConsumo() {
 		return tablas.get(11);
 	}
 
+	public String getSqlProducto() {
+		return tablas.get(13);
+	}
+
+	public String getSqlProductoConsumoPorHabitacion() {
+		return tablas.get(14);
+	}
+
+	public String getSqlReservaServicio() {
+		return tablas.get(16);
+	}
+
+	public String getSqlReservaHabitacion() {
+		return tablas.get(15);
+	}
+
+	public String getSqlServicio() {
+		return tablas.get(17);
+	}
+
 	public String getSqlServicioConsumo() {
-		return tablas.get(12);
+		return tablas.get(18);
 	}
 	
 	public String getSqlServicioProducto()
 	{
-		return tablas.get(13);
+		return tablas.get(19);
 	}
 
 	public String getSqlUsuario() {
-		return tablas.get(14);
+		return tablas.get(22);
 	}
 
 	public String getSqlUtil() {
-		return tablas.get(15);
+		return tablas.get(24);
 	}
 	
 	public String getSqlConsumoHabitacionServicio()
 	{
-		return tablas.get(16);
+		return tablas.get(3);
 	}
 	
 	public String getSqlTipoEmpleado()
 	{
-		return tablas.get(17);
+		return tablas.get(20);
 	}
 
 	
 	public String getSqlTipoServicio()
 	{
-		return tablas.get(18);
+		return tablas.get(21);
 	}
 	
 	public String getSqlTipoHabitacion()
 	{
-		return tablas.get(19);
+		return tablas.get(23);
 	}
 	
 	public String getSqlConvencion()
 	{
-		return tablas.get(20);
+		return tablas.get(4);
 	}
 	
 	public String getSqlMantenimiento()
 	{
-		return tablas.get(21);
+		return tablas.get(10);
 	}
 	
 	public String getSqlConvencionCliente()
 	{
-		return tablas.get(22);
+		return tablas.get(5);
 	}
 	
 	public String getSqlConvencionHotel()
 	{
-		return tablas.get(23);
+		return tablas.get(6);
 	}
 	
 	public String getSqlPlanConsumoServicio()
 	{
-		return tablas.get(24);
+		return tablas.get(12);
 	}
 
 	private Integer nextval ()
@@ -443,7 +451,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Cliente> darClientes ()
+	public List<Cliente> darClientes ()
 	{
 		return sqlCliente.darClientes(pmf.getPersistenceManager());
 	}
@@ -513,7 +521,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ConsumoHabitacionServicio> darConsumoHabitacionServicio ()
+	public List<ConsumoHabitacionServicio> darConsumoHabitacionServicio ()
 	{
 		return sqlConsumoHabitacioServicio.darConsumoHabitacionServicio(pmf.getPersistenceManager());
 	}
@@ -550,7 +558,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<ConsumoHabitacion> darConsumosHabitacion ()
+	public List<ConsumoHabitacion> darConsumosHabitacion ()
 	{
 		return sqlConsumoPorHabitacion.darConsumosHabitacion(pmf.getPersistenceManager());
 	}
@@ -591,7 +599,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Empleado> darEmpleados ()
+	public List<Empleado> darEmpleados ()
 	{
 		return sqlEmpleado.darEmpleados(pmf.getPersistenceManager());
 	}
@@ -633,7 +641,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Habitacion> darHabitaciones ()
+	public List<Habitacion> darHabitaciones ()
 	{
 		return sqlHabitacion.darHabitaciones(pmf.getPersistenceManager());
 	}
@@ -729,7 +737,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Hotel> darHoteles()
+	public List<Hotel> darHoteles()
 	{
 		return sqlHotel.darHoteles(pmf.getPersistenceManager());
 	}
@@ -739,7 +747,7 @@ public class PersistenciaCadenaHotelera
 		return sqlHotel.darHotelPorId(pmf.getPersistenceManager(), idHotel);
 	}
 	
-	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion,ArrayList<Convencion> convenciones, ArrayList<Servicio> servicios) 
+	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion,List<Convencion> convenciones, List<Servicio> servicios) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -771,7 +779,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<PlanConsumo> darPlanesConsumo()
+	public List<PlanConsumo> darPlanesConsumo()
 	{
 		return sqlPlanConsumo.darPlanesConsumo(pmf.getPersistenceManager());
 	}
@@ -813,7 +821,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Producto> darProductos()
+	public List<Producto> darProductos()
 	{
 		return sqlProducto.darProductos(pmf.getPersistenceManager());
 	}
@@ -855,7 +863,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ConsumoHabitacionServicio> darProductoConsumoPorHabitacion ()
+	public List<ConsumoHabitacionServicio> darProductoConsumoPorHabitacion ()
 	{
 		return sqlConsumoHabitacioServicio.darConsumoHabitacionServicio(pmf.getPersistenceManager());
 	}
@@ -1005,7 +1013,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ReservaHabitacion> darReservasHabitaciones()
+	public List<ReservaHabitacion> darReservasHabitaciones()
 	{
 		return sqlReservaHabitacion.darReservasHabitaciones(pmf.getPersistenceManager());
 	}
@@ -1048,7 +1056,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<ReservaServicio> darReservasServicios()
+	public List<ReservaServicio> darReservasServicios()
 	{
 		return sqlReservaServicio.darReservasServicios(pmf.getPersistenceManager());
 	}
@@ -1118,7 +1126,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Servicio> darServicios()
+	public List<Servicio> darServicios()
 	{
 		return sqlServicio.darServicios(pmf.getPersistenceManager());
 	}
@@ -1161,7 +1169,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ServicioConsumo> darServicioConsumo ()
+	public List<ServicioConsumo> darServicioConsumo ()
 	{
 		return sqlServicioConsumo.darServicioConsumo(pmf.getPersistenceManager());
 	}
@@ -1198,7 +1206,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ServicioProducto> darServicioProducto ()
+	public List<ServicioProducto> darServicioProducto ()
 	{
 		return sqlServicioProducto.darServicioProducto(pmf.getPersistenceManager());
 	}
@@ -1235,7 +1243,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<TipoEmpleado> darTiposEmpleado()
+	public List<TipoEmpleado> darTiposEmpleado()
 	{
 		return sqlTipoEmpleado.darTipoEmpleado(pmf.getPersistenceManager());
 	}
@@ -1278,7 +1286,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<TipoHabitacion> darTiposHabitacion()
+	public List<TipoHabitacion> darTiposHabitacion()
 	{
 		return sqlTipoHabitacion.darTipoHabitacion(pmf.getPersistenceManager());
 	}
@@ -1322,7 +1330,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<TipoServicio> darTiposServicio()
+	public List<TipoServicio> darTiposServicio()
 	{
 		return sqlTipoServicio.darTipoServicio(pmf.getPersistenceManager());
 	}
@@ -1392,7 +1400,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Usuario> darUsuarios()
+	public List<Usuario> darUsuarios()
 	{
 		return sqlUsuario.darUsuarios(pmf.getPersistenceManager());
 	}
@@ -1436,7 +1444,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Convencion> darConvenciones ()
+	public List<Convencion> darConvenciones ()
 	{
 		return sqlConvencion.darConvenciones(pmf.getPersistenceManager());
 	}
@@ -1478,7 +1486,7 @@ public class PersistenciaCadenaHotelera
         }
 	}
 	
-	public ArrayList<Mantenimiento> darMantenimientos ()
+	public List<Mantenimiento> darMantenimientos ()
 	{
 		return sqlMantenimiento.darMantenimientos(pmf.getPersistenceManager());
 	}
@@ -1520,7 +1528,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<PlanConsumoServicio> darPlanConsumoServicio()
+	public List<PlanConsumoServicio> darPlanConsumoServicio()
 	{
 		return sqlPlanConsumoServicio.darPlanConsumoServicio(pmf.getPersistenceManager());
 	}
@@ -1557,7 +1565,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ConvencionCliente> darConvencionCliente ()
+	public List<ConvencionCliente> darConvencionCliente ()
 	{
 		return sqlConvencionCliente.darConvencionCliente(pmf.getPersistenceManager());
 	}
@@ -1594,7 +1602,7 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public ArrayList<ConvencionHotel> darConvencionHotel ()
+	public List<ConvencionHotel> darConvencionHotel ()
 	{
 		return sqlConvencionHotel.darConvencionHotel(pmf.getPersistenceManager());
 	}
@@ -1602,8 +1610,8 @@ public class PersistenciaCadenaHotelera
 
 	public void checkin(Integer idReserva, Integer idEmpleado, char pazYSalvo, String tipoDocumento, long numeroDocumento, String correo, String nombre)
 	{
-		ArrayList<ReservaHabitacion> reservasHab = darReservasHabitaciones();
-		ArrayList<Empleado> empleados = darEmpleados();
+		List<ReservaHabitacion> reservasHab = darReservasHabitaciones();
+		List<Empleado> empleados = darEmpleados();
 		Empleado empleadoActual = null;
 		boolean esRecep = false;
 		boolean hayReserva = false;

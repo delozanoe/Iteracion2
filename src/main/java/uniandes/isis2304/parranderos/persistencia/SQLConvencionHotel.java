@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -25,10 +25,10 @@ public class SQLConvencionHotel
 		return (long) q.executeUnique();
 	}
 
-	public ArrayList<ConvencionHotel> darConvencionHotel (PersistenceManager pm)
+	public List<ConvencionHotel> darConvencionHotel (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlConvencionHotel ());
 		q.setResultClass(ConvencionHotel.class);
-		return (ArrayList<ConvencionHotel>) q.execute();
+		return (List<ConvencionHotel>) q.execute();
 	}
 }

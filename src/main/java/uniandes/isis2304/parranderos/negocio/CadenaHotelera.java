@@ -1,7 +1,8 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
@@ -55,7 +56,7 @@ public class CadenaHotelera
 		return nuevoCliente;
 	}
 	
-	public ArrayList<Cliente> darClientes()
+	public List<Cliente> darClientes()
 	{
 		return pha.darClientes();
 	}
@@ -75,7 +76,7 @@ public class CadenaHotelera
 		return nuevoConsumo ;
 	}
 	
-	public ArrayList<ConsumoHabitacionServicio> darCosnumosHabitacionServicio()
+	public List<ConsumoHabitacionServicio> darCosnumosHabitacionServicio()
 	{
 		return pha.darConsumoHabitacionServicio();
 	}
@@ -90,7 +91,7 @@ public class CadenaHotelera
 		return pha.adicionarConsumoHabitacion(valorTotal, idHabitacion);
 	}
 	
-	public ArrayList<ConsumoHabitacion> darConsumosHabitacion()
+	public List<ConsumoHabitacion> darConsumosHabitacion()
 	{
 		return pha.darConsumosHabitacion();
 	}
@@ -109,7 +110,7 @@ public class CadenaHotelera
 		return nuevoEmpleado;
 	}
 	
-	public ArrayList<Empleado> darEmpleados()
+	public List<Empleado> darEmpleados()
 	{
 		return pha.darEmpleados();
 	}
@@ -128,7 +129,7 @@ public class CadenaHotelera
 		return nuevaHabitacion;
 	}
 	
-	public ArrayList<Habitacion> darHabitaciones()
+	public List<Habitacion> darHabitaciones()
 	{
 		return pha.darHabitaciones();
 	}
@@ -148,7 +149,7 @@ public class CadenaHotelera
 		return nuevoHotel;
 	}
 	
-	public ArrayList<Hotel> darHoteles()
+	public List<Hotel> darHoteles()
 	{
 		return pha.darHoteles();
 	}
@@ -162,13 +163,13 @@ public class CadenaHotelera
 	//Plan Consumo
 	//-----------------------------------------------
 	
-	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion, ArrayList<Servicio> servicios)
+	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion, List<Servicio> servicios)
 	{
 		PlanConsumo nuevoPlanConsumo = pha.adicionarPlanConsumo(idHotel, descripcion, null,servicios);
 		return nuevoPlanConsumo;
 	}
 	
-	public ArrayList<PlanConsumo> darPlanesConsumo()
+	public List<PlanConsumo> darPlanesConsumo()
 	{
 		return pha.darPlanesConsumo();
 	}
@@ -188,7 +189,7 @@ public class CadenaHotelera
 		return nuevoProducto;
 	}
 	
-	public ArrayList<Producto> darProductos()
+	public List<Producto> darProductos()
 	{
 		return pha.darProductos();
 	}
@@ -208,7 +209,7 @@ public class CadenaHotelera
 		return nuevoConsumo; 
 	}
 	
-	public ArrayList<ConsumoHabitacionServicio> darProductoConsumoPorHabitacionServicio()
+	public List<ConsumoHabitacionServicio> darProductoConsumoPorHabitacionServicio()
 	{
 		return pha.darConsumoHabitacionServicio();
 	}
@@ -222,7 +223,7 @@ public class CadenaHotelera
 		return nuevaReserva;
 	}
 	
-	public ArrayList<ReservaHabitacion> darReservasHabitaciones()
+	public List<ReservaHabitacion> darReservasHabitaciones()
 	{
 		return pha.darReservasHabitaciones();
 	}
@@ -245,7 +246,7 @@ public class CadenaHotelera
 		return nuevaRservaServ;
 	}
 	
-	public ArrayList<ReservaServicio> darReservasServicios()
+	public List<ReservaServicio> darReservasServicios()
 	{
 		return pha.darReservasServicios();
 	}
@@ -265,7 +266,7 @@ public class CadenaHotelera
 		return  nuevoSerivcio; 
 	}
 	
-	public ArrayList<Servicio> darServicios()
+	public List<Servicio> darServicios()
 	{
 		return pha.darServicios();
 	}
@@ -286,7 +287,7 @@ public class CadenaHotelera
 		return nuevoConsumo;
 	}
 	
-	public ArrayList<ServicioConsumo> darServiciosConsumo()
+	public List<ServicioConsumo> darServiciosConsumo()
 	{
 		return pha.darServicioConsumo();
 	}
@@ -300,7 +301,7 @@ public class CadenaHotelera
 		return nuevoServProduc;
 	}
 	
-	public ArrayList<ServicioProducto> darServiciosProducto()
+	public List<ServicioProducto> darServiciosProducto()
 	{
 		return pha.darServicioProducto();
 	}
@@ -325,7 +326,7 @@ public class CadenaHotelera
 		return nuevoTipoHabitacion;
 	}
 	
-	public ArrayList<TipoHabitacion> darTiposHabitacion()
+	public List<TipoHabitacion> darTiposHabitacion()
 	{
 		return pha.darTiposHabitacion();
 	}
@@ -345,7 +346,7 @@ public class CadenaHotelera
 		return nuevoServicio;
 	}
 	
-	public ArrayList<TipoServicio> darTiposServicio()
+	public List<TipoServicio> darTiposServicio()
 	{
 		return pha.darTiposServicio();
 	}
@@ -366,7 +367,7 @@ public class CadenaHotelera
 		return nuevoUsuario;
 	}
 	
-	public ArrayList<Usuario> darUsuarios()
+	public List<Usuario> darUsuarios()
 	{
 		return pha.darUsuarios();
 	}
@@ -391,6 +392,11 @@ public class CadenaHotelera
 	public Mantenimiento adicionarMantenimiento()
 	{
 		return null; 
+	}
+	
+	public List<Convencion> darConvenciones()
+	{
+		return pha.darConvenciones();
 	}
 	
 	/**

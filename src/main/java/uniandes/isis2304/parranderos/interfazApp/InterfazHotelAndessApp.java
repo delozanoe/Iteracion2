@@ -30,6 +30,8 @@ import java.lang.reflect.Method;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -441,18 +443,18 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if(eliminar.isSelected())
 		{
-				System.out.println("ELIMINADO");
+			System.out.println("ELIMINADO");
 		}
 		else if(modifcar.isSelected())
 		{
-//			habitacionConvencion(convencion, "Modificar");
-				//		servicioConvencion(convencion, "Modificar");
+			//			habitacionConvencion(convencion, "Modificar");
+			//		servicioConvencion(convencion, "Modificar");
 			System.out.println("MODIFICAR");
 		}
-	
+
 	}
 
-	
+
 	private void servicioConvencion(Convencion convencion, String tipo)
 	{
 		try 
@@ -631,8 +633,8 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
-	
+
+
 	private Convencion registrarConvencion( )
 	{
 		Convencion convencion = null; 
@@ -697,7 +699,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		return convencion;
 	}
 
-	
+
 	private  Date convertirADate(String fecha)
 	{
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -717,39 +719,59 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	{
 		JPanel panel = new  JPanel(new GridLayout(0, 1 ));
 		JLabel titulo = new JLabel("Check out de la convencion");
-//		String[] items = cadenaHotelera.darConvenciones();
-//		JComboBox<String> combo = new JComboBox<>(items);
-		
+		List<Convencion> convenciones =cadenaHotelera.darConvenciones();
+		if(convenciones.isEmpty())
+		{
+			System.out.println("Paila perro");
+		}
+		String[] items = new String[convenciones.size()];
+		for (int i = 0; i < convenciones.size(); i++) 
+		{
+			items[i] = convenciones.get(i).getTematica();
+		}
+
+		JComboBox<String> combo = new JComboBox<>(items);
+
 		panel.add(titulo);
-		
-		JOptionPane.showConfirmDialog(null, panel, "Check out de la convencion",
+		panel.add(combo);
+
+		int result = JOptionPane.showConfirmDialog(null, panel, "Check out de la convencion",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		
+		if (result == JOptionPane.OK_OPTION)
+		{
+			
+		}
+
+		else
+		{
+			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+		}
+
 	}
 
 	public void registrarMantenimientoHabitacion()
 	{
-		
+
 	}
-	
+
 	public void finalizarMantenimiento() 
 	{
-		
+
 	}
-	
+
 	public void pocaDemandaServicios()
 	{
-		
+
 	}
-	
+
 	public void analizarHotelAndes()
 	{
-		
+
 	}
-	
+
 	public void buenosClientes()
 	{
-		
+
 	}
 	/* ****************************************************************
 	 * 			Métodos privados para la presentación de resultados y otras operaciones

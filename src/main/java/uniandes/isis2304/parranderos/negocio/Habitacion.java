@@ -1,5 +1,5 @@
 package uniandes.isis2304.parranderos.negocio;
-import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -46,7 +46,7 @@ public class Habitacion
 	 * @ordered
 	 */
 	
-	private ArrayList<Servicio> servicios;
+	private List<Servicio> servicios;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,7 +73,7 @@ public class Habitacion
 	 * @ordered
 	 */
 	
-	private ArrayList<Cliente> clientes;
+	private List<Cliente> clientes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -98,10 +98,10 @@ public class Habitacion
 	
 	private TipoHabitacion tipoHabitacion;
 	
-	private ArrayList<Mantenimiento> mantenimientos ;
+	private List<Mantenimiento> mantenimientos ;
 
-	public Habitacion(int capacidad, double costoPorNoche, ArrayList<Servicio> servicios,
-			double cuenta, Hotel hotel, ArrayList<Cliente> clientes, ConsumoHabitacion consumoHabitacion,
+	public Habitacion(int capacidad, double costoPorNoche, List<Servicio> servicios,
+			double cuenta, Hotel hotel, List<Cliente> clientes, ConsumoHabitacion consumoHabitacion,
 			PlanConsumo planConsumo, Integer id, TipoHabitacion tipoHabitacion, char estado) {
 		super();
 		this.id = id;
@@ -117,12 +117,12 @@ public class Habitacion
 		this.estado = estado;
 	}
 	
-	public ArrayList<Mantenimiento> getMantenimientos()
+	public List<Mantenimiento> getMantenimientos()
 	{
 		return mantenimientos;
 	}
 	
-	public void setMantenimientos(ArrayList<Mantenimiento> mantenimientos)
+	public void setMantenimientos(List<Mantenimiento> mantenimientos)
 	{
 		this.mantenimientos=mantenimientos;
 	}
@@ -178,11 +178,11 @@ public class Habitacion
 		this.costoPorNoche = costoPorNoche;
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<Servicio> servicios) {
+	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 
@@ -202,11 +202,11 @@ public class Habitacion
 		this.hotel = hotel;
 	}
 
-	public ArrayList<Cliente> getClientes() {
+	public List<Cliente> getClientes() {
 		return clientes;
 	}
 
-	public void setClientes(ArrayList<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 

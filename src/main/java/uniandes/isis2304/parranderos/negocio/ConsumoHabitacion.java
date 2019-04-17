@@ -1,6 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,9 +39,9 @@ public class ConsumoHabitacion
 	
 	private Hotel hotel;
 	
-	private ArrayList<Servicio> servicios;
+	private List<Servicio> servicios;
 
-	public ConsumoHabitacion(double valorTotal, Habitacion habitacion, ArrayList<Servicio> servicios, Integer id) {
+	public ConsumoHabitacion(double valorTotal, Habitacion habitacion, List<Servicio> servicios, Integer id) {
 		super();
 		this.id = id;
 		this.valorTotal = valorTotal;
@@ -75,11 +75,11 @@ public class ConsumoHabitacion
 		this.habitacion = habitacion;
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<Servicio> servicios) {
+	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 
