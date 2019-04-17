@@ -28,7 +28,7 @@ public class Empleado extends Usuario
 	
 	private Hotel hotel;
 
-	public Empleado(TipoEmpleado tipo, Hotel hotel, String nombre, String tipoDocumento, long  numeroDocumento, String correo, Integer id)
+	public Empleado(TipoEmpleado tipo, Hotel hotel, String nombre, String tipoDocumento, long  numeroDocumento, String correo, long id)
 	{
 		super(nombre, tipoDocumento, numeroDocumento, correo,id);
 		this.tipo = tipo;

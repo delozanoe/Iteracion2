@@ -20,7 +20,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarCliente(PersistenceManager pm, Integer idBar, char pazySalvo, Integer idHabitacion) 
+	public long adicionarCliente(PersistenceManager pm, long idBar, char pazySalvo, long idHabitacion) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlCliente()+ "(id, pazySalvo, idHotel) values (?, ?, ?)");
         q.setParameters(idBar, pazySalvo, idHabitacion);
@@ -28,7 +28,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	}
 	
 	
-	public Cliente darClientePorId (PersistenceManager pm, Integer idUsuario) 
+	public Cliente darClientePorId (PersistenceManager pm, long idUsuario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlCliente () + " WHERE id = ?");
 		q.setResultClass(Cliente.class);
@@ -42,7 +42,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (List<Cliente>) q.executeList();
 	}
 	
-	public long cambiarHabitacion (PersistenceManager pm, Integer idCliente, Integer idHabitacion)
+	public long cambiarHabitacion (PersistenceManager pm, long idCliente, long idHabitacion)
 	{
         Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlCliente () + " SET idHabitacion = ? WHERE id = ?");
         q.setParameters(idHabitacion,idCliente);

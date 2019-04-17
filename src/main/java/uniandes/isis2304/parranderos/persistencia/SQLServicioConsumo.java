@@ -19,7 +19,7 @@ class SQLServicioConsumo
 		this.pha = pha;
 	}
 	
-	public long adicionarServicioConsumo (PersistenceManager pm, Integer idServicio, Integer idProducto) 
+	public long adicionarServicioConsumo (PersistenceManager pm, long idServicio, long idProducto) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlServicioConsumo() + "(idServicio,idProducto) values (?, ?)");
         q.setParameters(idServicio, idProducto);

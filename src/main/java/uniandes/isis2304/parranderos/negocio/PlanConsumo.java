@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlanConsumo
 {
-	private Integer id;
+	private long id;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -44,7 +44,7 @@ public class PlanConsumo
 	
 	private List<Servicio> servicios ;
 
-	public PlanConsumo(String descripcion, Hotel hotel, List<Habitacion> habitacion, Integer id, List<Convencion> convenciones, List<Servicio> servicios) {
+	public PlanConsumo(String descripcion, Hotel hotel, List<Habitacion> habitacion, long id, List<Convencion> convenciones, List<Servicio> servicios) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -65,13 +65,13 @@ public class PlanConsumo
 	}
 
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

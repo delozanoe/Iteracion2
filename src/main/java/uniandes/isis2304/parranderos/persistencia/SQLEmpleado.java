@@ -21,14 +21,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarEmpleado(PersistenceManager pm, Integer id,Integer idHotel, Integer idTipoEmpleado) 
+	public long adicionarEmpleado(PersistenceManager pm, long id,long idHotel, long idTipoEmpleado) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlEmpleado()+ "(id, idHotel, idTipoEmpleado) values (?, ?,?)");
         q.setParameters(id, idHotel, idTipoEmpleado);
         return (long) q.executeUnique();
 	}
 	
-	public Empleado darEmpleadoPorId (PersistenceManager pm, Integer id) 
+	public Empleado darEmpleadoPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlEmpleado () + " WHERE id = ?");
 		q.setResultClass(Empleado.class);

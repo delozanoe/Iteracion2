@@ -19,14 +19,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarUsuario(PersistenceManager pm, Integer id, String tipoDocumento, Long numeroDocumento, String nombre, String correo) 
+	public long adicionarUsuario(PersistenceManager pm, long id, String tipoDocumento, Long numeroDocumento, String nombre, String correo) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlUsuario()+ "(id, tipoDocumento, numeroDocumento, nombre, correo) values (?, ?, ?,?,?)");
         q.setParameters(id, tipoDocumento,numeroDocumento,nombre, correo);
         return (long) q.executeUnique();
 	}
 	
-	public Usuario darUsuarioPorId (PersistenceManager pm, Integer id) 
+	public Usuario darUsuarioPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlUsuario () + " WHERE id = ?");
 		q.setResultClass(Usuario.class);

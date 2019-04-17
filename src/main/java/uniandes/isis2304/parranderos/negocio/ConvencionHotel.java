@@ -3,12 +3,12 @@ package uniandes.isis2304.parranderos.negocio;
 public class ConvencionHotel 
 {
 
-	private Integer idConvencion;
+	private long idConvencion;
 
-	private Integer idHotel;
+	private long idHotel;
 
 
-	public ConvencionHotel(Integer idConvencion, Integer idHotel)
+	public ConvencionHotel(long idConvencion, long idHotel)
 	{
 		super();
 		this.idHotel = idHotel;
@@ -16,22 +16,22 @@ public class ConvencionHotel
 	}
 
 
-	public Integer getIdConvencion() {
+	public long getIdConvencion() {
 		return idConvencion;
 	}
 
 
-	public void setIdConvencion(Integer idConvencion) {
+	public void setIdConvencion(long idConvencion) {
 		this.idConvencion = idConvencion;
 	}
 
 
-	public Integer getIdHotel() {
+	public long getIdHotel() {
 		return idHotel;
 	}
 
 
-	public void setIdHotel(Integer idHotel) {
+	public void setIdHotel(long idHotel) {
 		this.idHotel = idHotel;
 	}
 

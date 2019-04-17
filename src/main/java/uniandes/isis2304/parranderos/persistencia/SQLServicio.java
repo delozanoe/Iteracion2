@@ -18,14 +18,14 @@ class SQLServicio
 	{
 		this.pha = pha;
 	}
-	public long adicionarServicio(PersistenceManager pm, Integer id, String nombre, String descripcion, String horaApertura, String horaCierre, int capacidad, double costo, char costoIncluido, Integer idHotel, Integer idTipoServicio, Integer estado) 
+	public long adicionarServicio(PersistenceManager pm, long id, String nombre, String descripcion, String horaApertura, String horaCierre, int capacidad, double costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlServicio() + "(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio,estado) values (?, ?, ?, ?, ? , ?, ?, ?, ?, ?,?)");
         q.setParameters(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio,estado);
         return (long) q.executeUnique();
 	}
 	
-	public Servicio darServicioPorId (PersistenceManager pm, Integer id) 
+	public Servicio darServicioPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlServicio() + " WHERE id = ?");
 		q.setResultClass(Servicio.class);
@@ -40,7 +40,7 @@ class SQLServicio
 		return (List<Servicio>) q.executeList();
 	}
 	
-	public long cambiarEstado (PersistenceManager pm, Integer estado, Integer idServicio)
+	public long cambiarEstado (PersistenceManager pm, long estado, long idServicio)
 	{
         Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlServicio () + " SET estado = ? WHERE id = ?");
         q.setParameters(estado, idServicio);

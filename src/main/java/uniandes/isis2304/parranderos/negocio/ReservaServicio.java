@@ -45,7 +45,7 @@ public class ReservaServicio
 	 * @ordered
 	 */
 
-	private Integer id;
+	private long id;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,7 +76,7 @@ public class ReservaServicio
 
 	private Convencion convencion;
 
-	public ReservaServicio(String horaInicio, int duracion, Timestamp dia, Integer id, String lugar, Cliente cliente,
+	public ReservaServicio(String horaInicio, int duracion, Timestamp dia, long id, String lugar, Cliente cliente,
 			Servicio servicio, Convencion convencion) {
 		super();
 		this.horaInicio = horaInicio;
@@ -115,11 +115,11 @@ public class ReservaServicio
 		this.dia = dia;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

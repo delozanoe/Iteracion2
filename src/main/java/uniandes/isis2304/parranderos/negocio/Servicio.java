@@ -18,7 +18,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private Integer id;
+	private long id;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,7 +99,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private Integer estado;
+	private long estado;
 	
 	private List<ReservaServicio> reservas;
 
@@ -135,9 +135,9 @@ public class Servicio
 	private List<PlanConsumo> planesDeConsumo;
 	
 
-	public Servicio(Integer id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
+	public Servicio(long id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
 			double costo, TipoServicio tipo, char costoIncluido, List<ReservaServicio> reservas, Hotel hotel,
-			List<Producto> productos, List<Producto> comsumos,List<PlanConsumo> planesDeConsumo,  List<Mantenimiento> mantenimientos, Integer estado) {
+			List<Producto> productos, List<Producto> comsumos,List<PlanConsumo> planesDeConsumo,  List<Mantenimiento> mantenimientos, long estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -157,11 +157,11 @@ public class Servicio
 		this.estado = estado;
 	}
 
-	public Integer getEstado() {
+	public long getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Integer estado) {
+	public void setEstado(long estado) {
 		this.estado = estado;
 	}
 
@@ -185,11 +185,11 @@ public class Servicio
 		return costoIncluido;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

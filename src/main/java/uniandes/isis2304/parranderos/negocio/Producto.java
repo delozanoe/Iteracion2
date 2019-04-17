@@ -37,7 +37,7 @@ public class Producto
 	 */
 	
 	
-	private Integer  id;
+	private long  id;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class Producto
 	
 	private List<Servicio> serviciosConsumos;
 
-	public Producto(String nombre, Double costo,Integer id,
+	public Producto(String nombre, Double costo,long id,
 			List<Servicio> serviciosProductos, List<Servicio> serviciosConsumos) {
 		super();
 		this.nombre = nombre;
@@ -84,11 +84,11 @@ public class Producto
 	}
 
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer  id) {
+	public void setId(long  id) {
 		this.id = id;
 	}
 

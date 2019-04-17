@@ -18,14 +18,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	{
 		this.pha = pha;
 	}
-	public long adicionarHabitacion(PersistenceManager pm, Integer id, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idHotel, Integer idConsumoHabitacion, Integer idTipoHabitacion, Integer idPlanConsumo, char estado) 
+	public long adicionarHabitacion(PersistenceManager pm, long id, long capacidad, Double costoPorNoche, Double cuenta, String numero, long idHotel, long idConsumoHabitacion, long idTipoHabitacion, long idPlanConsumo, char estado) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlHabitacion()+ "(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoPorHabitacion, idTipoHabitacion, idPlanConsumo, estado) values (?, ?, ?,?,?,?,?,?,?)");
         q.setParameters(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoHabitacion, idTipoHabitacion, idPlanConsumo, estado);
         return (long) q.executeUnique();
 	}
 	
-	public Habitacion darHabitacionPorId (PersistenceManager pm, Integer id) 
+	public Habitacion darHabitacionPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlHabitacion () + " WHERE id = ?");
 		q.setResultClass(Habitacion.class);
@@ -40,14 +40,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (List<Habitacion>) q.executeList();
 	}
 	
-	public long cambiarEstado (PersistenceManager pm,char estado, Integer idHabitacion)
+	public long cambiarEstado (PersistenceManager pm,char estado, long idHabitacion)
 	{
         Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET estado = ? WHERE id = ?");
         q.setParameters(estado, idHabitacion);
         return (long) q.executeUnique();
 	}
 	
-	public long moverConsumos (PersistenceManager pm, Integer idHabitacion, Integer idHabitacionNueva, Integer idConsumoHabitacion)
+	public long moverConsumos (PersistenceManager pm, long idHabitacion, long idHabitacionNueva, long idConsumoHabitacion)
 	{
         Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET idConsumoHabitacion = ? WHERE id = ?");
         q.setParameters(idConsumoHabitacion,idHabitacionNueva);
@@ -56,7 +56,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         return (long) q.executeUnique();
 	}
 	
-	public Integer darNumeroHabitacionesTipo(PersistenceManager pm, Integer idTipoHabitacion)
+	public long darNumeroHabitacionesTipo(PersistenceManager pm, long idTipoHabitacion)
 	{
 		Query q = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + pha.getSqlHabitacion () + "WHERE idTipoHabitacion = ?");
         q.setParameters(idTipoHabitacion);

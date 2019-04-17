@@ -20,14 +20,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarHotel(PersistenceManager pm, Integer id, String pais, String ciudad, Integer ofertaHabitacionl) 
+	public long adicionarHotel(PersistenceManager pm, long id, String pais, String ciudad, long ofertaHabitacionl) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlHotel()+ "(id, pais, ciudad, ofertaHabitacional) values (?, ?, ?,?)");
         q.setParameters(id, pais, ciudad, ofertaHabitacionl);
         return (long) q.executeUnique();
 	}
 	
-	public Hotel darHotelPorId (PersistenceManager pm, Integer id) 
+	public Hotel darHotelPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlHotel () + " WHERE id = ?");
 		q.setResultClass(Hotel.class);

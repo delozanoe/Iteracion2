@@ -2,21 +2,21 @@ package uniandes.isis2304.parranderos.negocio;
 
 public class TipoEmpleado 
 {
-	private Integer id;
+	private long id;
 	
 	private String nombre;
 	
-	public TipoEmpleado(Integer id, String nombre)
+	public TipoEmpleado(long id, String nombre)
 	{
 		this.id = id;
 		this.nombre = nombre;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

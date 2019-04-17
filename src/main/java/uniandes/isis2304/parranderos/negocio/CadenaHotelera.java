@@ -50,7 +50,7 @@ public class CadenaHotelera
 	 * 			M�todos para manejar los clientes
 	 *****************************************************************/
 	
-	public Cliente nuevoCliente(char pazYSalvo, Integer idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
+	public Cliente nuevoCliente(char pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
 	{
 		log.info("Agregando nuevo cliente: " + nombre );
 		Cliente nuevoCliente = pha.adicionarCliente(pazYSalvo, idHabitacion, tipoDocumento, numeroDocumento, nombre, correo);
@@ -63,7 +63,7 @@ public class CadenaHotelera
 		return pha.darClientes();
 	}
 	
-	public Cliente darClientePorId(Integer idCliente)
+	public Cliente darClientePorId(long idCliente)
 	{
 		return pha.darClientePorId(idCliente);
 	}
@@ -72,7 +72,7 @@ public class CadenaHotelera
 	//Consumo Habitacion servicio
 	//-----------------------------------------------------
 	
-	public ConsumoHabitacionServicio nuevoConsumoPorHabitacionServicio(Integer idConsumoHabitacion, Integer idServicio)
+	public ConsumoHabitacionServicio nuevoConsumoPorHabitacionServicio(long idConsumoHabitacion, long idServicio)
 	{
 		ConsumoHabitacionServicio nuevoConsumo = pha.adicionarConsumoPorHabitacionServicio(idConsumoHabitacion, idServicio);
 		return nuevoConsumo ;
@@ -88,7 +88,7 @@ public class CadenaHotelera
 	//Consunmo Habitacion 
 	//------------------------------------------------
 	
-	public ConsumoHabitacion nuevoConsumoPorHabitacion(Double valorTotal, Integer idHabitacion)
+	public ConsumoHabitacion nuevoConsumoPorHabitacion(Double valorTotal, long idHabitacion)
 	{
 		return pha.adicionarConsumoHabitacion(valorTotal, idHabitacion);
 	}
@@ -98,7 +98,7 @@ public class CadenaHotelera
 		return pha.darConsumosHabitacion();
 	}
 	
-	public ConsumoHabitacion darConsumoHabitacionPorId(Integer idConsumoPorHabitacion)
+	public ConsumoHabitacion darConsumoHabitacionPorId(long idConsumoPorHabitacion)
 	{
 		return pha.darConsumoHabitacionPorId(idConsumoPorHabitacion);
 	}
@@ -106,7 +106,7 @@ public class CadenaHotelera
 	//Empleado
 	//--------------------------------
 	
-	public Empleado adicionarEmpleado(Integer idHotel, Integer idTipoEmpleado, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
+	public Empleado adicionarEmpleado(long idHotel, long idTipoEmpleado, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
 	{
 		Empleado nuevoEmpleado = pha.adicionarEmpleado(idHotel, idTipoEmpleado, tipoDocumento, numeroDocumento, nombre, correo);
 		return nuevoEmpleado;
@@ -117,7 +117,7 @@ public class CadenaHotelera
 		return pha.darEmpleados();
 	}
 	
-	public Empleado darEmpleadoPorId(Integer idEmpleado)
+	public Empleado darEmpleadoPorId(long idEmpleado)
 	{
 		return pha.darEmpleadoPorId(idEmpleado);
 	}
@@ -125,7 +125,7 @@ public class CadenaHotelera
 	//------------------------------------------------
 	//Habitacion
 	//------------------------------------------------
-	public Habitacion adicionarHabitacion(Integer idHotel, Integer capacidad, Double costoPorNoche, Double cuenta, String numero, Integer idPlanConsumo, Integer idConsumoHabitacion, Integer idTipoHabitacion, char estado)
+	public Habitacion adicionarHabitacion(long idHotel, long capacidad, Double costoPorNoche, Double cuenta, String numero, long idPlanConsumo, long idConsumoHabitacion, long idTipoHabitacion, char estado)
 	{
 		Habitacion nuevaHabitacion = pha.adicionarHabitacion(idHotel, capacidad, costoPorNoche, cuenta, numero, idPlanConsumo, idConsumoHabitacion, idTipoHabitacion, estado);
 		return nuevaHabitacion;
@@ -136,7 +136,7 @@ public class CadenaHotelera
 		return pha.darHabitaciones();
 	}
 	
-	public Habitacion darHabitacionesPorId(Integer idHabitacion)
+	public Habitacion darHabitacionesPorId(long idHabitacion)
 	{
 		return pha.darHabitacionPorId(idHabitacion);
 	}
@@ -145,7 +145,7 @@ public class CadenaHotelera
 	//Hotel
 	//-------------------------------------------------
 	
-	public Hotel adicionarHotel(String ciudad, String pais, Integer ofertaHabitacional)
+	public Hotel adicionarHotel(String ciudad, String pais, long ofertaHabitacional)
 	{
 		Hotel nuevoHotel = pha.adicionarHotel(ciudad, pais, ofertaHabitacional);
 		return nuevoHotel;
@@ -156,7 +156,7 @@ public class CadenaHotelera
 		return pha.darHoteles();
 	}
 	
-	public Hotel darHotelPorId(Integer idHotel)
+	public Hotel darHotelPorId(long idHotel)
 	{
 		return pha.darHotelPorId(idHotel);
 	}
@@ -165,7 +165,7 @@ public class CadenaHotelera
 	//Plan Consumo
 	//-----------------------------------------------
 	
-	public PlanConsumo adicionarPlanConsumo(Integer idHotel, String descripcion, List<Servicio> servicios)
+	public PlanConsumo adicionarPlanConsumo(long idHotel, String descripcion, List<Servicio> servicios)
 	{
 		PlanConsumo nuevoPlanConsumo = pha.adicionarPlanConsumo(idHotel, descripcion, null,servicios);
 		return nuevoPlanConsumo;
@@ -176,7 +176,7 @@ public class CadenaHotelera
 		return pha.darPlanesConsumo();
 	}
 	
-	public PlanConsumo darPlanCosumoPorId(Integer idPlanConsumo)
+	public PlanConsumo darPlanCosumoPorId(long idPlanConsumo)
 	{
 		return pha.darPlanConsumoPorId(idPlanConsumo);
 	}
@@ -196,7 +196,7 @@ public class CadenaHotelera
 		return pha.darProductos();
 	}
 	
-	public Producto darProductoPorId (Integer idProducto)
+	public Producto darProductoPorId (long idProducto)
 	{
 		return pha.darProductoPorId(idProducto);
 	}
@@ -205,7 +205,7 @@ public class CadenaHotelera
 	//Producto consumo por habitacion
 	//----------------------------------------------
 	
-	public ProductoConsumoPorHabitacion adicionarProcutoConsummidoPorHabitacion(Integer idProducto, Integer idConsumoHabitacion)
+	public ProductoConsumoPorHabitacion adicionarProcutoConsummidoPorHabitacion(long idProducto, long idConsumoHabitacion)
 	{
 		ProductoConsumoPorHabitacion nuevoConsumo = pha.adicionarProductoConsumoPorHabitacion(idProducto, idConsumoHabitacion);
 		return nuevoConsumo; 
@@ -219,7 +219,7 @@ public class CadenaHotelera
 	//-------------------------------------------------------
 	//Reserva Habitacion
 	//-----------------------------------------------------
-	public ReservaHabitacion adicionarReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente,Integer id, Integer idConvencion, Integer idTipoHabitacion )
+	public ReservaHabitacion adicionarReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, long numeroPersonas, long idHotel, long idCliente,long id, long idConvencion, long idTipoHabitacion )
 	{
 		ReservaHabitacion nuevaReserva = pha.adicionarReservaHabitacion(fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente,idConvencion, idTipoHabitacion );
 		return nuevaReserva;
@@ -231,7 +231,7 @@ public class CadenaHotelera
 	}
 	
 	
-	public ReservaHabitacion darReservaHabitacion(Integer idReserva)
+	public ReservaHabitacion darReservaHabitacion(long idReserva)
 	{
 		return pha.darReservaHabitacion(idReserva);
 	}
@@ -242,7 +242,7 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Timestamp dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
+	public ReservaServicio adicionarReservaServicio(String horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion)
 	{
 		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
@@ -253,7 +253,7 @@ public class CadenaHotelera
 		return pha.darReservasServicios();
 	}
 	
-	public ReservaServicio darReservaServicioId(Integer idReserva)
+	public ReservaServicio darReservaServicioId(long idReserva)
 	{
 		return pha.darReservaServicio(idReserva);
 	}
@@ -262,7 +262,7 @@ public class CadenaHotelera
 	//Servicio
 	//----------------------------------------------------------
 	
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, Integer capacidad, Double costo, char costoIncluido, Integer idHotel, Integer idTipoServicio, Integer estado)
+	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, char costoIncluido, long idHotel, long idTipoServicio, long estado)
 	{
 		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
 		return  nuevoSerivcio; 
@@ -273,7 +273,7 @@ public class CadenaHotelera
 		return pha.darServicios();
 	}
 	
-	public Servicio darServicio(Integer idServicio)
+	public Servicio darServicio(long idServicio)
 	{
 		return pha.darServicio(idServicio);
 	
@@ -283,7 +283,7 @@ public class CadenaHotelera
 	//Servicio Consumo
 	//--------------------------------------------------------
 	
-	public ServicioConsumo adicionarServicioConsumo(Integer idServicio, Integer idProducto)
+	public ServicioConsumo adicionarServicioConsumo(long idServicio, long idProducto)
 	{
 		ServicioConsumo nuevoConsumo = pha.adicionarServicioConsumo(idServicio, idProducto); 
 		return nuevoConsumo;
@@ -297,7 +297,7 @@ public class CadenaHotelera
 	//-----------------------------------------
 	//Servicio Producto
 	//------------------------------------------
-	public ServicioProducto adicionarServicioProducto(Integer idServicio, Integer idProducto)
+	public ServicioProducto adicionarServicioProducto(long idServicio, long idProducto)
 	{
 		ServicioProducto nuevoServProduc = pha.adicionarServicioProducto(idServicio, idProducto);
 		return nuevoServProduc;
@@ -312,7 +312,7 @@ public class CadenaHotelera
 	//TipoEmpleado
 	//------------------------------------------------
 	
-	public TipoEmpleado adicionarTipoEmpleado(String nombre, Integer id) 
+	public TipoEmpleado adicionarTipoEmpleado(String nombre, long id) 
 	{
 		TipoEmpleado nuevoTipoEmpleado = pha.adicionarTipoEmpleado(nombre);
 		return nuevoTipoEmpleado;
@@ -322,7 +322,7 @@ public class CadenaHotelera
 	//Tipo Habitacion
 	//-------------------------------------------
 	
-	public TipoHabitacion adicionarTipoHabitacion(String nombre, Integer id)
+	public TipoHabitacion adicionarTipoHabitacion(String nombre, long id)
 	{
 		TipoHabitacion nuevoTipoHabitacion = pha.adicionarTipoHabitacion(nombre);
 		return nuevoTipoHabitacion;
@@ -333,7 +333,7 @@ public class CadenaHotelera
 		return pha.darTiposHabitacion();
 	}
 	
-	public TipoHabitacion darTipoHabitacion(Integer idTipo)
+	public TipoHabitacion darTipoHabitacion(long idTipo)
 	{
 		return pha.darTipoHabitacion(idTipo);
 	}
@@ -342,7 +342,7 @@ public class CadenaHotelera
 	//Tipos Servicio
 	//-----------------------------------------------------
 	
-	public TipoServicio adicionarTipoServicio(String nombre, Integer id)
+	public TipoServicio adicionarTipoServicio(String nombre, long id)
 	{
 		TipoServicio nuevoServicio = pha.adicionarTipoServicio(nombre);
 		return nuevoServicio;
@@ -353,7 +353,7 @@ public class CadenaHotelera
 		return pha.darTiposServicio();
 	}
 	
-	public TipoServicio darTipoServicio(Integer idTipo)
+	public TipoServicio darTipoServicio(long idTipo)
 	{
 		return pha.darTipoServicio(idTipo);
 	
@@ -363,7 +363,7 @@ public class CadenaHotelera
 	//Usuario
 	//----------------------------------------------------
 	
-	public Usuario adicionarUsuario(String nombre, Integer id, String tipoDocumento, Long numeroDocumento, String correo)
+	public Usuario adicionarUsuario(String nombre, long id, String tipoDocumento, Long numeroDocumento, String correo)
 	{
 		Usuario nuevoUsuario = pha.adicionarUsuario(nombre, tipoDocumento, numeroDocumento, correo);
 		return nuevoUsuario;
@@ -374,7 +374,7 @@ public class CadenaHotelera
 		return pha.darUsuarios();
 	}
 	
-	public Usuario darUsuario(Integer idUsuario)
+	public Usuario darUsuario(long idUsuario)
 	{
 		return pha.darUsuario(idUsuario);
 	

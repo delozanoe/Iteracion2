@@ -17,7 +17,7 @@ public class SQLPlanConsumoServicio
 		this.pha = pha;
 	}
 
-	public long adicionarPlanConsumoServicio(PersistenceManager pm, Integer idPlanConsumo, Integer idServicio) 
+	public long adicionarPlanConsumoServicio(PersistenceManager pm, long idPlanConsumo, long idServicio) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlConvencionHotel() + "(idPlanConsumo, idServicio) values (?, ?)");
 		q.setParameters(idPlanConsumo,idServicio);

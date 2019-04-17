@@ -18,7 +18,7 @@ public class SQLTipoServicio
 		this.pha = pha;
 	}
 
-	public long adicionarTipoServicio(PersistenceManager pm, Integer id, String nombre) 
+	public long adicionarTipoServicio(PersistenceManager pm, long id, String nombre) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlTipoServicio()+ "(id, nombre) values (?, ?)");
 		q.setParameters(id, nombre);
@@ -26,7 +26,7 @@ public class SQLTipoServicio
 	}
 
 
-	public TipoServicio darTipoServicioPorId (PersistenceManager pm, Integer id) 
+	public TipoServicio darTipoServicioPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlTipoServicio () + " WHERE id = ?");
 		q.setResultClass(TipoServicio.class);
