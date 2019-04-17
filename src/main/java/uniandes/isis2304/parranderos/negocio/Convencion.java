@@ -1,7 +1,11 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.sql.Timestamp;
+
 
 public class Convencion
 {
@@ -11,11 +15,11 @@ public class Convencion
 
 	private Integer numeroParticipantes;
 
-	private Date fechaInicio;
+	private Timestamp fechaInicio;
 
-	private Date fechaFin;
+	private Timestamp fechaFin;
 
-	private double cuenta;
+	private BigDecimal cuenta;
 
 	private char pazYSalvo;
 
@@ -30,9 +34,26 @@ public class Convencion
 	private PlanConsumo planConsumo;
 
 	private List<ReservaServicio> reservasServicio;
+	
+	public Convencion() {
+		super();
+		this.id = 0;
+		this.tematica = "";
+		this.numeroParticipantes = 0;
+		this.fechaInicio =  new Timestamp (0);
+		this.fechaFin = new Timestamp (0);
+		this.cuenta = new BigDecimal(0);
+		this.pazYSalvo = ' ';
+		this.estado = ' ';
+		this.hotelesConvencion = new LinkedList<>();
+		this.reservasHabitaciones = new LinkedList<>();;
+		this.clientes = new LinkedList<>();;
+		this.planConsumo = (PlanConsumo) new Object();
+		this.reservasServicio = new LinkedList<>();;
+	}
 
-	public Convencion(Integer id, String tematica, Integer numeroParticipantes, Date fechaInicio, Date fechaFin,
-			double cuenta, char pazYSalvo, char estado, List<Hotel> hotelesConvencion,
+	public Convencion(Integer id, String tematica, Integer numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin,
+			BigDecimal cuenta, char pazYSalvo, char estado, List<Hotel> hotelesConvencion,
 			List<ReservaHabitacion> reservasHabitaciones, List<Cliente> clientes, PlanConsumo planConsumo,
 			List<ReservaServicio> reservasServicio) {
 		super();
@@ -75,27 +96,27 @@ public class Convencion
 		this.numeroParticipantes = numeroParticipantes;
 	}
 
-	public Date getFechaInicio() {
+	public Timestamp getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(Timestamp fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public Timestamp getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(Timestamp fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
-	public double getCuenta() {
+	public BigDecimal getCuenta() {
 		return cuenta;
 	}
 
-	public void setCuenta(double cuenta) {
+	public void setCuenta(BigDecimal cuenta) {
 		this.cuenta = cuenta;
 	}
 
