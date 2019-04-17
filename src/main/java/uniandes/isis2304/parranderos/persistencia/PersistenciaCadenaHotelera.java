@@ -874,7 +874,7 @@ public class PersistenciaCadenaHotelera
 		return sqlConsumoHabitacioServicio.darConsumoHabitacionServicio(pmf.getPersistenceManager());
 	}
 
-	public ReservaHabitacion adicionarReservaHabitacion(Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente, Integer idConvencion, Integer idTipoHabitacion) 
+	public ReservaHabitacion adicionarReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente, Integer idConvencion, Integer idTipoHabitacion) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1030,7 +1030,7 @@ public class PersistenciaCadenaHotelera
 
 	}
 
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Date dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion) 
+	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Timestamp dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1739,7 +1739,6 @@ public class PersistenciaCadenaHotelera
 
 		}
 
-
 		for(int i =0; i<tiposServicio.size(); i++)
 		{
 			TipoServicio servicio= tiposServicio.get(i);
@@ -1783,16 +1782,63 @@ public class PersistenciaCadenaHotelera
 
 			}
 
-
 			for(int i =0; i < idServicios.size();i++)
 			{
-				
-				Servicio servicio = sqlServicio.darServicioPorId(pm, idServicios.get(i));
-				this.adicionarReservaServicio("12:00", 180, fechaInicio, "" + servicio, null, idServicios.get(i), convencion.getId());
+
+				for(int j = 0; j<numeroParticipantes;j++)
+				{
+					Servicio servicio = sqlServicio.darServicioPorId(pm, idServicios.get(i));
+					this.adicionarReservaServicio("12:00", 180, fechaInicio, "" + servicio, null, idServicios.get(i), convencion.getId());
+				}
 			}
 		}
 	}
 
+	public void desReservar(Hashtable<TipoHabitacion, Integer> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, Integer idConvencion)
+	{
+		List<ReservaHabitacion> reservasHabitacion = this.darReservasHabitaciones();
+		Integer numeroPersonas = 0;
+
+		Iterator<TipoHabitacion> iter = (Iterator<TipoHabitacion>) tiposHabitacion.keys();
+		while(iter.hasNext())
+		{
+			TipoHabitacion actual = iter.next();
+			Integer cantidadDeseada = tiposHabitacion.get(actual);
+			numeroPersonas += cantidadDeseada;
+			
+			Integer cant = 0;
+
+			for(int i = 0; i < reservasHabitacion.size() && cant<=cantidadDeseada ;i++)
+			{
+				if(reservasHabitacion.get(i).getTipoHabitacion().getId() == (actual.getId()) && reservasHabitacion.get(i).getConvencion().getId() == idConvencion)
+				{
+					this.eliminarReservaHabitacionPorId(reservasHabitacion.get(i).getId());
+					cant ++;
+				}
+			}
+
+		}
+		
+		List<ReservaServicio> reservasServicio = this.darReservasServicios();
+		
+		for(int i =0; i <tiposServicio.size();i++)
+		{
+			Integer idTipoServicio = tiposServicio.get(i).getId();
+			Integer cantidadE = 0;
+			
+			for(int j = 0; j<reservasServicio.size() && cantidadE <= numeroPersonas ; j++)
+			{
+				if(reservasServicio.get(j).getConvencion().getId() == idConvencion && reservasServicio.get(j).getServicio().getTipo().getId() == idTipoServicio )
+				{
+					this.eliminarReservaServicioPorId(reservasServicio.get(j).getId());
+					cantidadE++;
+				}
+			}
+		}
+		
+		
+		
+	}
 
 
 }

@@ -1,6 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +36,7 @@ public class ReservaServicio
 	 * @ordered
 	 */
 
-	private Date dia;
+	private Timestamp dia;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,7 +76,7 @@ public class ReservaServicio
 
 	private Convencion convencion;
 
-	public ReservaServicio(String horaInicio, int duracion, Date dia, Integer id, String lugar, Cliente cliente,
+	public ReservaServicio(String horaInicio, int duracion, Timestamp dia, Integer id, String lugar, Cliente cliente,
 			Servicio servicio, Convencion convencion) {
 		super();
 		this.horaInicio = horaInicio;
@@ -106,11 +107,11 @@ public class ReservaServicio
 		this.duracion = duracion;
 	}
 
-	public Date getDia() {
+	public Timestamp getDia() {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
+	public void setDia(Timestamp dia) {
 		this.dia = dia;
 	}
 

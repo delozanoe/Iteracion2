@@ -1,6 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ReservaHabitacion
 	 * @ordered
 	 */
 
-	private Date fechaEntrada;
+	private Timestamp fechaEntrada;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ public class ReservaHabitacion
 	 * @ordered
 	 */
 
-	private Date fechaSalida;
+	private Timestamp fechaSalida;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,7 +62,7 @@ public class ReservaHabitacion
 	
 	private TipoHabitacion tipoHabitacion;
 
-	public ReservaHabitacion(Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Hotel hotel,
+	public ReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Hotel hotel,
 			Cliente cliente, Integer id, Convencion convencion, TipoHabitacion tipoHabitacion) throws Exception {
 		super();
 		this.id= id;
@@ -96,19 +97,19 @@ public class ReservaHabitacion
 	}
 
 
-	public Date getFechaEntrada() {
+	public Timestamp getFechaEntrada() {
 		return fechaEntrada;
 	}
 
-	public void setFechaEntrada(Date fechaEntrada) {
+	public void setFechaEntrada(Timestamp fechaEntrada) {
 		this.fechaEntrada = fechaEntrada;
 	}
 
-	public Date getFechaSalida() {
+	public Timestamp getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(Timestamp fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 

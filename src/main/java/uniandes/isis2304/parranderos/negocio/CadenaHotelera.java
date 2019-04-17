@@ -219,7 +219,7 @@ public class CadenaHotelera
 	//-------------------------------------------------------
 	//Reserva Habitacion
 	//-----------------------------------------------------
-	public ReservaHabitacion adicionarReservaHabitacion(Date fechaEntrada, Date fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente,Integer id, Integer idConvencion, Integer idTipoHabitacion )
+	public ReservaHabitacion adicionarReservaHabitacion(Timestamp fechaEntrada, Timestamp fechaSalida, Integer numeroPersonas, Integer idHotel, Integer idCliente,Integer id, Integer idConvencion, Integer idTipoHabitacion )
 	{
 		ReservaHabitacion nuevaReserva = pha.adicionarReservaHabitacion(fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente,idConvencion, idTipoHabitacion );
 		return nuevaReserva;
@@ -242,7 +242,7 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Date dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
+	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Timestamp dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
 	{
 		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
