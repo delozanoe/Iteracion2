@@ -240,7 +240,7 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, String dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
+	public ReservaServicio adicionarReservaServicio(String horaInicio, Integer duracion, Date dia, String lugar, Integer idCliente, Integer idServicio, Integer idConvencion)
 	{
 		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
