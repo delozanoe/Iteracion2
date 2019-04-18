@@ -426,9 +426,123 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	public void reservarAlojamientoServicio()
 	{
-		Convencion convencion =registrarConvencion(); 
-		habitacionConvencion(convencion, "Registrar");
-		servicioConvencion(convencion, "Registrar");		
+		
+		try 
+		{
+			JPanel ventana = new JPanel(new BorderLayout());
+			String[] items = {"1. Especial", "2. Ejecutivo", "3. Premium", "4. Platinum", "5. Diamante", "6. Rubí"};
+			JComboBox<String> combo = new JComboBox<>(items);
+			JTextField tematica = new JTextField( );
+			JTextField numeroParticipantes = new JTextField( );
+			JTextField fechaInicio = new JTextField( );
+			JTextField fechaFin = new JTextField( );
+
+			JPanel datosConvencion = new JPanel(new GridLayout(0, 1));
+
+
+			//            panel.add(combo);
+			datosConvencion.add(new JLabel("1. Tematica:"));
+			datosConvencion.add(tematica);
+			datosConvencion.add(new JLabel("2. Numero Participantes:"));
+			datosConvencion.add(numeroParticipantes);
+			datosConvencion.add(new JLabel("3. Fecha inicio (Use el formato yyyy-MM-dd hh:mm:ss.SSS):"));
+			datosConvencion.add(fechaInicio);
+			datosConvencion.add(new JLabel("4. Fecha fin (Use el formato yyyy-MM-dd hh:mm:ss.SSS):"));
+			datosConvencion.add(fechaFin);
+			datosConvencion.add(new JLabel("5. Cuenta (INICIAR ESTO EN 0):"));
+
+			datosConvencion.add(new JLabel("6. Paz y salvo (INICIAR EN TRUE)"));
+			datosConvencion.add(new JLabel("7. Plan de consumo:"));
+			datosConvencion.add(combo);
+			datosConvencion.setBorder(new TitledBorder("Datos requeridos"));
+
+			JCheckBox piscina = new JCheckBox("Piscina"); 
+			JCheckBox gimnasio = new JCheckBox("Gimnasio"); 
+			JCheckBox internet = new JCheckBox("Internet"); 
+			JCheckBox bar = new JCheckBox("Bar"); 
+			JCheckBox restaurante = new JCheckBox("Restaurante"); 
+			JCheckBox supermercado = new JCheckBox("Supermercado"); 
+			JCheckBox tienda = new JCheckBox("Tienda"); 
+			JCheckBox spa = new JCheckBox("SPA"); 
+			JCheckBox lavanderia = new JCheckBox("Lavanderia"); 
+			JCheckBox prestamo = new JCheckBox("Prestamo");
+			JCheckBox salonReuniones = new JCheckBox("Salon reuniones");
+			JCheckBox salonConferencias = new JCheckBox("Salon conferencias");
+
+
+			JPanel servicios = new JPanel(new GridLayout(0, 1));
+
+			servicios.setBorder(new TitledBorder("Servicios requeridos"));
+			servicios.add(piscina);
+			servicios.add(gimnasio);
+			servicios.add(internet);
+			servicios.add(bar);
+			servicios.add(restaurante);
+			servicios.add(supermercado);
+			servicios.add(tienda);
+			servicios.add(spa);
+			servicios.add(lavanderia);
+			servicios.add(prestamo);
+			servicios.add(salonReuniones);
+			servicios.add(salonConferencias);
+
+			JTextField SUITEPRESIDENCIAL = new JTextField( );
+			JTextField SUITE = new JTextField( );
+			JTextField FAMILIAR = new JTextField( );
+			JTextField DOBLE = new JTextField( );
+			JTextField SENCILLA = new JTextField( );
+
+			JPanel habitacion = new JPanel(new GridLayout(0, 1));
+
+
+			//            panel.add(combo);
+			habitacion.setBorder(new TitledBorder("Habitacion requeridos"));
+			habitacion.add(new JLabel("1. Suite Presicencial:"));
+			habitacion.add(SUITEPRESIDENCIAL);
+			habitacion.add(new JLabel("2. Suite"));
+			habitacion.add(SUITE);
+			habitacion.add(new JLabel("3. Familiar"));
+			habitacion.add(FAMILIAR);
+			habitacion.add(new JLabel("4. Doble"));
+			habitacion.add(DOBLE);
+			habitacion.add(new JLabel("5. Sencilla"));
+			habitacion.add(SENCILLA);
+			
+			
+			ventana.add(datosConvencion, BorderLayout.NORTH);
+			ventana.add(servicios,BorderLayout.CENTER);
+			ventana.add(habitacion, BorderLayout.SOUTH);
+
+
+			int result = JOptionPane.showConfirmDialog(null, ventana, "Registrar la convencion",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (result == JOptionPane.OK_OPTION)
+			{
+
+				if (result != 0)
+				{
+					//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
+					//					if (convencion == null)
+					//					{
+					//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+					//					}
+					String resultado = "En adicionarHabitacionesConvencion\n\n";
+					resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 
 	}
 
@@ -586,11 +700,11 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					if (result != 0)
 					{
 
-						//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
-						//					if (convencion == null)
-						//					{
-						//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
-						//					}
+//						convencion = cadenaHotelera.regis; 
+						if (convencion == null)
+						{
+							throw new Exception ("No se puedo reservar las habitacines para la convencion " );
+						}
 						String resultado = "En adicionarHabitacionesConvencion\n\n";
 						resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
 						resultado += "\n Operación terminada";
@@ -776,7 +890,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		JCheckBox prestamo = new JCheckBox("Prestamo");
 		JCheckBox salonReuniones = new JCheckBox("Salon reuniones");
 		JCheckBox salonConferencias = new JCheckBox("Salon conferencias");
-		
+
 		JLabel tituloHab =  new JLabel("Dijite las habitaciones que se van a tener mantenimieto y seprarelas por una coma");
 		JTextField habitacion = new JTextField( );
 
@@ -797,19 +911,19 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		servicios.add(prestamo);
 		servicios.add(salonReuniones);
 		servicios.add(salonConferencias);
-		
+
 		servicios.setBorder(new TitledBorder("Servicios"));
 		habitaciones.add(tituloHab);
 		habitaciones.add(habitacion);
 		habitaciones.setBorder(new TitledBorder("Habitaciones"));
-		
+
 		panel.add(servicios, BorderLayout.NORTH);
 		panel.add(habitaciones, BorderLayout.SOUTH);
-		
-		
+
+
 		int result = JOptionPane.showConfirmDialog(null, panel, "Selecione el servicio o habitacion en mantenimiento",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		
+
 	}
 
 	public void finalizarMantenimiento() 

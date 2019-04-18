@@ -1,4 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
+import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -20,7 +22,7 @@ public class Habitacion
 	 * @ordered
 	 */
 	
-	private int capacidad;
+	private long capacidad;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -37,7 +39,7 @@ public class Habitacion
 	 * @ordered
 	 */
 	
-	private double costoPorNoche;
+	private BigDecimal costoPorNoche;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,7 +57,7 @@ public class Habitacion
 	 * @ordered
 	 */
 	
-	private double cuenta;
+	private BigDecimal cuenta;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,6 +67,8 @@ public class Habitacion
 	 */
 	
 	private Hotel hotel;
+	
+	private long idHotel,  idPlanConsumo,  idConsumoHabitacion,  idTipoHabitacion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,7 +96,9 @@ public class Habitacion
 	 * 
 	 */
 	
-	private char estado;
+	private String estado;
+	
+	private String numero; 
 	
 	private PlanConsumo planConsumo;
 	
@@ -100,81 +106,63 @@ public class Habitacion
 	
 	private List<Mantenimiento> mantenimientos ;
 
-	public Habitacion(int capacidad, double costoPorNoche, List<Servicio> servicios,
-			double cuenta, Hotel hotel, List<Cliente> clientes, ConsumoHabitacion consumoHabitacion,
-			PlanConsumo planConsumo, long id, TipoHabitacion tipoHabitacion, char estado) {
+	public Habitacion() {
+		super();
+		this.id = 0;
+		this.capacidad = 0;
+		this.costoPorNoche = new BigDecimal(0);
+		this.cuenta = new BigDecimal(0);
+		this.numero = "";
+		this.idHotel = 0;
+		this.idPlanConsumo = 0; 
+		this.idConsumoHabitacion = 0;
+		this.estado = "";
+		
+		clientes = new LinkedList<>();
+		mantenimientos = new LinkedList<>();
+		servicios = new LinkedList<>();
+
+	}
+	
+	public Habitacion(long id, long capacidad, BigDecimal costoPorNoche, BigDecimal cuenta, String numero, long idHotel, long idPlanConsumo, long idConsumoHabitacion, long idTipoHabitacion, String estado ) 
+	{
 		super();
 		this.id = id;
 		this.capacidad = capacidad;
 		this.costoPorNoche = costoPorNoche;
-		this.servicios = servicios;
 		this.cuenta = cuenta;
-		this.hotel = hotel;
-		this.clientes = clientes;
-		this.consumoHabitacion = consumoHabitacion;
-		this.planConsumo = planConsumo;
-		this.tipoHabitacion = tipoHabitacion;
+		this.numero = numero;
+		this.idHotel = idHotel;
+		this.idPlanConsumo = idPlanConsumo; 
+		this.idConsumoHabitacion = idPlanConsumo;
 		this.estado = estado;
+		
+		clientes = new LinkedList<>();
+		mantenimientos = new LinkedList<>();
+		servicios = new LinkedList<>();
 	}
-	
-	public List<Mantenimiento> getMantenimientos()
-	{
-		return mantenimientos;
-	}
-	
-	public void setMantenimientos(List<Mantenimiento> mantenimientos)
-	{
-		this.mantenimientos=mantenimientos;
-	}
-	
-	public char getEstado()
-	{
-		return estado;
-	}
-	
-	public void setEstado (char estado)
-	{
-		this.estado = estado;
-	}
-	
-
-	public TipoHabitacion getTipoHabitacion() {
-		return tipoHabitacion;
-	}
-
-
-
-	public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-		this.tipoHabitacion = tipoHabitacion;
-	}
-
-
 
 	public long getId() {
 		return id;
 	}
 
-
-
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
-
-	public int getCapacidad() {
+	public long getCapacidad() {
 		return capacidad;
 	}
 
-	public void setCapacidad(int capacidad) {
+	public void setCapacidad(long capacidad) {
 		this.capacidad = capacidad;
 	}
 
-	public double getCostoPorNoche() {
+	public BigDecimal getCostoPorNoche() {
 		return costoPorNoche;
 	}
 
-	public void setCostoPorNoche(double costoPorNoche) {
+	public void setCostoPorNoche(BigDecimal costoPorNoche) {
 		this.costoPorNoche = costoPorNoche;
 	}
 
@@ -186,11 +174,11 @@ public class Habitacion
 		this.servicios = servicios;
 	}
 
-	public double getCuenta() {
+	public BigDecimal getCuenta() {
 		return cuenta;
 	}
 
-	public void setCuenta(double cuenta) {
+	public void setCuenta(BigDecimal cuenta) {
 		this.cuenta = cuenta;
 	}
 
@@ -200,6 +188,38 @@ public class Habitacion
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public long getIdHotel() {
+		return idHotel;
+	}
+
+	public void setIdHotel(long idHotel) {
+		this.idHotel = idHotel;
+	}
+
+	public long getIdPlanConsumo() {
+		return idPlanConsumo;
+	}
+
+	public void setIdPlanConsumo(long idPlanConsumo) {
+		this.idPlanConsumo = idPlanConsumo;
+	}
+
+	public long getIdConsumoHabitacion() {
+		return idConsumoHabitacion;
+	}
+
+	public void setIdConsumoHabitacion(long idConsumoHabitacion) {
+		this.idConsumoHabitacion = idConsumoHabitacion;
+	}
+
+	public long getIdTipoHabitacion() {
+		return idTipoHabitacion;
+	}
+
+	public void setIdTipoHabitacion(long idTipoHabitacion) {
+		this.idTipoHabitacion = idTipoHabitacion;
 	}
 
 	public List<Cliente> getClientes() {
@@ -218,6 +238,22 @@ public class Habitacion
 		this.consumoHabitacion = consumoHabitacion;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
 	public PlanConsumo getPlanConsumo() {
 		return planConsumo;
 	}
@@ -226,11 +262,22 @@ public class Habitacion
 		this.planConsumo = planConsumo;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
+	public TipoHabitacion getTipoHabitacion() {
+		return tipoHabitacion;
+	}
+
+	public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+		this.tipoHabitacion = tipoHabitacion;
+	}
+
+	public List<Mantenimiento> getMantenimientos() {
+		return mantenimientos;
+	}
+
+	public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+		this.mantenimientos = mantenimientos;
+	}
+	
 	
 	
 	

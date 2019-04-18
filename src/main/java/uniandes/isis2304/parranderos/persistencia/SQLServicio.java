@@ -18,7 +18,7 @@ class SQLServicio
 	{
 		this.pha = pha;
 	}
-	public long adicionarServicio(PersistenceManager pm, long id, String nombre, String descripcion, String horaApertura, String horaCierre, int capacidad, double costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) 
+	public long adicionarServicio(PersistenceManager pm, long id, String nombre, String descripcion, String horaApertura, String horaCierre, int capacidad, double costo, String costoIncluido, long idHotel, long idTipoServicio, long estado) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlServicio() + "(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio,estado) values (?, ?, ?, ?, ? , ?, ?, ?, ?, ?,?)");
         q.setParameters(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio,estado);

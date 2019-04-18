@@ -1,6 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 import java.sql.Date;
+
 import java.sql.Timestamp;
 
 /**
@@ -18,7 +19,7 @@ public class ReservaServicio
 	 * @ordered
 	 */
 
-	private String horaInicio;
+	private Timestamp horaInicio;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ public class ReservaServicio
 	 * @ordered
 	 */
 
-	private int duracion;
+	private long duracion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -45,7 +46,7 @@ public class ReservaServicio
 	 * @ordered
 	 */
 
-	private long id;
+	private long id, idServicio, idConvencion, idCliente;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,34 +77,43 @@ public class ReservaServicio
 
 	private Convencion convencion;
 
-	public ReservaServicio(String horaInicio, int duracion, Timestamp dia, long id, String lugar, Cliente cliente,
-			Servicio servicio, Convencion convencion) {
+	public ReservaServicio(long id, Timestamp horaInicio, Timestamp dia, long duracion, String lugar, long idCliente, long idServicio, long idConvencion) {
 		super();
 		this.horaInicio = horaInicio;
 		this.duracion = duracion;
 		this.dia = dia;
 		this.id = id;
 		this.lugar = lugar;
-		this.cliente = cliente;
-		this.servicio = servicio;
-		this.convencion = convencion;
-
-
+		this.idCliente= idCliente;
+		this.idServicio= idServicio;
+		this.idConvencion =idConvencion;
+	}
+	
+	public ReservaServicio() {
+		super();
+		this.horaInicio = new Timestamp(0);
+		this.duracion = 0;
+		this.dia = new Timestamp(0);
+		this.lugar = " ";
+		this.id= 0;
+		this.idCliente= 0;
+		this.idServicio= 0;
+		this.idConvencion =0;
 	}
 
-	public String getHoraInicio() {
+	public Timestamp getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(String horaInicio) {
+	public void setHoraInicio(Timestamp horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public int getDuracion() {
+	public long getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(int duracion) {
+	public void setDuracion(long duracion) {
 		this.duracion = duracion;
 	}
 
@@ -121,6 +131,30 @@ public class ReservaServicio
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getIdServicio() {
+		return idServicio;
+	}
+
+	public void setIdServicio(long idServicio) {
+		this.idServicio = idServicio;
+	}
+
+	public long getIdConvencion() {
+		return idConvencion;
+	}
+
+	public void setIdConvencion(long idConvencion) {
+		this.idConvencion = idConvencion;
+	}
+
+	public long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getLugar() {
@@ -147,20 +181,14 @@ public class ReservaServicio
 		this.servicio = servicio;
 	}
 
-	public Convencion getConvencion()
-	{
+	public Convencion getConvencion() {
 		return convencion;
 	}
 
-	public void setConvencion(Convencion nuevaConvencion)
-	{
-		this.convencion = nuevaConvencion;
+	public void setConvencion(Convencion convencion) {
+		this.convencion = convencion;
 	}
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
-
-
+	
+	
+	
 }

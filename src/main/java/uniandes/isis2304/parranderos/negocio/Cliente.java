@@ -1,4 +1,5 @@
 package uniandes.isis2304.parranderos.negocio;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -27,7 +28,7 @@ public class Cliente extends Usuario
 	 * @ordered
 	 */
 
-	private char pazYSalvo;
+	private String pazYSalvo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,7 +69,7 @@ public class Cliente extends Usuario
 
 	private List<Convencion> convenciones;
 
-	public Cliente( long id, char pazYSalvo, List<String> planConsumo, Habitacion habitacion,
+	public Cliente( long id, String pazYSalvo, List<String> planConsumo, Habitacion habitacion,
 			List<ReservaHabitacion> reserva, List<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, List<Convencion> convenciones)
 			 {
 
@@ -102,18 +103,18 @@ public class Cliente extends Usuario
 		this.nombre = nombre;
 	}
 
-	public char isPazYSalvo() {
-		if(habitacion.getCuenta() == 0)
+	public String isPazYSalvo() {
+		if(habitacion.getCuenta() == new BigDecimal(0))
 		{
-			return 'T';
+			return "T";
 		}
 		else
 		{
-			return 'F';
+			return "F";
 		}
 	}
 
-	public void setPazYSalvo(char pazYSalvo) {
+	public void setPazYSalvo(String pazYSalvo) {
 		this.pazYSalvo = pazYSalvo;
 	}
 

@@ -20,7 +20,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarCliente(PersistenceManager pm, long idBar, char pazySalvo, long idHabitacion) 
+	public long adicionarCliente(PersistenceManager pm, long idBar, String pazySalvo, long idHabitacion) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlCliente()+ "(id, pazySalvo, idHotel) values (?, ?, ?)");
         q.setParameters(idBar, pazySalvo, idHabitacion);

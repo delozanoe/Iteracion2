@@ -1,6 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Mantenimiento 
@@ -9,28 +10,46 @@ public class Mantenimiento
 	private long id;
 	
 	
-	private char estado;
+	private String estado;
 	
-	private Date fechaInicio; 
+	private Timestamp fechaInicio; 
 	
-	private Date fechaFin; 
+	private Timestamp fechaFin; 
 	
 	private String descripcion;
 	
 	private Habitacion habitacion;
 	
 	private Servicio servicio;
+	
+	private long idHabitacion, idServicio; 
 
-	public Mantenimiento(long id, char estado, Date fechaInicio, Date fechaFin, String descripcion, Habitacion habitacion, Servicio servicio) {
+	public Mantenimiento(String estado, long id, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, long idHabitacion, long idServicio ) 
+	{
 		super();
 		this.id = id;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.descripcion = descripcion;
-		this.habitacion = habitacion;
-		this.servicio = servicio;
+		this.idHabitacion = idHabitacion;
+		this.idServicio = idServicio;
+		
 	}
+	
+	public Mantenimiento() 
+	{
+		super();
+		this.id = 0;
+		this.estado = "";
+		this.fechaInicio = new Timestamp(0);
+		this.fechaFin = new Timestamp(0);
+		this.descripcion = "";
+		this.idHabitacion = 0;
+		this.idServicio = 0;
+		
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -39,14 +58,37 @@ public class Mantenimiento
 		this.id = id;
 	}
 
-	public char getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(char estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
+	public Timestamp getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Timestamp fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Timestamp getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Timestamp fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public Habitacion getHabitacion() {
 		return habitacion;
@@ -64,37 +106,24 @@ public class Mantenimiento
 		this.servicio = servicio;
 	}
 
-	public char getEstados() {
-		return estado;
+	public long getIdHabitacion() {
+		return idHabitacion;
 	}
 
-	public void setEstados(char estados) {
-		this.estado = estados;
+	public void setIdHabitacion(long idHabitacion) {
+		this.idHabitacion = idHabitacion;
 	}
 
-	public Date getFechaInicio() {
-		return fechaInicio;
+	public long getIdServicio() {
+		return idServicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	public void setIdServicio(long idServicio) {
+		this.idServicio = idServicio;
 	}
+	
+	
 
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	} 
 	
 	
 	

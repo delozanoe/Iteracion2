@@ -425,7 +425,7 @@ public class PersistenciaCadenaHotelera
 	 * @param nombre - El nombre del tipo de bebida
 	 * @return El objeto TipoBebida adicionado. null si ocurre alguna Excepción
 	 */
-	public Cliente adicionarCliente(char pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
+	public Cliente adicionarCliente(String pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -656,7 +656,7 @@ public class PersistenciaCadenaHotelera
 	{
 		return sqlHabitacion.darHabitacionPorId(pmf.getPersistenceManager(), idHabitacion);
 	}
-	public long cambiarEstadoHabitacion (char estado,long idHabitacion)
+	public long cambiarEstadoHabitacion (String estado,long idHabitacion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1100,7 +1100,7 @@ public class PersistenciaCadenaHotelera
 		}
 	} 
 
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) 
+	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, String costoIncluido, long idHotel, long idTipoServicio, long estado) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1461,7 +1461,7 @@ public class PersistenciaCadenaHotelera
 	}
 
 
-	public Mantenimiento adicionarMantenimiento(char estado, Date fechaInicio, Date fechaFin, String descripcion, long idHabitacion, long idServicio)
+	public Mantenimiento adicionarMantenimiento(String estado, Date fechaInicio, Date fechaFin, String descripcion, long idHabitacion, long idServicio)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1642,7 +1642,7 @@ public class PersistenciaCadenaHotelera
 	}
 
 
-//	public void checkin(long idReserva, long idEmpleado, char pazYSalvo, String tipoDocumento, long numeroDocumento, String correo, String nombre)
+//	public void checkin(long idReserva, long idEmpleado, String pazYSalvo, String tipoDocumento, long numeroDocumento, String correo, String nombre)
 //	{
 //		List<ReservaHabitacion> reservasHab = darReservasHabitaciones();
 //		List<Empleado> empleados = darEmpleados();
@@ -1908,7 +1908,7 @@ public class PersistenciaCadenaHotelera
 				for(int j=0; j<habitacionesRevisar.size();j++)
 				{
 					Habitacion nueva = habitaciones.get(j);
-					char estadoNueva = habitaciones.get(j).getEstado();
+					String estadoNueva = habitaciones.get(j).getEstado();
 					if(estadoNueva=='D' && nueva.getTipoHabitacion() == (habitaciones.get(i).getTipoHabitacion()))
 					{
 						 idHabitacionNueva = nueva.getId();
