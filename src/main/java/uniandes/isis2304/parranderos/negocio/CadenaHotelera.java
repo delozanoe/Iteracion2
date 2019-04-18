@@ -388,7 +388,7 @@ public class CadenaHotelera
 		return nuevaConvencion;
 	}
 
-	public void registrarConvencion(Hashtable<TipoHabitacion, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
+	public void registrarConvencion(Hashtable<Long, Long> tiposHabitacion, ArrayList<Long> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
 	{
 		pha.registrarReservaConvenvion(tiposHabitacion, tiposServicio, tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo, idHotel);
 	}
