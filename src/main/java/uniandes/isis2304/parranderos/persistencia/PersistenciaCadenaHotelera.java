@@ -1735,6 +1735,22 @@ public class PersistenciaCadenaHotelera
 //		}
 //	}
 
+	/**
+	 * Este requerimiento permite hacer la reserva del numero de habitaciones y servicios de cada tipo solicitadas por una convencion
+	 * @param tiposHabitacion hashtable de los tipos de habitacion con la cantidad que se desea reservas
+	 * @param tiposServicio lista de los servicios que se desean reservar
+	 * @param tematica tematica de la convencion
+	 * @param numeroParticipantes numero de participantes de la convenvion (de los que se sacara el numero requerido de cada servicio)
+	 * @param fechaInicio fecha de inicio de la convencion
+	 * @param fechaFin fecha final de la convencion
+	 * @param cuenta cuenta de la convencion
+	 * @param pazYSalvo estado de paz y salvo de la convencion
+	 * @param estado estado de la convencion (A de actica, I de inactiva)
+	 * @param idPlanConsumo plan de consumo de la convencion
+	 * @param idHotel id del hotel donde esta la convencion
+	 * El metodo unicamente permite hacer la reserva de los recursos si todos tienen disponibilidad, en caso de que al menos uno no la tenga, no se procesa la transaccion
+	 * La base de datod queda en estado de readcommited y el autocommit apagado
+	 */
 	public void registrarReservaConvenvion(Hashtable<Long, Long> tiposHabitacion, ArrayList<Long> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
 	{
 		Convencion convencion= this.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);
@@ -1823,6 +1839,12 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 
+	/**
+	 * Cancela la reserva de tipos de habitacion y de servicios
+	 * @param tiposHabitacion hashtable con los tipos de habitacion y la cantidad que se desean cancelar
+	 * @param tiposServicio tipos de los servicios que se desean cancelar
+	 * @param idConvencion id de la convencion de la cual se quieren cancelar las reservas
+	 */
 	public void desReservar(Hashtable<TipoHabitacion, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, long idConvencion)
 	{
 		List<ReservaHabitacion> reservasHabitacion = this.darReservasHabitaciones();
@@ -1867,6 +1889,11 @@ public class PersistenciaCadenaHotelera
 		
 	}
 	
+	
+	/**
+	 * Finaliza la convencion, cierra y permite terminar la convenvion si esta esta a paz y salvo con el hotel
+	 * @param idConvencion convencion que se quiere finalizar
+	 */
 	public void finConvencion (long idConvencion)
 	{
 		Convencion convencion =sqlConvencion.darConvencionPorId(pmf.getPersistenceManager(), idConvencion);
@@ -1879,6 +1906,16 @@ public class PersistenciaCadenaHotelera
 		
 	}
 	
+	/**
+	 * Pone en mantenimiento una lista de habitaciones y servicios
+	 * @param habitaciones lista de habitaciones que se quiere poner en mantenimiento
+	 * @param servicios lista de servicios a poner en mantenimiento
+	 * @param fechaInicio fecha de inicio del mantenimiento
+	 * @param fechaFin fecha de fin del mantenimiento
+	 * 
+	 * Para poner en mantenimiento todas las habitaciones tienen que existir, si alguna no se puede se hace rollback de la aplicacion ya que o se hace una o se hacen todas
+	 * 
+	 */
 	public void ponerEnMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios, Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1946,6 +1983,11 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 
+	/**
+	 * Finaliza el mantenimiento. Cambia los recursos que entran como parametro a estado disponible para que se puedan volver a reservar
+	 * @param habitaciones habitaciones a sacar de mantenimiento
+	 * @param servicios servicios a sacar de mantenimiento
+	 */
 	public void sacarDeMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios)
 	{
 		for (int i =0; i<habitaciones.size();i++)
@@ -1959,6 +2001,12 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 	
+	/**
+	 * Muestra el dinero recolectado por cada habitacion
+	 * @param fechaInicio de consulta
+	 * @param fechaFin de consulta
+	 * @return 
+	 */
 	public Hashtable<Habitacion, Long> mostrarDineroRecolectado(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1986,6 +2034,12 @@ public class PersistenciaCadenaHotelera
 		return hs;
 	}
 	
+	/**
+	 * Da los 20 servicios mas populares
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @return
+	 */
 	public List<Servicio> serviciosMasPopulares(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -2004,6 +2058,12 @@ public class PersistenciaCadenaHotelera
 		
 	}
 	
+	/**
+	 * Da los servicios en tre el rango de precio ingresadl
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public List<Servicio> serviciosEntreRangoDePrecio(Long min,Long max)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -2022,7 +2082,13 @@ public class PersistenciaCadenaHotelera
 		
 	}
 	
-	
+	/**
+	 * Muestra el consumo de un cliente entre fechas
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @param idCliente
+	 * @return
+	 */
 	public BigDecimal mostrarConsumoCliente(Timestamp fechaInicio, Timestamp fechaFin, Long idCliente)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
