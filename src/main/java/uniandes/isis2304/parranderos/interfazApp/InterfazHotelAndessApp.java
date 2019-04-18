@@ -33,6 +33,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -62,6 +63,9 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.CadenaHotelera;
 import uniandes.isis2304.parranderos.negocio.Convencion;
+import uniandes.isis2304.parranderos.negocio.Hotel;
+import uniandes.isis2304.parranderos.negocio.TipoHabitacion;
+import uniandes.isis2304.parranderos.negocio.TipoServicio;
 
 
 
@@ -426,7 +430,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	public void reservarAlojamientoServicio()
 	{
-		
+
 		try 
 		{
 			JPanel ventana = new JPanel(new BorderLayout());
@@ -436,6 +440,17 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			JTextField numeroParticipantes = new JTextField( );
 			JTextField fechaInicio = new JTextField( );
 			JTextField fechaFin = new JTextField( );
+			List<Hotel> hoteless =cadenaHotelera.darHoteles();
+			if(hoteless.isEmpty())
+			{
+				System.out.println("Paila perro");
+			}
+			String[] hoteles = new String[hoteless.size()];
+			for (int i = 0; i < hoteless.size(); i++) 
+			{
+				hoteles[i] = hoteless.get(i).getCiudad();
+			}
+			JComboBox<String> combo2 = new JComboBox<>(hoteles);
 
 			JPanel datosConvencion = new JPanel(new GridLayout(0, 1));
 
@@ -454,6 +469,9 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			datosConvencion.add(new JLabel("6. Paz y salvo (INICIAR EN TRUE)"));
 			datosConvencion.add(new JLabel("7. Plan de consumo:"));
 			datosConvencion.add(combo);
+			datosConvencion.add(new JLabel("8. Selecione el hotel"));
+			datosConvencion.add(combo2);
+			
 			datosConvencion.setBorder(new TitledBorder("Datos requeridos"));
 
 			JCheckBox piscina = new JCheckBox("Piscina"); 
@@ -507,11 +525,69 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			habitacion.add(DOBLE);
 			habitacion.add(new JLabel("5. Sencilla"));
 			habitacion.add(SENCILLA);
-			
-			
+
+
 			ventana.add(datosConvencion, BorderLayout.NORTH);
 			ventana.add(servicios,BorderLayout.CENTER);
 			ventana.add(habitacion, BorderLayout.SOUTH);
+
+			Hashtable<Long, Long> tiposHabitacion = new Hashtable<>();
+			tiposHabitacion.put(new Long(1),  new Long(Integer.parseInt(SUITEPRESIDENCIAL.getText())));
+			tiposHabitacion.put(new Long(2),  new Long(Integer.parseInt(SUITE.getText())));
+			tiposHabitacion.put(new Long(3),  new Long(Integer.parseInt(FAMILIAR.getText())));
+			tiposHabitacion.put(new Long(4),  new Long(Integer.parseInt(DOBLE.getText())));
+			tiposHabitacion.put(new Long(5),  new Long(Integer.parseInt(SENCILLA.getText())));
+
+			ArrayList<Long> tiposServicios =  new ArrayList<>();
+			if(piscina.isSelected())
+			{
+				tiposServicios.add(new Long(1));
+			}
+			if(gimnasio.isSelected())
+			{
+				tiposServicios.add(new Long(2));
+			}
+
+			if(internet.isSelected())
+			{
+				tiposServicios.add(new Long(3));
+			}
+			if(bar.isSelected())
+			{
+				tiposServicios.add(new Long(4));
+			}
+			if(restaurante.isSelected())
+			{
+				tiposServicios.add(new Long(5));
+			}
+			if(supermercado.isSelected())
+			{tiposServicios.add(new Long(6));
+
+			}
+			if(tienda.isSelected())
+			{
+				tiposServicios.add(new Long(7));
+			}
+			if(spa.isSelected())
+			{
+				tiposServicios.add(new Long(8));
+			}
+			if(lavanderia.isSelected())
+			{
+				tiposServicios.add(new Long(9));
+			}
+			if(prestamo.isSelected())
+			{
+				tiposServicios.add(new Long(10));
+			}
+			if(salonReuniones.isSelected())
+			{
+				tiposServicios.add(new Long(11));
+			}
+			if(salonConferencias.isSelected())
+			{
+				tiposServicios.add(new Long(12));
+			}
 
 
 			int result = JOptionPane.showConfirmDialog(null, ventana, "Registrar la convencion",
@@ -521,11 +597,8 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 				if (result != 0)
 				{
-					//					convencion = cadenaHotelera.adicionarHabitacionConvencion(); 
-					//					if (convencion == null)
-					//					{
-					//						throw new Exception ("No se puedo reservar las habitacines para la convencion " );
-					//					}
+					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
+
 					String resultado = "En adicionarHabitacionesConvencion\n\n";
 					resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
 					resultado += "\n Operación terminada";
@@ -700,7 +773,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					if (result != 0)
 					{
 
-//						convencion = cadenaHotelera.regis; 
+						//						convencion = cadenaHotelera.regis; 
 						if (convencion == null)
 						{
 							throw new Exception ("No se puedo reservar las habitacines para la convencion " );
