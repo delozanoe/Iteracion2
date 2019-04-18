@@ -1734,7 +1734,7 @@ public class PersistenciaCadenaHotelera
 //		}
 //	}
 
-	public void registrarReservaConvenvion(Hashtable<Long, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
+	public void registrarReservaConvenvion(Hashtable<Long, Long> tiposHabitacion, ArrayList<Long> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
 	{
 		Convencion convencion= this.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);
 		PersistenceManager pm= pmf.getPersistenceManager();
@@ -1769,14 +1769,14 @@ public class PersistenciaCadenaHotelera
 
 		for(int i =0; i<tiposServicio.size(); i++)
 		{
-			TipoServicio servicio= tiposServicio.get(i);
+			Long servicio= tiposServicio.get(i);
 
 			Query q3 = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + this.getSqlServicio () + "WHERE idTipoServicio = ? AND capacidad>?");
-			q3.setParameters(servicio.getId(), numeroParticipantes);
+			q3.setParameters(servicio, numeroParticipantes);
 			long cantServiciosCumplen= (long) q3.executeUnique();
 
 			Query q4 = pm.newQuery(SQL, "SELECT DISTINCT id FROM " + this.getSqlServicio () + "WHERE idTipoServicio = ? AND capacidad>?");
-			q4.setParameters(servicio.getId(), numeroParticipantes);
+			q4.setParameters(servicio, numeroParticipantes);
 			idServicios.add((Long) q4.executeUnique());
 
 			Query q5 = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + this.getSqlReservaServicio () + "WHERE dia >=? AND dia<= ? AND idServicio =?");
@@ -2029,9 +2029,9 @@ public class PersistenciaCadenaHotelera
 		
 		Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlReservaHabitacion() + "WHERE fechaEntreda >=? AND fechaSalida<=? AND idCliente = ?");
 		q1.setParameters(fechaInicio,fechaFin,idCliente);
-		List<Long> reservasCliente= (List<Long>) q1.executeUnique();
+		List<Long> idReservasCliente= (List<Long>) q1.executeUnique();
 		
-		for (int i =0; i<reservasCliente.size();i++)
+		for (int i =0; i<idReservasCliente.size();i++)
 		{
 			
 		}
