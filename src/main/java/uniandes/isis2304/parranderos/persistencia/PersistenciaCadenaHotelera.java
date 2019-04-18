@@ -1884,18 +1884,18 @@ public class PersistenciaCadenaHotelera
 		
 		for(int i =0; i <habitaciones.size();i++)
 		{
-			if(habitaciones.get(i).getEstado() == 'D')				
+			if(habitaciones.get(i).getEstado() == "D")				
 			{
-				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
-				habitaciones.get(i).setEstado('M');
-				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
+				this.adicionarMantenimiento("P", fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
+				habitaciones.get(i).setEstado("M");
+				this.cambiarEstadoHabitacion("M", habitaciones.get(i).getId());
 			}
 			
-			else if(habitaciones.get(i).getEstado() == 'O')
+			else if(habitaciones.get(i).getEstado() == "O")
 			{
-				this.adicionarMantenimiento('P', fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
-				habitaciones.get(i).setEstado('M');
-				this.cambiarEstadoHabitacion('M', habitaciones.get(i).getId());
+				this.adicionarMantenimiento("P", fechaInicio, fechaFin, "Habitacion en mantenimiento", habitaciones.get(i).getId(), 0);
+				habitaciones.get(i).setEstado("M");
+				this.cambiarEstadoHabitacion("M", habitaciones.get(i).getId());
 				
 				Query q1 = pm.newQuery(SQL, "SELECT DISTINCT id FROM " + this.getSqlCliente() + "WHERE idHabitacion =?");
 				q1.setParameters(habitaciones.get(i).getId());
@@ -1909,7 +1909,7 @@ public class PersistenciaCadenaHotelera
 				{
 					Habitacion nueva = habitaciones.get(j);
 					String estadoNueva = habitaciones.get(j).getEstado();
-					if(estadoNueva=='D' && nueva.getTipoHabitacion() == (habitaciones.get(i).getTipoHabitacion()))
+					if(estadoNueva=="D" && nueva.getTipoHabitacion() == (habitaciones.get(i).getTipoHabitacion()))
 					{
 						 idHabitacionNueva = nueva.getId();
 					}
@@ -1949,7 +1949,7 @@ public class PersistenciaCadenaHotelera
 	{
 		for (int i =0; i<habitaciones.size();i++)
 		{
-			this.cambiarEstadoHabitacion('D', habitaciones.get(i).getId());
+			this.cambiarEstadoHabitacion("D", habitaciones.get(i).getId());
 		}
 		
 		for (int i =0; i <servicios.size(); i++)
@@ -2022,10 +2022,10 @@ public class PersistenciaCadenaHotelera
 	}
 	
 	
-	public Long mostrarConsumoCliente(Timestamp fechaInicio, Timestamp fechaFin, Long idCliente)
+	public BigDecimal mostrarConsumoCliente(Timestamp fechaInicio, Timestamp fechaFin, Long idCliente)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-		Long consumoTotal = new Long (0);
+		BigDecimal consumoTotal = new BigDecimal (0);
 		
 		Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlReservaHabitacion() + "WHERE fechaEntreda >=? AND fechaSalida<=? AND idCliente = ?");
 		q1.setParameters(fechaInicio,fechaFin,idCliente);
@@ -2033,8 +2033,12 @@ public class PersistenciaCadenaHotelera
 		
 		for (int i =0; i<idReservasCliente.size();i++)
 		{
+			ReservaHabitacion rh = sqlReservaHabitacion.darReservaHabitacionPorId(pm, idReservasCliente.get(i));
+			consumoTotal.add(rh.getCliente().getHabitacion().getCuenta()) ;
 			
 		}
+		
+		return consumoTotal;
 		
 	}
 
