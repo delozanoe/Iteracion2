@@ -20,7 +20,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	{
 		this.pha = pha;
 	}
-	public long adicionarReserva(PersistenceManager pm, long id, String horaInicio, double duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion)  
+	public long adicionarReserva(PersistenceManager pm, long id, Timestamp horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion)  
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlReservaServicio() + "(id, horaInicio, duracion, dia, lugar, idCLiente, idServicio, idConvencion) values (?, ?, ?,?,?,?,?)");
         q.setParameters(id, horaInicio, duracion, lugar, idCliente, idServicio, idConvencion);

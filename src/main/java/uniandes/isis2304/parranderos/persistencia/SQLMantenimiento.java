@@ -1,6 +1,7 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -21,7 +22,7 @@ class SQLMantenimiento
 		this.pha=pha; 
 	}
 	
-	public long adicionarMantenimiento(PersistenceManager pm, long id, String estado, Date fechaInicio, Date fechaFin, String descripcion, long idHabitacion, long idServicio) 
+	public long adicionarMantenimiento(PersistenceManager pm, long id, String estado, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, long idHabitacion, long idServicio) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlMantenimiento() + "(id,estado,fechaInicio, fechaFin, descripcion, idHabitacion, idServicio) values (?, ?, ?, ? , ?, ?, ?)");
         q.setParameters(id,estado,fechaInicio, fechaFin, descripcion, idHabitacion, idServicio);

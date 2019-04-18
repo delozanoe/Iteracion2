@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Hotel
 	 * @ordered
 	 */
 
-	private int ofertaHabitacional;
+	private long ofertaHabitacional;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,22 +87,35 @@ public class Hotel
 	private List<TipoEmpleado> tiposEmpleados;
 
 	private List<Convencion> convenciones; 
+	
+	public Hotel()
+	{
+		this.id= 0;
+		this.pais = " ";
+		this.ciudad = " ";
+		this.ofertaHabitacional = 0;
+		this.habitaciones = new LinkedList<>();
+		this.reservas = new LinkedList<>();
+		this.empleados = new LinkedList<>();
+		this.servicios = new LinkedList<>();
+		this.planesConsumo = new LinkedList<>();
+		this.tiposEmpleados = new LinkedList<>();
+		this.convenciones = new LinkedList<>();
+	}
 
-	public Hotel(long id, String pais, String ciudad, int ofertaHabitacional, List<Habitacion> habitaciones,
-			List<ReservaHabitacion> reservas, List<Empleado> empleado, List<Servicio> servicios,
-			List<PlanConsumo> planesConsumo, List<TipoEmpleado> tiposEmpleados, List<Convencion> convenciones) {
+	public Hotel(long id, String pais, String ciudad, long ofertaHabitacional) {
 		super();
 		this.id= id;
 		this.pais = pais;
 		this.ciudad = ciudad;
 		this.ofertaHabitacional = ofertaHabitacional;
-		this.habitaciones = habitaciones;
-		this.reservas = reservas;
-		this.empleados = empleado;
-		this.servicios = servicios;
-		this.planesConsumo = planesConsumo;
-		this.tiposEmpleados = tiposEmpleados;
-		this.convenciones = convenciones;
+		this.habitaciones = new LinkedList<>();
+		this.reservas = new LinkedList<>();
+		this.empleados = new LinkedList<>();
+		this.servicios = new LinkedList<>();
+		this.planesConsumo = new LinkedList<>();
+		this.tiposEmpleados = new LinkedList<>();
+		this.convenciones = new LinkedList<>();
 	}
 
 
@@ -170,11 +184,11 @@ public class Hotel
 		this.ciudad = ciudad;
 	}
 
-	public int getOfertaHabitacional() {
+	public long getOfertaHabitacional() {
 		return ofertaHabitacional;
 	}
 
-	public void setOfertaHabitacional(int ofertaHabitacional) {
+	public void setOfertaHabitacional(long ofertaHabitacional) {
 		this.ofertaHabitacional = ofertaHabitacional;
 	}
 

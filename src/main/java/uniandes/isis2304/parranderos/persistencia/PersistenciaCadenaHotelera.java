@@ -18,6 +18,7 @@ import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
+import org.datanucleus.FetchPlanForClass;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -629,7 +630,7 @@ public class PersistenciaCadenaHotelera
 
             log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new Habitacion(capacidad, costoPorNoche, null, cuenta, sqlHotel.darHotelPorId(pm, idHotel), null, sqlConsumoPorHabitacion.darConsumoHabitacionPorId(pm, idConsumoHabitacion), sqlPlanConsumo.darPlanConsumoPorId(pm, idPlanConsumo), id, sqlTipoHabitacion.darTipoHabitacionPorId(pm, idTipoHabitacion),estado);
+            return new Habitacion(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idPlanConsumo, idConsumoHabitacion, idTipoHabitacion, estado);
         }
         catch (Exception e)
         {
@@ -725,7 +726,7 @@ public class PersistenciaCadenaHotelera
 
             log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new Hotel(id, pais, ciudad, ofertaHabitacional, null, null, null, null, null, null, null);
+            return new Hotel(id, pais, ciudad, ofertaHabitacional);
         }
         catch (Exception e)
         {
@@ -888,7 +889,7 @@ public class PersistenciaCadenaHotelera
 
 			log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new ReservaHabitacion(fechaEntrada, fechaSalida, numeroPersonas, sqlHotel.darHotelPorId(pm, idHotel), sqlCliente.darClientePorId(pm, idCliente),id, sqlConvencion.darConvencionPorId(pm, idConvencion), sqlTipoHabitacion.darTipoHabitacionPorId(pm, idTipoHabitacion));
+			return new ReservaHabitacion(id, fechaEntrada, fechaSalida, numeroPersonas, idHotel, idCliente, idConvencion, idTipoHabitacion);
 		}
 		catch (Exception e)
 		{
@@ -1030,7 +1031,7 @@ public class PersistenciaCadenaHotelera
 
 	}
 
-	public ReservaServicio adicionarReservaServicio(String horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion) 
+	public ReservaServicio adicionarReservaServicio(Timestamp horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1044,7 +1045,7 @@ public class PersistenciaCadenaHotelera
 
             log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new ReservaServicio(horaInicio, duracion, dia, id, lugar, sqlCliente.darClientePorId(pm, idCliente), sqlServicio.darServicioPorId(pm, idServicio), sqlConvencion.darConvencionPorId(pm, idConvencion));
+            return new ReservaServicio(id, horaInicio, dia, duracion, lugar, idCliente, idServicio, idConvencion);
         }
         catch (Exception e)
         {
@@ -1100,7 +1101,7 @@ public class PersistenciaCadenaHotelera
 		}
 	} 
 
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, String costoIncluido, long idHotel, long idTipoServicio, long estado) 
+	public Servicio adicionarServicio(String nombre, String descripcion, Timestamp horaApertura, Timestamp horaCierre, long capacidad, BigDecimal costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1114,7 +1115,7 @@ public class PersistenciaCadenaHotelera
 
             log.trace ("Inserción de consumo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new Servicio(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, sqlTipoServicio.darTipoServicioPorId(pm, idTipoServicio), costoIncluido, null, sqlHotel.darHotelPorId(pm, idHotel), null, null,null,null,estado);
+            return new Servicio(id, nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
         }
         catch (Exception e)
         {
@@ -1461,7 +1462,7 @@ public class PersistenciaCadenaHotelera
 	}
 
 
-	public Mantenimiento adicionarMantenimiento(String estado, Date fechaInicio, Date fechaFin, String descripcion, long idHabitacion, long idServicio)
+	public Mantenimiento adicionarMantenimiento(String estado, Timestamp fechaInicio, Timestamp fechaFin, String descripcion, long idHabitacion, long idServicio)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1474,7 +1475,7 @@ public class PersistenciaCadenaHotelera
             
             log.trace ("Inserción de mantenimiento: " + descripcion + ": " + tuplasInsertadas+" tuplas insertadas");
             
-            return new Mantenimiento (id, estado, fechaInicio,fechaFin,descripcion,sqlHabitacion.darHabitacionPorId(pm, idHabitacion),sqlServicio.darServicioPorId(pm, idServicio));
+            return new Mantenimiento (estado, id, fechaInicio, fechaFin, descripcion, idHabitacion, idServicio);
         }
         catch (Exception e)
         {
@@ -1816,7 +1817,7 @@ public class PersistenciaCadenaHotelera
 				for(int j = 0; j<numeroParticipantes;j++)
 				{
 					Servicio servicio = sqlServicio.darServicioPorId(pm, idServicios.get(i));
-					this.adicionarReservaServicio("12:00", 180, fechaInicio, "" + servicio, 0, idServicios.get(i), convencion.getId());
+					this.adicionarReservaServicio(new Timestamp(120), new Long(180), fechaInicio, "" + servicio, new Long(0), idServicios.get(i), convencion.getId());
 				}
 			}
 		}
@@ -1878,7 +1879,7 @@ public class PersistenciaCadenaHotelera
 		
 	}
 	
-	public void ponerEnMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios, Date fechaInicio, Date fechaFin)
+	public void ponerEnMantenimiento(List<Habitacion> habitaciones, List<Servicio> servicios, Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		

@@ -590,14 +590,14 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			}
 
 
-			int result = JOptionPane.showConfirmDialog(null, ventana, "Registrar la convencion",
+			int result = JOptionPane.showConfirmDialog(null, tiposHabitacion, "Registrar la convencion",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			if (result == JOptionPane.OK_OPTION)
 			{
 
 				if (result != 0)
 				{
-					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
+//					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
 
 					String resultado = "En adicionarHabitacionesConvencion\n\n";
 					resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";

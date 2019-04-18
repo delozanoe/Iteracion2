@@ -82,7 +82,7 @@ public class ReservaServicio
 		this.horaInicio = horaInicio;
 		this.duracion = duracion;
 		this.dia = dia;
-		this.id = id;
+		this.duracion = duracion;
 		this.lugar = lugar;
 		this.idCliente= idCliente;
 		this.idServicio= idServicio;

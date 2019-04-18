@@ -244,7 +244,7 @@ public class CadenaHotelera
 	//Reserva Servicio
 	//----------------------------------------------------------
 	
-	public ReservaServicio adicionarReservaServicio(String horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion)
+	public ReservaServicio adicionarReservaServicio(Timestamp horaInicio, long duracion, Timestamp dia, String lugar, long idCliente, long idServicio, long idConvencion)
 	{
 		ReservaServicio nuevaRservaServ = pha.adicionarReservaServicio(horaInicio, duracion, dia, lugar, idCliente, idServicio, idConvencion);
 		return nuevaRservaServ;
@@ -264,7 +264,7 @@ public class CadenaHotelera
 	//Servicio
 	//----------------------------------------------------------
 	
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, String costoIncluido, long idHotel, long idTipoServicio, long estado)
+	public Servicio adicionarServicio(String nombre, String descripcion, Timestamp horaApertura, Timestamp horaCierre, long capacidad, BigDecimal costo, char costoIncluido, long idHotel, long idTipoServicio, long estado)
 	{
 		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
 		return  nuevoSerivcio; 
