@@ -1734,25 +1734,25 @@ public class PersistenciaCadenaHotelera
 //		}
 //	}
 
-	public void registrarReservaConvenvion(Hashtable<TipoHabitacion, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
+	public void registrarReservaConvenvion(Hashtable<Long, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
 	{
 		Convencion convencion= this.adicionarConvencion(tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo);
 		PersistenceManager pm= pmf.getPersistenceManager();
 		boolean esPosible =false;
 		ArrayList<Long> idServicios = new ArrayList<Long>();
 
-		Iterator<TipoHabitacion> iter = (Iterator<TipoHabitacion>) tiposHabitacion.keys();
+		Iterator<Long> iter = (Iterator<Long>) tiposHabitacion.keys();
 		while(iter.hasNext())
 		{
-			TipoHabitacion actual = iter.next();
+			Long actual = iter.next();
 			Long cantidadDeseada = tiposHabitacion.get(actual);
 
 			Query q = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + this.getSqlHabitacion () + "WHERE idTipoHabitacion = ?");
-			q.setParameters(actual.getId());
+			q.setParameters(actual);
 			long cant= (long) q.executeUnique();
 
 			Query q2 = pm.newQuery(SQL, "SELECT COUNT(*) FROM " + this.getSqlReservaHabitacion () + "WHERE (fechaEntrada <=? OR fechaSalida >=?)  AND idTipoHabitacion = ?");
-			q2.setParameters(fechaFin,fechaInicio, actual.getId());
+			q2.setParameters(fechaFin,fechaInicio, actual);
 			long cantOcupadas= (long) q2.executeUnique();
 
 			if(cant>=cantidadDeseada &&(cant - cantOcupadas >=cantidadDeseada))
@@ -1800,12 +1800,12 @@ public class PersistenciaCadenaHotelera
 		{
 			while(iter.hasNext())
 			{
-				TipoHabitacion actual = iter.next();
+				Long actual = iter.next();
 				Long cantidad = tiposHabitacion.get(actual);
 
 				for(int i =0; i < cantidad;i++)
 				{
-					this.adicionarReservaHabitacion(fechaInicio, fechaFin, 1, idHotel, 0, convencion.getId(), actual.getId());
+					this.adicionarReservaHabitacion(fechaInicio, fechaFin, 1, idHotel, 0, convencion.getId(), actual);
 				}
 
 			}
@@ -1958,5 +1958,84 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 	
+	public Hashtable<Habitacion, Long> mostrarDineroRecolectado(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Hashtable<Habitacion, Long> hs = new Hashtable<Habitacion,Long>();
+		
+		Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlReservaHabitacion() + "WHERE fechaEntrada >=? AND fechaSalida<=?");
+		q1.setParameters(fechaInicio,fechaFin);
+		List<Long> idReservasDentro= (List<Long>) q1.executeUnique();
+		
+		for(int i =0; i<idReservasDentro.size();i++)
+		{
+			ReservaHabitacion reserva = sqlReservaHabitacion.darReservaHabitacionPorId(pm, idReservasDentro.get(i));
+			Habitacion habitacion = reserva.getCliente().getHabitacion();
+			
+			Long idConsumoHabitacionClienteDeReserva = habitacion.getConsumoHabitacion().getId();
+			
+			Query q2 = pm.newQuery(SQL, "SELECT valorTotal FROM " + this.getSqlConsumoPorHabitacion() + "WHERE id =?");
+			q2.setParameters(idConsumoHabitacionClienteDeReserva);
+			Long valorTotal= (Long) q2.executeUnique();
+			
+			hs.put(habitacion, valorTotal);
+			
+		}
+		
+		return hs;
+	}
+	
+	public List<Servicio> serviciosMasPopulares(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		List<Servicio> servicios= new ArrayList<Servicio>();
+		
+		Query q1 = pm.newQuery(SQL, "SELECT idServicio FROM (SELECT idServicio FROM " + this.getSqlReservaServicio() + "WHERE dia >=? AND dia<=? GROUP BY idServicio ORDER BY COUNT(*) DESC) WHERE rownum<=20 ");
+		q1.setParameters(fechaInicio,fechaFin);
+		List<Long> ids=(List<Long>) q1.executeUnique();
+		
+		for (int i =0; i<ids.size();i++)
+		{
+			servicios.add(sqlServicio.darServicioPorId(pm, ids.get(i)));
+		}
+		
+		return servicios;
+		
+	}
+	
+	public List<Servicio> serviciosEntreRangoDePrecio(Long min,Long max)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		List<Servicio> servicios= new ArrayList<Servicio>();
+		
+		Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlServicio() + "WHERE costo >=? AND costo<=?");
+		q1.setParameters(min,max);
+		List<Long> ids= (List<Long>) q1.executeUnique();
+		
+		for (int i =0; i<ids.size();i++)
+		{
+			servicios.add(sqlServicio.darServicioPorId(pm, ids.get(i)));
+		}
+		
+		return servicios;
+		
+	}
+	
+	
+	public Long mostrarConsumoCliente(Timestamp fechaInicio, Timestamp fechaFin, Long idCliente)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Long consumoTotal = new Long (0);
+		
+		Query q1 = pm.newQuery(SQL, "SELECT id FROM " + this.getSqlReservaHabitacion() + "WHERE fechaEntreda >=? AND fechaSalida<=? AND idCliente = ?");
+		q1.setParameters(fechaInicio,fechaFin,idCliente);
+		List<Long> reservasCliente= (List<Long>) q1.executeUnique();
+		
+		for (int i =0; i<reservasCliente.size();i++)
+		{
+			
+		}
+		
+	}
 
 }
