@@ -3,6 +3,8 @@ package uniandes.isis2304.parranderos.negocio;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class CadenaHotelera
 	 * 			M�todos para manejar los clientes
 	 *****************************************************************/
 	
-	public Cliente nuevoCliente(char pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
+	public Cliente nuevoCliente(String pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
 	{
 		log.info("Agregando nuevo cliente: " + nombre );
 		Cliente nuevoCliente = pha.adicionarCliente(pazYSalvo, idHabitacion, tipoDocumento, numeroDocumento, nombre, correo);
@@ -80,7 +82,7 @@ public class CadenaHotelera
 	
 	public List<ConsumoHabitacionServicio> darCosnumosHabitacionServicio()
 	{
-		return pha.darConsumoHabitacionServicio();
+		return pha.darConsumoHabitacionServicio(); 
 	}
 	
 	
@@ -125,7 +127,7 @@ public class CadenaHotelera
 	//------------------------------------------------
 	//Habitacion
 	//------------------------------------------------
-	public Habitacion adicionarHabitacion(long idHotel, long capacidad, Double costoPorNoche, Double cuenta, String numero, long idPlanConsumo, long idConsumoHabitacion, long idTipoHabitacion, char estado)
+	public Habitacion adicionarHabitacion(long idHotel, long capacidad, BigDecimal costoPorNoche, BigDecimal cuenta, String numero, long idPlanConsumo, long idConsumoHabitacion, long idTipoHabitacion, String estado)
 	{
 		Habitacion nuevaHabitacion = pha.adicionarHabitacion(idHotel, capacidad, costoPorNoche, cuenta, numero, idPlanConsumo, idConsumoHabitacion, idTipoHabitacion, estado);
 		return nuevaHabitacion;
@@ -262,7 +264,7 @@ public class CadenaHotelera
 	//Servicio
 	//----------------------------------------------------------
 	
-	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, char costoIncluido, long idHotel, long idTipoServicio, long estado)
+	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, long capacidad, Double costo, String costoIncluido, long idHotel, long idTipoServicio, long estado)
 	{
 		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
 		return  nuevoSerivcio; 
@@ -386,7 +388,10 @@ public class CadenaHotelera
 		return nuevaConvencion;
 	}
 
-	
+	public void registrarConvencion(Hashtable<TipoHabitacion, Long> tiposHabitacion, ArrayList<TipoServicio> tiposServicio, String tematica, long numeroParticipantes, Timestamp fechaInicio, Timestamp fechaFin, BigDecimal cuenta, String pazYSalvo, String estado, long  idPlanConsumo, long idHotel)
+	{
+		pha.registrarReservaConvenvion(tiposHabitacion, tiposServicio, tematica, numeroParticipantes, fechaInicio, fechaFin, cuenta, pazYSalvo, estado, idPlanConsumo, idHotel);
+	}
 	
 	public void adicionarHabitacionConvencion()
 	{

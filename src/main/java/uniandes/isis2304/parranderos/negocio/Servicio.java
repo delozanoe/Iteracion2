@@ -1,4 +1,7 @@
 package uniandes.isis2304.parranderos.negocio;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -45,7 +48,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private String horaApertura;
+	private Timestamp horaApertura;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,7 +57,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private String horaCierre;
+	private Timestamp horaCierre;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +75,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private double costo;
+	private BigDecimal costo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,7 +102,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private long estado;
+	private long estado, idHotel, idTipoServicio;
 	
 	private List<ReservaServicio> reservas;
 
@@ -135,9 +138,7 @@ public class Servicio
 	private List<PlanConsumo> planesDeConsumo;
 	
 
-	public Servicio(long id, String nombre, String descripcion, String horaApertura, String horaCierre, double capacidad,
-			double costo, TipoServicio tipo, char costoIncluido, List<ReservaServicio> reservas, Hotel hotel,
-			List<Producto> productos, List<Producto> comsumos,List<PlanConsumo> planesDeConsumo,  List<Mantenimiento> mantenimientos, long estado) {
+	public Servicio(long id, String nombre, String descripcion, Timestamp horaApertura, Timestamp horaCierre, long capacidad, BigDecimal costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -146,43 +147,38 @@ public class Servicio
 		this.horaCierre = horaCierre;
 		this.capacidad = capacidad;
 		this.costo = costo;
-		this.tipo = tipo;
 		this.costoIncluido = costoIncluido;
-		this.reservas = reservas;
-		this.hotel = hotel;
-		this.productos = productos;
-		this.comsumos = comsumos;
-		this.mantenimientos = mantenimientos;
-		this.planesDeConsumo = planesDeConsumo;
+		this.idHotel = idHotel;
+		this.idTipoServicio = idTipoServicio;
 		this.estado = estado;
+		
+		this.reservas = new LinkedList<>();
+		this.productos = new LinkedList<>();
+		this.comsumos = new LinkedList<>();
+		this.mantenimientos = new LinkedList<>();
+		this.planesDeConsumo = new LinkedList<>();
 	}
-
-	public long getEstado() {
-		return estado;
-	}
-
-	public void setEstado(long estado) {
-		this.estado = estado;
-	}
-
-	public List<Mantenimiento> getMantenimientos() {
-		return mantenimientos;
-	}
-
-	public void setMantenimientos(List<Mantenimiento> mantenimientos) {
-		this.mantenimientos = mantenimientos;
-	}
-
-	public List<PlanConsumo> getPlanesDeConsumo() {
-		return planesDeConsumo;
-	}
-
-	public void setPlanesDeConsumo(List<PlanConsumo> planesDeConsumo) {
-		this.planesDeConsumo = planesDeConsumo;
-	}
-
-	public char getCostoIncluido() {
-		return costoIncluido;
+	
+	public Servicio()
+	{
+		super();
+		this.id = 0;
+		this.nombre = "";
+		this.descripcion = "";
+		this.horaApertura = new Timestamp(0);
+		this.horaCierre =  new Timestamp(0);
+		this.capacidad = 0;
+		this.costo = new BigDecimal(0);
+		this.costoIncluido = 0;
+		this.idHotel = 0;
+		this.idTipoServicio = 0;
+		this.estado = 0;
+		
+		this.reservas = new LinkedList<>();
+		this.productos = new LinkedList<>();
+		this.comsumos = new LinkedList<>();
+		this.mantenimientos = new LinkedList<>();
+		this.planesDeConsumo = new LinkedList<>();
 	}
 
 	public long getId() {
@@ -209,19 +205,19 @@ public class Servicio
 		this.descripcion = descripcion;
 	}
 
-	public String getHoraApertura() {
+	public Timestamp getHoraApertura() {
 		return horaApertura;
 	}
 
-	public void setHoraApertura(String horaApertura) {
+	public void setHoraApertura(Timestamp horaApertura) {
 		this.horaApertura = horaApertura;
 	}
 
-	public String getHoraCierre() {
+	public Timestamp getHoraCierre() {
 		return horaCierre;
 	}
 
-	public void setHoraCierre(String horaCierre) {
+	public void setHoraCierre(Timestamp horaCierre) {
 		this.horaCierre = horaCierre;
 	}
 
@@ -233,11 +229,11 @@ public class Servicio
 		this.capacidad = capacidad;
 	}
 
-	public double getCosto() {
+	public BigDecimal getCosto() {
 		return costo;
 	}
 
-	public void setCosto(double costo) {
+	public void setCosto(BigDecimal costo) {
 		this.costo = costo;
 	}
 
@@ -249,12 +245,36 @@ public class Servicio
 		this.tipo = tipo;
 	}
 
-	public char isCostoIncluido() {
+	public char getCostoIncluido() {
 		return costoIncluido;
 	}
 
 	public void setCostoIncluido(char costoIncluido) {
 		this.costoIncluido = costoIncluido;
+	}
+
+	public long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(long estado) {
+		this.estado = estado;
+	}
+
+	public long getIdHotel() {
+		return idHotel;
+	}
+
+	public void setIdHotel(long idHotel) {
+		this.idHotel = idHotel;
+	}
+
+	public long getIdTipoServicio() {
+		return idTipoServicio;
+	}
+
+	public void setIdTipoServicio(long idTipoServicio) {
+		this.idTipoServicio = idTipoServicio;
 	}
 
 	public List<ReservaServicio> getReservas() {
@@ -289,13 +309,23 @@ public class Servicio
 		this.comsumos = comsumos;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
+	public List<Mantenimiento> getMantenimientos() {
+		return mantenimientos;
+	}
+
+	public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+		this.mantenimientos = mantenimientos;
+	}
+
+	public List<PlanConsumo> getPlanesDeConsumo() {
+		return planesDeConsumo;
+	}
+
+	public void setPlanesDeConsumo(List<PlanConsumo> planesDeConsumo) {
+		this.planesDeConsumo = planesDeConsumo;
+	}
+	
 	
 	
 
 }
-

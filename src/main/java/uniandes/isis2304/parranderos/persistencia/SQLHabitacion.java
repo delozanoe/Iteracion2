@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -18,7 +19,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	{
 		this.pha = pha;
 	}
-	public long adicionarHabitacion(PersistenceManager pm, long id, long capacidad, Double costoPorNoche, Double cuenta, String numero, long idHotel, long idConsumoHabitacion, long idTipoHabitacion, long idPlanConsumo, char estado) 
+	public long adicionarHabitacion(PersistenceManager pm, long id, long capacidad, BigDecimal costoPorNoche, BigDecimal cuenta, String numero, long idHotel, long idConsumoHabitacion, long idTipoHabitacion, long idPlanConsumo, String estado) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlHabitacion()+ "(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoPorHabitacion, idTipoHabitacion, idPlanConsumo, estado) values (?, ?, ?,?,?,?,?,?,?)");
         q.setParameters(id, capacidad, costoPorNoche, cuenta, numero, idHotel, idConsumoHabitacion, idTipoHabitacion, idPlanConsumo, estado);
@@ -40,7 +41,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		return (List<Habitacion>) q.executeList();
 	}
 	
-	public long cambiarEstado (PersistenceManager pm,char estado, long idHabitacion)
+	public long cambiarEstado (PersistenceManager pm,String estado, long idHabitacion)
 	{
         Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlHabitacion () + " SET estado = ? WHERE id = ?");
         q.setParameters(estado, idHabitacion);
