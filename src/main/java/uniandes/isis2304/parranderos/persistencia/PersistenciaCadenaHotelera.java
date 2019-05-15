@@ -2101,12 +2101,77 @@ public class PersistenciaCadenaHotelera
 		for (int i =0; i<idReservasCliente.size();i++)
 		{
 			ReservaHabitacion rh = sqlReservaHabitacion.darReservaHabitacionPorId(pm, idReservasCliente.get(i));
-			consumoTotal.add(rh.getCliente().getHabitacion().getCuenta()) ;
-			
+			consumoTotal.add(rh.getCliente().getHabitacion().getCuenta()) ;	
 		}
 		
-		return consumoTotal;
+		return consumoTotal;	
+	}
+	
+	/**
+	 * Metodo que revisa el consumo de HotelAndes, devolviendo la lista de clientes que han consumido cierto servicio 
+	 * @param servicio el servicio que se desea consultar
+	 * @param fechaInicio fecha de inicio de la consulta
+	 * @param fechaFin fecha final de la consulta
+	 * @param criterio el criterio de busqueda (puede ser por cliente, fecha, cantidad de consumo del servicio)
+	 * @param criterioOrden el criterio de ordenamiento (ASC o DESC)
+	 * @return la lista de clientes que han consumido el servicio
+	 */
+	public List<Cliente> darClientesHanConsumido (long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
 		
+		try
+		{
+			tx.begin();
+			log.trace("Se quiere obtener los clientes que han utilizado el servicio con id: " + idServicio);
+			List<Cliente> registros = sqlCliente.darClientesHanConsumido(pm, idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+			tx.commit();
+			return registros;
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			log.error("Exception: " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public List<Cliente> darClientesNoHanConsumido(long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		try
+		{
+			tx.begin();
+			log.trace("Se quiere obtener los clientes que no han utilizado el servicio con id:" + idServicio);
+			List<Cliente> registros = sqlCliente.darClientesNoHanConsumido(pm, idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+			tx.commit();
+			return registros;
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			log.error("Exception: " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
 
 }

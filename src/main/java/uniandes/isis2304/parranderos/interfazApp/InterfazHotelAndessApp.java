@@ -1128,6 +1128,115 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		} 
 	}
 
+	//METODOS PARA QUE LA INTERFAZ FUNCONE
+	public void  regReservaAlojamiento() 
+	{
+		
+	}
+	
+	public void regReservaServicio()
+	{
+		
+	}
+	
+	public void regUsuario() 
+	{
+		
+	}
+	
+	public void regTipoHabitacion()
+	{
+		
+	}
+	
+	public void regHabitacion()
+	{
+		
+	}
+	
+	public void regServHotel()
+	{
+		
+	}
+	
+	public void regPlanConsumo()
+	{
+		
+	}
+	
+	public void checkIn()
+	{
+		
+	}
+	
+	public void checkOut()
+	{
+		
+	}
+	
+	public void consumoHotelAndes()
+	{
+		
+	}
+	
+	public void reservarConsumoServicio()
+	{
+		
+	}
+	
+	public void recolectadoPorHabitacion()
+	{
+		
+	}
+	
+	public void servPopulares()
+	{
+		
+	}
+	
+	public void indiceOcupacion()
+	{
+		
+	}
+	
+	public void serCaracteristica()
+	{
+		
+	}
+	
+	public void consumoUsuario()
+	{
+		
+	}
+	
+	public void servPocaDemanda()
+	{
+		
+	}
+	
+	public void buenosClientesP1()
+	{
+		
+	}
+	
+	public void buenosClientesP2()
+	{
+		
+	}
+	
+	public void buenosClientesP3()
+	{
+		
+	}
+	
+	public void login()
+	{
+		
+	}
+	
+	
+	
+	
 	/* ****************************************************************
 	 * 			Programa principal
 	 *****************************************************************/

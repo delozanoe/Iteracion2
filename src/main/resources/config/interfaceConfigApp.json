@@ -11,69 +11,164 @@
 			"options":
 			[
 				{
-					"label": "Registrar Cliente",
-					"event": "registrarCliente"
+					"label": "Registrar reserva alojamiebnto RF7",
+					"event": "regReservaAlojamiento"
+				},
+				{
+					"label": "Registrar reserva servicio RF8",
+					"event": "regReservaServicio"
 				}
 			]
 		},
 		{
-			"menuTitle": "Empleados",
+			"menuTitle": "Administrador de datos",
 			"options":
 			[
 				{
-					"label": "Registrar Empleados",
-					"event": "registrarEmpleado"
+					"label": "RF2 Registrar usuario",
+					"event": "regUsuario"
+				},
+				{
+					"label": "RF3 Registrar tipo habitacion",
+					"event": "regTipoHabitacion"
+				},
+				{
+					"label": "RF4 Habitacion",
+					"event": "regHabitacion"
+				},
+				{
+					"label": "RF5 Registrar un servicio del hotel",
+					"event": "regServHotel"
+				},
+				{
+					"label": "RF6 Registrar un plan de consumo",
+					"event": "regPlanConsumo"
 				}
 			]
 		}, 
 		{
-			"menuTitle": "Convencion",
+			"menuTitle": "Recepcionista",
 			"options":
 			[
 				{
-					"label": "Registrar Convencion",
+					"label": "RF9 Check in",
+					"event": "checkIn"
+				},
+				{
+					"label": "RF11 Check out",
+					"event": "checkOut"
+				},
+				{
+					"label": "RFC9 Colsultar consumo Hotel Andes",
+					"event": "consumoHotelAndes"
+				}
+			]
+		},
+		{
+			"menuTitle": "Empleado",
+			"options":
+			[
+				{
+					"label": "RF10 Consumo servicio",
+					"event": "reservarConsumoServicio"
+				}
+			]
+		},
+		{
+			"menuTitle": "Organizador eventos",
+			"options":
+			[
+				{
+					"label": "RF12 Registrar Convencion",
 					"event": "reservarAlojamientoServicio"
 				},
 				{
-					"label": "Cancelar reservas Convencion",
+					"label": "RF13 Cancelar reservas Convencion",
 					"event": "cancelarReservasConvencion"
 				},
 				{
-					"label": "Finalizar Convencion",
+					"label": "RF14 Finalizar Convencion",
 					"event": "finalizarConvencion"
 				}
 			]
 		},
 		{
-			"menuTitle": "Mantenimiento",
+			"menuTitle": "Gerente",
 			"options":
 			[
 				{
-					"label": "Registrar un mantenimiento habitacion",
+					"label": "RF15 Registrar un mantenimiento habitacion",
 					"event": "registrarMantenimientoHabitacion"
 				},
 				{
-					"label": "Finalizar mantenimiento",
+					"label": "RF16 Finalizar mantenimiento",
 					"event": "finalizarMantenimiento"
 				}
 			]
 		},
 		{
-			"menuTitle": "Analisis del hotel",
+			"menuTitle": "Login",
+			"options":
+			[
+				{
+					"label": "Ingresar Login",
+					"event": "login"
+				}
+			]
+		},
+		{
+			"menuTitle": "Analisis del hotel (Gerente)",
 			"options": 
 			[
 				{
-					"label": "Analizar la operacion del hotel",
+					"label": "RFC1 Dinero recolectado por hab",
+					"event": "recolectadoPorHabitacion"
+				},
+				{
+					"label": "RFC2 Servicios mas populares",
+					"event": "servPopulares"
+				},
+				{
+					"label": "RFC3 Indice de ocupacion",
+					"event": "indiceOcupacion"
+				},
+				{
+					"label": "RFC4 Servicios por caracteristicas",
+					"event": "serCaracteristica"
+				},
+				{
+					"label": "RFC5 Consumo por usuario",
+					"event": "consumoUsuario"
+				},
+				{
+					"label": "RFC6 Analizar Hotel andes",
 					"event": "analizarHotelAndes"
 				},
 				{
-					"label": "Encontrar buenos clientes",
+					"label": "RFC7 Encontrar buenos clientes ",
 					"event": "buenosClientes"
 				},
 				{
-					"label": "Servicios con poca demanda",
+					"label": "RFC8 Servicios poca demanda",
+					"event": "servPocaDemanda"
+				},
+				{
+					"label": "RFC11 Consultar funcionamiento",
 					"event": "pocaDemandaServicios"
+				},
+				{
+					"label": "RFC12-1 Consultar buenos clientes por servicio costoso",
+					"event": "buenosClientesP1"
+				},
+				{
+					"label": "RFC12-2 Consultar buenos clientes por SPA",
+					"event": "buenosClientesP2"
+				},
+				{
+					"label": "RFC12-3 Consultar buenos clientes por Salon de reunion",
+					"event": "buenosClientesP3"
 				}
+
 			]
 		}
 		
