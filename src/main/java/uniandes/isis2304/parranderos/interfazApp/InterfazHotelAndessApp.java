@@ -28,11 +28,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.sql.Date;
+
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -427,6 +429,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 		panelDatos.actualizarInterfaz(resultado);		
 	}
+	
 
 	public void reservarAlojamientoServicio()
 	{
@@ -532,71 +535,75 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			ventana.add(habitacion, BorderLayout.SOUTH);
 
 			Hashtable<Long, Long> tiposHabitacion = new Hashtable<>();
-			tiposHabitacion.put(new Long(1),  new Long(Integer.parseInt(SUITEPRESIDENCIAL.getText())));
-			tiposHabitacion.put(new Long(2),  new Long(Integer.parseInt(SUITE.getText())));
-			tiposHabitacion.put(new Long(3),  new Long(Integer.parseInt(FAMILIAR.getText())));
-			tiposHabitacion.put(new Long(4),  new Long(Integer.parseInt(DOBLE.getText())));
-			tiposHabitacion.put(new Long(5),  new Long(Integer.parseInt(SENCILLA.getText())));
+
 
 			ArrayList<Long> tiposServicios =  new ArrayList<>();
-			if(piscina.isSelected())
-			{
-				tiposServicios.add(new Long(1));
-			}
-			if(gimnasio.isSelected())
-			{
-				tiposServicios.add(new Long(2));
-			}
-
-			if(internet.isSelected())
-			{
-				tiposServicios.add(new Long(3));
-			}
-			if(bar.isSelected())
-			{
-				tiposServicios.add(new Long(4));
-			}
-			if(restaurante.isSelected())
-			{
-				tiposServicios.add(new Long(5));
-			}
-			if(supermercado.isSelected())
-			{tiposServicios.add(new Long(6));
-
-			}
-			if(tienda.isSelected())
-			{
-				tiposServicios.add(new Long(7));
-			}
-			if(spa.isSelected())
-			{
-				tiposServicios.add(new Long(8));
-			}
-			if(lavanderia.isSelected())
-			{
-				tiposServicios.add(new Long(9));
-			}
-			if(prestamo.isSelected())
-			{
-				tiposServicios.add(new Long(10));
-			}
-			if(salonReuniones.isSelected())
-			{
-				tiposServicios.add(new Long(11));
-			}
-			if(salonConferencias.isSelected())
-			{
-				tiposServicios.add(new Long(12));
-			}
 
 
-			int result = JOptionPane.showConfirmDialog(null, tiposHabitacion, "Registrar la convencion",
+			int result = JOptionPane.showConfirmDialog(null, ventana, "Registrar la convencion",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			if (result == JOptionPane.OK_OPTION)
 			{
+				
 
 				if (result != 0)
 				{
+					tiposHabitacion.put(new Long(1),  new Long(Integer.parseInt(SUITEPRESIDENCIAL.getText())));
+					tiposHabitacion.put(new Long(2),  new Long(Integer.parseInt(SUITE.getText())));
+					tiposHabitacion.put(new Long(3),  new Long(Integer.parseInt(FAMILIAR.getText())));
+					tiposHabitacion.put(new Long(4),  new Long(Integer.parseInt(DOBLE.getText())));
+					tiposHabitacion.put(new Long(5),  new Long(Integer.parseInt(SENCILLA.getText())));
+					
+					if(piscina.isSelected())
+					{
+						tiposServicios.add(new Long(1));
+					}
+					if(gimnasio.isSelected())
+					{
+						tiposServicios.add(new Long(2));
+					}
+
+					if(internet.isSelected())
+					{
+						tiposServicios.add(new Long(3));
+					}
+					if(bar.isSelected())
+					{
+						tiposServicios.add(new Long(4));
+					}
+					if(restaurante.isSelected())
+					{
+						tiposServicios.add(new Long(5));
+					}
+					if(supermercado.isSelected())
+					{tiposServicios.add(new Long(6));
+
+					}
+					if(tienda.isSelected())
+					{
+						tiposServicios.add(new Long(7));
+					}
+					if(spa.isSelected())
+					{
+						tiposServicios.add(new Long(8));
+					}
+					if(lavanderia.isSelected())
+					{
+						tiposServicios.add(new Long(9));
+					}
+					if(prestamo.isSelected())
+					{
+						tiposServicios.add(new Long(10));
+					}
+					if(salonReuniones.isSelected())
+					{
+						tiposServicios.add(new Long(11));
+					}
+					if(salonConferencias.isSelected())
+					{
+						tiposServicios.add(new Long(12));
+					}
+
 //					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
 
 					String resultado = "En adicionarHabitacionesConvencion\n\n";
@@ -997,6 +1004,98 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		int result = JOptionPane.showConfirmDialog(null, panel, "Selecione el servicio o habitacion en mantenimiento",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
+	}
+
+	public String consumo1()
+	{
+		String resp = "Los clientes que consumieron ese producto son:\n";
+
+		try 
+		{
+			String producto2 = JOptionPane.showInputDialog (this, "Ingrese el identificador del servicio:", "Consumo en HotelAndes", JOptionPane.QUESTION_MESSAGE);
+			long producto = Long.parseLong(producto2);
+
+			String fechainicio = JOptionPane.showInputDialog (this, "Fecha de inicio de la consulta. Escribir dia/mes/año sin espacios (ej: 14/09/2018)", "Consumo en HotelAndes", JOptionPane.QUESTION_MESSAGE);
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = dateFormat.parse(fechainicio);
+			long time = date.getTime();
+			Timestamp fechaInicio = new Timestamp(time);
+
+			String fechafin = JOptionPane.showInputDialog (this, "Fecha de fin de la consulta. Escribir dia/mes/año sin espacios (ej: 14/09/2018)", "Consumo en HotelAndes", JOptionPane.QUESTION_MESSAGE);
+			Date date2 = dateFormat.parse(fechafin);
+			long time2 = date2.getTime();
+			Timestamp fechaFin = new Timestamp(time2);
+			
+			String criterio = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento (ejemplo: identificación del cliente, fecha, numero de veces que utilizo el servicio):", "Consumo en SuperAndes", JOptionPane.QUESTION_MESSAGE);
+			String criterio2 = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento, ascendente (ASC) y descendente (DESC):", "Consumo en HotelAndes", JOptionPane.QUESTION_MESSAGE);
+
+			
+			//List<Cliente> lista = parranderos.consumo1(producto, fechainicio, fechafin, criterio, criterio2);
+
+//			if (lista != null){
+//			for (Cliente cliente: lista) {
+//				resp+=cliente.toString();
+//				 resp+="\n";
+//				
+//			}
+//			}
+//			panelDatos.actualizarInterfaz(resp);
+			return resp;
+		}
+
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		return resp;
+	}
+	
+	public String noConsumo()
+	{
+		String resp = "Los clientes que no consumieron ese producto son:\n";
+
+		try 
+		{
+			String producto2 = JOptionPane.showInputDialog (this, "Ingrese el identificador del servicio:", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
+			long producto = Long.parseLong(producto2);
+
+			String fechainicio = JOptionPane.showInputDialog (this, "Fecha de inicio de la consulta. Escribir dia/mes/año sin espacios (ej: 14/09/2018)", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = dateFormat.parse(fechainicio);
+			long time = date.getTime();
+			Timestamp fechaInicio = new Timestamp(time);
+
+			String fechafin = JOptionPane.showInputDialog (this, "Fecha de fin de la consulta. Escribir dia/mes/año sin espacios (ej: 14/09/2018)", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
+			Date date2 = dateFormat.parse(fechafin);
+			long time2 = date2.getTime();
+			Timestamp fechaFin = new Timestamp(time2);
+			
+			String criterio = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento (ejemplo: identificación del cliente, fecha):", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
+			String criterio2 = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento, ascendente (ASC) y descendente (DESC):", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
+
+			
+//			List<Cliente> lista = parranderos.consumo1(producto, fechainicio, fechafin, criterio, criterio2);
+//
+//			if (lista != null){
+//			for (Cliente cliente: lista) {
+//				resp+=cliente.toString();
+//				 resp+="\n";
+//				
+//			}
+//			}
+			panelDatos.actualizarInterfaz(resp);
+			return resp;
+		}
+
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		return resp;
 	}
 
 	public void finalizarMantenimiento() 

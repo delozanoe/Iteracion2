@@ -170,6 +170,24 @@
 				}
 
 			]
+		},
+				{
+			"menuTitle": " Requerimientos de consulta",
+			"options": 
+			[
+				{
+					"label": "Consumo en Hotel Andes V1",
+					"event": "consumo1"
+				},
+				{
+					"label": "Sin consumo en Hotel Andes V2 ",
+					"event": "noConsumo"
+				},
+				{
+					"label": "Servicios con poca demanda",
+					"event": "pocaDemandaServicios"
+				}
+			]
 		}
 		
 	]
