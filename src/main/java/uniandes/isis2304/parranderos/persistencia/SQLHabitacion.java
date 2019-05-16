@@ -63,4 +63,60 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
         q.setParameters(idTipoHabitacion);
         return (int) q.executeUnique();
 	}
+	
+	public List <Object[]> consultarFuncionamientoHabitacionMasSolicitada (PersistenceManager pm)
+	{
+		String sql = "SELECT DISTINCT nombre, solicitudes, semana"
+				+ "FROM (SELECT MAX (cantidad) as solicitudes, to_char(fecha, 'IW') as semana"
+				+ 		"FROM (SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
+				+ 				"FROM RESERVAHABITACION rh, TIPOHABITACION th"
+				+ 				"WHERE rh.estado = 1"
+				+ 					"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
+				+ 					"AND rh.idTipoHabitacion = th.id"
+				+ 				"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
+				+ 				"ORDER BY cantidad DESC)"
+				+ 		"GROUP BY to_char(fecha, 'IW')"
+				+ 		"ORDER BY semana ASC) t1,"
+				+ 		"(SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
+				+ 			"FROM RESERVAHABITACION rh, TIPOHABITACION th"
+				+ 			"WHERE rh.estado = 1"
+				+ 				"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
+				+ 				"AND rh.idTipoHabitacion = th.id"
+				+ 			"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
+				+ 			"ORDER BY cantidad DESC) t2"
+				+ "WHERE t1.solicitudes = t2.cantidad"
+				+ "ORDER BY semana ASC;";
+		
+		
+		Query q = pm.newQuery(SQL, sql);
+		return q.executeList();
+	}
+	
+	public List <Object[]> consultarFuncionamientoHabitacionMenosSolicitada (PersistenceManager pm)
+	{
+		String sql = "SELECT DISTINCT nombre, solicitudes, semana"
+				+ "FROM (SELECT MIN (cantidad) as solicitudes, to_char(fecha, 'IW') as semana"
+				+ 		"FROM (SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
+				+ 				"FROM RESERVAHABITACION rh, TIPOHABITACION th"
+				+ 				"WHERE rh.estado = 1"
+				+ 					"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
+				+ 					"AND rh.idTipoHabitacion = th.id"
+				+ 				"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
+				+ 				"ORDER BY cantidad DESC)"
+				+ 		"GROUP BY to_char(fecha, 'IW')"
+				+ 		"ORDER BY semana ASC) t1,"
+				+ 		"(SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
+				+ 			"FROM RESERVAHABITACION rh, TIPOHABITACION th"
+				+ 			"WHERE rh.estado = 1"
+				+ 				"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
+				+ 				"AND rh.idTipoHabitacion = th.id"
+				+ 			"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
+				+ 			"ORDER BY cantidad DESC) t2"
+				+ "WHERE t1.solicitudes = t2.cantidad"
+				+ "ORDER BY semana ASC;";
+		
+		
+		Query q = pm.newQuery(SQL, sql);
+		return q.executeList();
+	}
 }

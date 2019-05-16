@@ -98,8 +98,8 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 //		}
 		
 		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
-		sql+= "FROM" + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u, " + pha.getSqlReservaServicio() + " rs";
-		sql+= "LEFT JOIN" + pha.getSqlReservaServicio()+ "c ON c.idUsuario = rs.idClient";
+		sql+= "FROM" + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u";
+		sql+= "LEFT JOIN" + pha.getSqlReservaServicio()+ "rs ON c.idUsuario = rs.idClient";
 		sql+= "WHERE c.idUsuario = u.id AND rs.idServicio != ? AND rs.dia BETWEEN (?) AND (?)";
 		sql+= "ORDER BY ? ?";
 		
@@ -107,7 +107,6 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		q.setResultClass(Cliente.class);
 		q.setParameters(idServicio, fechaInicio, fechaFin, criterio,criterioOrden);
 		return (List<Cliente>) q.executeList();
-		
 	}
 	
 }

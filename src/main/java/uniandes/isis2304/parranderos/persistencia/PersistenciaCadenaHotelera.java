@@ -2173,5 +2173,103 @@ public class PersistenciaCadenaHotelera
 			pm.close();
 		}
 	}
+	
+	public List<String[]> consultarFuncionamientoServicioMasConsumido()
+	{
+		List<String []> resp = new LinkedList<String []> ();
+		long startTime = System.nanoTime();
+
+		List<Object []> tuplas = sqlServicio.consultarFuncionamientoServicioMasConsumido(pmf.getPersistenceManager());
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime); 
+
+		//dividir entre 1000000 para que de en milisegundos
+		System.out.println(duration/1000000);
+		for ( Object [] tupla : tuplas)
+		{
+			String [] datosResp = new String[5];
+
+			datosResp [0] = tupla [0].toString(); // nombre servicio
+			datosResp [1] = tupla [1].toString(); // nombre tipo de servicio
+			datosResp [2] = tupla [2].toString(); // consumos
+			datosResp [3] = tupla [3].toString(); // semana
+			resp.add(datosResp);
+		}
+		return resp;
+	}
+	
+	public List<String[]> consultarFuncionamientoServicioMenosConsumido()
+	{
+		List<String []> resp = new LinkedList<String []> ();
+		long startTime = System.nanoTime();
+
+		List<Object []> tuplas = sqlServicio.consultarFuncionamientoServicioMenosConsumido(pmf.getPersistenceManager());
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime); 
+
+		//dividir entre 1000000 para que de en milisegundos
+		System.out.println(duration/1000000);
+		for ( Object [] tupla : tuplas)
+		{
+			String [] datosResp = new String[5];
+
+			datosResp [0] = tupla [0].toString(); // nombre servicio
+			datosResp [1] = tupla [1].toString(); // nombre tipo de servicio
+			datosResp [2] = tupla [2].toString(); // consumos
+			datosResp [3] = tupla [3].toString(); // semana
+			resp.add(datosResp);
+		}
+		return resp;
+	}
+	
+	public List<String[]> consultarFuncionamientoHabitacionMasSolicitada()
+	{
+		List<String []> resp = new LinkedList<String []> ();
+		long startTime = System.nanoTime();
+
+		List<Object []> tuplas = sqlHabitacion.consultarFuncionamientoHabitacionMasSolicitada(pmf.getPersistenceManager());
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime); 
+
+		//dividir entre 1000000 para que de en milisegundos
+		System.out.println(duration/1000000);
+		for ( Object [] tupla : tuplas)
+		{
+			String [] datosResp = new String[4];
+
+			datosResp [0] = tupla [0].toString(); // nombre tipo habitacion
+			datosResp [1] = tupla [1].toString(); // solicitudes
+			datosResp [2] = tupla [2].toString(); // semana
+			resp.add(datosResp);
+		}
+		return resp;
+	}
+	
+	public List<String[]> consultarFuncionamientoHabitacionMenosSolicitada()
+	{
+		List<String []> resp = new LinkedList<String []> ();
+		long startTime = System.nanoTime();
+
+		List<Object []> tuplas = sqlHabitacion.consultarFuncionamientoHabitacionMenosSolicitada(pmf.getPersistenceManager());
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime); 
+
+		//dividir entre 1000000 para que de en milisegundos
+		System.out.println(duration/1000000);
+		for ( Object [] tupla : tuplas)
+		{
+			String [] datosResp = new String[4];
+
+			datosResp [0] = tupla [0].toString(); // nombre tipo habitacion
+			datosResp [1] = tupla [1].toString(); // solicitudes
+			datosResp [2] = tupla [2].toString(); // semana
+			resp.add(datosResp);
+		}
+		return resp;
+	}
 
 }
