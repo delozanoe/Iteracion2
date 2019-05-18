@@ -2271,5 +2271,53 @@ public class PersistenciaCadenaHotelera
 		}
 		return resp;
 	}
+	
+	public List<long []> buenosClientes1()
+	{
+		List<long[]> resp = new LinkedList <long[]>();
+		List<Object[]> tuplas = sqlCliente.buenosClientes1(pmf.getPersistenceManager());
+		
+		for(Object [] tupla: tuplas)
+		{
+			long[] datosResp = new long [2];
+			
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			resp.add(datosResp);
+		}
+		
+		return resp;
+	}
+	
+	public List<long []> buenosClientes2()
+	{
+		List<long[]> resp = new LinkedList <long[]>();
+		List<Object[]> tuplas = sqlCliente.buenosClientes2(pmf.getPersistenceManager());
+		
+		for(Object [] tupla: tuplas)
+		{
+			long[] datosResp = new long [2];
+			
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			resp.add(datosResp);
+		}
+		
+		return resp;
+	}
+	
+	public List<long []> buenosClientes3()
+	{
+		List<long[]> resp = new LinkedList <long[]>();
+		List<Object[]> tuplas = sqlCliente.buenosClientes3(pmf.getPersistenceManager());
+		
+		for(Object [] tupla: tuplas)
+		{
+			long[] datosResp = new long [2];
+			
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			resp.add(datosResp);
+		}
+		
+		return resp;
+	}
 
 }
