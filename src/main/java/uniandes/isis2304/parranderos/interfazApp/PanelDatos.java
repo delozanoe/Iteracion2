@@ -18,10 +18,14 @@ package uniandes.isis2304.parranderos.interfazApp;
 
 
 import java.awt.BorderLayout;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+
+import uniandes.isis2304.parranderos.negocio.Cliente;
 
 /**
  * Clase de interfaz para mostrar los resultados de la ejecución de las 
@@ -74,6 +78,24 @@ public class PanelDatos extends JPanel
     public void actualizarInterfaz (String texto)
     {
     	textArea.setText(texto);
+    }
+    
+    public void actuInterfazCliente(List<Cliente> texto)
+    {
+    	System.out.println("llego aca");
+    	Cliente actual = null;
+    	for (int i = 0; i < texto.size(); i++) 
+    	{
+    		System.out.println("LLEGO ACA 2.0");
+    		actual = texto.get(i);
+    		textArea.setText("El id del cliente: "+ actual.getId());
+    		textArea.setText("Nombre cliente: " +  actual.getNombre() );
+    		textArea.setText("Tipo de documento: "+ actual.getTipoDocumento());
+    		textArea.setText("El numero de documento: "+ actual.getNumeroDocumento());
+    		textArea.setText("El correo es: "+ actual.getCorreo());
+    		textArea.setText("-------------------------------------------------------------------");
+    		
+		}
     }
 
 }

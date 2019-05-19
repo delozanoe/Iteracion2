@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -68,40 +69,27 @@ public class Cliente extends Usuario
 	private List<ReservaServicio> reservas;
 
 	private List<Convencion> convenciones;
+	
+	public Cliente(String nombre, BigDecimal id, String TipoDoc,String numeroDoc, String correo )
+	{
+		super(nombre, TipoDoc, numeroDoc, correo, id);
+		this.pazYSalvo="F";
+	}
 
-	public Cliente( long id, String pazYSalvo, List<String> planConsumo, Habitacion habitacion,
-			List<ReservaHabitacion> reserva, List<ReservaServicio> reservas, String nombre, String tipoDocumento, long numeroDocumento, String correo, List<Convencion> convenciones)
-			 {
-
-		super(nombre, nombre, numeroDocumento, nombre, id);
-		this.id = id;
-		this.nombre = nombre;
-		this.pazYSalvo = pazYSalvo;
-		this.planConsumo = planConsumo;
-		this.habitacion = habitacion;
-		this.reservaHabitacion = reserva;
-		this.reservas = reservas;
-		this.convenciones = convenciones;
+	public Cliente()
+	{
+		super("", "", "", "", new BigDecimal(0));
+		this.nombre = "";
+		this.pazYSalvo = "F";
+		this.planConsumo = null;
+		this.habitacion = null;
+		this.reservaHabitacion = new LinkedList<>();
+		this.reservas = new LinkedList<>();
+		this.convenciones = new LinkedList<>();
 	}
 
 
-	public long getId() {
-		return id;
-	}
 
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String isPazYSalvo() {
 		if(habitacion.getCuenta() == new BigDecimal(0))
@@ -113,58 +101,51 @@ public class Cliente extends Usuario
 			return "F";
 		}
 	}
-
-	public void setPazYSalvo(String pazYSalvo) {
-		this.pazYSalvo = pazYSalvo;
+	
+	public String getNombre() {
+		return nombre;
 	}
 
-	public List<String> getPlanConsumo() {
-		return planConsumo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public void setPlanConsumo(List<String> planConsumo) {
-		this.planConsumo = planConsumo;
+	public String getTipoDocumento() {
+		return tipoDocumento;
 	}
 
-	public Habitacion getHabitacion() {
-		return habitacion;
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
-	public void setHabitacion(Habitacion habitacion) {
-		this.habitacion = habitacion;
+	public String getNumeroDocumento() {
+		return numeroDocumento;
 	}
 
-	public List<ReservaHabitacion> getReserva() {
-		return reservaHabitacion;
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
 	}
 
-	public void setReserva(List<ReservaHabitacion> reserva) {
-		this.reservaHabitacion = reserva;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public List<ReservaServicio> getReservas() {
-		return reservas;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
-	public void setReservas(List<ReservaServicio> reservas) {
-		this.reservas = reservas;
+	public BigDecimal getId() {
+		return id;
 	}
 
-	public List<Convencion> getConvencion()
-	{
-		return convenciones;
+	public void setId(BigDecimal id) {
+		this.id = id;
 	}
-
-	public void setConvenciones(List<Convencion> convenciones)
-	{
-		this.convenciones = convenciones;
-	}
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
-
+	
+	
+	
+	
+	
 
 
 }

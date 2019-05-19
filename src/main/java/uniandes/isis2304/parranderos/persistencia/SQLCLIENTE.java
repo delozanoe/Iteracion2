@@ -12,23 +12,23 @@ import uniandes.isis2304.parranderos.negocio.Cliente;
 
 
 class SQLCLIENTE {
-private final static String SQL = PersistenciaCadenaHotelera.SQL;
-	
+	private final static String SQL = PersistenciaCadenaHotelera.SQL;
+
 	private PersistenciaCadenaHotelera pha;
-	
+
 	public SQLCLIENTE(PersistenciaCadenaHotelera pha)
 	{
 		this.pha = pha;
 	}
-	
+
 	public long adicionarCliente(PersistenceManager pm, long idBar, String pazySalvo, long idHabitacion) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlCliente()+ "(idUsuario, pazySalvo, idHotel) values (?, ?, ?)");
-        q.setParameters(idBar, pazySalvo, idHabitacion);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlCliente()+ "(idUsuario, pazySalvo, idHotel) values (?, ?, ?)");
+		q.setParameters(idBar, pazySalvo, idHabitacion);
+		return (long) q.executeUnique();
 	}
-	
-	
+
+
 	public Cliente darClientePorId (PersistenceManager pm, long idUsuario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlCliente () + " WHERE idUsuario = ?");
@@ -36,64 +36,83 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		q.setParameters(idUsuario);
 		return (Cliente) q.executeUnique();
 	}
-	
+
 	public List<Cliente> darClientes(PersistenceManager pm) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pha.getSqlCliente());
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
 	}
-	
+
 	public long cambiarHabitacion (PersistenceManager pm, long idCliente, long idHabitacion)
 	{
-        Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlCliente () + " SET idHabitacion = ? WHERE idUsuario = ?");
-        q.setParameters(idHabitacion,idCliente);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "UPDATE " + pha.getSqlCliente () + " SET idHabitacion = ? WHERE idUsuario = ?");
+		q.setParameters(idHabitacion,idCliente);
+		return (long) q.executeUnique();
 	}
-	
-	public List<Cliente> darClientesHanConsumido(PersistenceManager pm, long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden )
+
+	public List<Cliente> darClientesHanConsumido(PersistenceManager pm, long idServicio, String fechaInicio, String fechaFin, String criterio, String criterioOrden )
 	{
+		System.out.println("ESTA EN EL QUERY");
 		String sql = "";
 		String adicionar1 = "";
 		String adicionar2 = "";
-		
+
 		if(criterio.equals("id"))
 		{
 			criterio = "u.id";
 		}
-		
+
 		else if (criterio.equals("fecha"))
 		{
 			criterio = "rs.dia";
 		}
-		
+
 		else if(criterio.equals("cantidad"))
 		{
 			adicionar1 = ", COUNT(*) AS CantidadConsumos";
-			adicionar2 = "GROUP BY u.nombre, u.id, i.tipoDocumento, u.numeroDocumento, u.correo";
-			criterio = "COUNT(*)";
+			adicionar2 = " GROUP BY u.nombre, u.id, i.tipoDocumento, u.numeroDocumento, u.correo";
+			criterio = " COUNT(*)";
 		}
-		
-		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
-		sql += adicionar1;
-		sql+= "FROM" + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u, " + pha.getSqlReservaServicio() + " rs";
-		sql+= "WHERE c.idUsuario = u.id "
-			+ 	"AND u.id = rs.idCliente"
-			+ 	"AND rs.estado = 1"
-			+ 	"AND rs.idServicio = ? "
-			+ 	"AND rs.dia BETWEEN (?) AND (?)";
-		sql += adicionar2;
-		sql+= "ORDER BY ? ?";
-		
+		if(criterioOrden.equals("asc"))
+		{
+			sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
+			sql += adicionar1;
+			sql+= " FROM " + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u, " + pha.getSqlReservaServicio() + " rs";
+			sql+= " WHERE c.idUsuario = u.id "
+					+ 	" AND u.id = rs.idCliente"
+					+ 	" AND rs.estado = 1"
+					+ 	" AND rs.idServicio = ? "
+					+ 	" AND rs.dia BETWEEN (?) AND (?)";
+			sql += adicionar2;
+			sql+= " ORDER BY ? ASC";
+		}
+		else
+		{
+			sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
+			sql += adicionar1;
+			sql+= " FROM " + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u, " + pha.getSqlReservaServicio() + " rs";
+			sql+= " WHERE c.idUsuario = u.id "
+					+ 	" AND u.id = rs.idCliente"
+					+ 	" AND rs.estado = 1"
+					+ 	" AND rs.idServicio = ? "
+					+ 	" AND rs.dia BETWEEN (?) AND (?)";
+			sql += adicionar2;
+			sql+= " ORDER BY ? DESC";
+		}
+
 		Query q = pm.newQuery(SQL,sql);
+
 		q.setResultClass(Cliente.class);
 		q.setParameters(idServicio, fechaInicio, fechaFin, criterio,criterioOrden);
+		System.out.println(sql);
 		return (List<Cliente>) q.executeList();
+
 	}
-	
+
 	public List<Cliente> darClientesNoHanConsumido(PersistenceManager pm, long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden)
 	{
 		String sql = "";
-		
+
 		if(criterio.equals("id"))
 		{
 			criterio = "u.id";
@@ -102,7 +121,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		{
 			criterio = "rs.dia";
 		}
-		
+
 		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo\n" + 
 				"FROM" + pha.getSqlUsuario()+" u, "+ pha.getSqlCliente() + " c, " + pha.getSqlReservaServicio()+" rs\n" + 
 				"WHERE u.id = c.idUsuario\n" + 
@@ -115,13 +134,13 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 				"            AND c.idUsuario = cli.idUsuario\n" + 
 				"            AND rese.idServicio = ?) =0\n" + 
 				"ORDER BY ? ?;";
-		
+
 		Query q = pm.newQuery(SQL,sql);
 		q.setResultClass(Cliente.class);
 		q.setParameters(fechaInicio, fechaFin,idServicio, criterio,criterioOrden);
 		return (List<Cliente>) q.executeList();
 	}
-	
+
 	public List<Object[]> buenosClientes1(PersistenceManager pm)
 	{
 		String sql = "SELECT clienteBueno1 AS BuenosClientes\n" + 
@@ -145,11 +164,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 9 AND 12) t3\n" + 
 				"WHERE clienteBueno1 = clienteBueno2\n" + 
 				"AND clienteBueno2 = clienteBueno3;";
-		
+
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();
 	}
-	
+
 	public List<Object[]> buenosClientes2 (PersistenceManager pm)
 	{
 		String sql = "SELECT c.idUsuario\n" + 
@@ -162,7 +181,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();	
 	}
-	
+
 	public List<Object[]> buenosClientes3 (PersistenceManager pm)
 	{
 		String sql = "SELECT c.idUsuario"
@@ -180,5 +199,5 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();	
 	}
-	
+
 }

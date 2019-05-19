@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -19,7 +20,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		this.pha = pha;
 	}
 	
-	public long adicionarUsuario(PersistenceManager pm, long id, String tipoDocumento, Long numeroDocumento, String nombre, String correo) 
+	public long adicionarUsuario(PersistenceManager pm, BigDecimal id, String tipoDocumento, String numeroDocumento, String nombre, String correo) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pha.getSqlUsuario()+ "(id, tipoDocumento, numeroDocumento, nombre, correo) values (?, ?, ?,?,?)");
         q.setParameters(id, tipoDocumento,numeroDocumento,nombre, correo);

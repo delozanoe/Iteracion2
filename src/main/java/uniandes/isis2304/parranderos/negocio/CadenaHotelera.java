@@ -52,7 +52,7 @@ public class CadenaHotelera
 	 * 			M�todos para manejar los clientes
 	 *****************************************************************/
 	
-	public Cliente nuevoCliente(String pazYSalvo, long idHabitacion, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
+	public Cliente nuevoCliente(String pazYSalvo, long idHabitacion, String tipoDocumento, String numeroDocumento, String nombre, String correo)
 	{
 		log.info("Agregando nuevo cliente: " + nombre );
 		Cliente nuevoCliente = pha.adicionarCliente(pazYSalvo, idHabitacion, tipoDocumento, numeroDocumento, nombre, correo);
@@ -86,6 +86,7 @@ public class CadenaHotelera
 	}
 	
 	
+	
 	//-------------------------------------------------
 	//Consunmo Habitacion 
 	//------------------------------------------------
@@ -110,8 +111,9 @@ public class CadenaHotelera
 	
 	public Empleado adicionarEmpleado(long idHotel, long idTipoEmpleado, String tipoDocumento, Long numeroDocumento, String nombre, String correo)
 	{
-		Empleado nuevoEmpleado = pha.adicionarEmpleado(idHotel, idTipoEmpleado, tipoDocumento, numeroDocumento, nombre, correo);
-		return nuevoEmpleado;
+//		Empleado nuevoEmpleado = pha.adicionarEmpleado(idHotel, idTipoEmpleado, tipoDocumento, numeroDocumento, nombre, correo);
+//		return nuevoEmpleado;
+		return null;
 	}
 	
 	public List<Empleado> darEmpleados()
@@ -264,7 +266,7 @@ public class CadenaHotelera
 	//Servicio
 	//----------------------------------------------------------
 	
-	public Servicio adicionarServicio(String nombre, String descripcion, Timestamp horaApertura, Timestamp horaCierre, long capacidad, BigDecimal costo, char costoIncluido, long idHotel, long idTipoServicio, long estado)
+	public Servicio adicionarServicio(String nombre, String descripcion, String horaApertura, String horaCierre, BigDecimal capacidad, BigDecimal costo, String costoIncluido, BigDecimal idHotel, BigDecimal idTipoServicio, BigDecimal estado)
 	{
 		Servicio nuevoSerivcio = pha.adicionarServicio(nombre, descripcion, horaApertura, horaCierre, capacidad, costo, costoIncluido, idHotel, idTipoServicio, estado);
 		return  nuevoSerivcio; 
@@ -365,7 +367,7 @@ public class CadenaHotelera
 	//Usuario
 	//----------------------------------------------------
 	
-	public Usuario adicionarUsuario(String nombre, long id, String tipoDocumento, Long numeroDocumento, String correo)
+	public Usuario adicionarUsuario(String nombre, long id, String tipoDocumento, String numeroDocumento, String correo)
 	{
 		Usuario nuevoUsuario = pha.adicionarUsuario(nombre, tipoDocumento, numeroDocumento, correo);
 		return nuevoUsuario;
@@ -407,6 +409,18 @@ public class CadenaHotelera
 	{
 		return pha.darConvenciones();
 	}
+	
+	//---------------------------------------------------------------
+	//Requerimientos de la iteracion 3
+	//----------------------------------------------------
+	public List<Cliente> darClientesHanConsumido (long idServicio, String fechaInicio, String fechaFin, String criterio, String criterioOrden)
+	{
+		System.out.println("CADENA HOTELERA");
+		return pha.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+		
+		
+	}
+	
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

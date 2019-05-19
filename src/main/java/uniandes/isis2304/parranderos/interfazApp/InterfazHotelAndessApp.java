@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -64,8 +65,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.parranderos.negocio.CadenaHotelera;
+import uniandes.isis2304.parranderos.negocio.Cliente;
 import uniandes.isis2304.parranderos.negocio.Convencion;
 import uniandes.isis2304.parranderos.negocio.Hotel;
+import uniandes.isis2304.parranderos.negocio.Servicio;
 import uniandes.isis2304.parranderos.negocio.TipoHabitacion;
 import uniandes.isis2304.parranderos.negocio.TipoServicio;
 
@@ -1275,7 +1278,114 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	
 	public void consumoHotelAndes()
 	{
-		
+		//TODO CLIENTE
+		try
+		{
+			List<Cliente> respuesta = null;
+			JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+			JLabel titulo = new JLabel("Seleccione el servicio");
+			List<Servicio> servicios = cadenaHotelera.darServicios();
+			
+			JLabel tituloCriterios = new JLabel("Seleccione el servicio");
+			String[] criterios = {"id", "fecha", "cantidad"};
+			JComboBox<String> criteriosCom = new JComboBox<>(criterios);
+			
+			
+//					cadenaHotelera.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+			JTextField fechaInicio = new JTextField( );
+			JTextField fechaFinal = new JTextField( );
+			JCheckBox ascendente = new JCheckBox("Ascendente"); 
+			JCheckBox descendente = new JCheckBox("Descendente"); 
+			
+			if(servicios.isEmpty())
+			{
+				System.out.println("Paila perro");
+			}
+			String[] items = new String[servicios.size()];
+			for (int i = 0; i < servicios.size(); i++) 
+			{
+				items[i] = servicios.get(i).getNombre();
+			}
+
+			JComboBox<String> combo = new JComboBox<>(items);
+
+			panel.add(titulo);
+			panel.add(combo);
+			panel.add(new JLabel(" Fecha inicio (Use el formato dd/mm/yyy):"));
+			panel.add(fechaInicio);
+			
+			panel.add(new JLabel("Fecha final (Use el formato dd/mm/yyy ):"));
+			panel.add(fechaFinal);
+			
+			panel.add(tituloCriterios);
+			panel.add(criteriosCom);
+			
+			panel.add(new JLabel("Seleciona el criterio de ordenamiento"));
+			panel.add(ascendente);
+			panel.add(descendente);
+			
+			
+			int result = JOptionPane.showConfirmDialog(null, panel, "Consultar consumo",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			System.out.println("despues del int");
+			if (result == JOptionPane.OK_OPTION)
+			{
+				System.out.println("SDSS");
+				if(result == 0)
+				{
+					System.out.println("Entro al segundo if");
+					String orden  = "";
+					if(ascendente.isSelected())
+					{
+						orden = "asc";
+					}
+					else
+					{
+						orden = "dsc";
+					}
+					System.out.println(servicios.get(combo.getSelectedIndex()).getNombre());
+					
+					System.out.println(convertirTimeStap((fechaInicio.getText()).toString()));
+					respuesta = cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
+					
+					if(respuesta.isEmpty())
+					{
+						System.out.println("AYUDAAAAAAAA");
+					}
+					else
+					{
+						System.out.println("AJAJAAJAJAJAJAJAJAJAJA");
+						System.out.println(respuesta.size());
+					}
+					 tabla table = new tabla(respuesta);
+					
+				}
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	private  Timestamp convertirTimeStap(String fecha)
+	{
+
+		Timestamp timestamp = null;
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+			java.util.Date parsedDate = dateFormat.parse(fecha);
+			timestamp = new Timestamp(parsedDate.getTime());
+		} catch(Exception e) { //this generic but you can control another types of exception
+			// look the origin of excption 
+		}
+		return timestamp;
 	}
 	
 	public void reservarConsumoServicio()

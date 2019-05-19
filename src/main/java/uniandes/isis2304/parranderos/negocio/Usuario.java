@@ -1,5 +1,6 @@
 package uniandes.isis2304.parranderos.negocio;
 
+import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +35,7 @@ public class Usuario
 	 * @ordered
 	 */
 	
-	protected  long numeroDocumento;
+	protected  String numeroDocumento;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -52,13 +53,13 @@ public class Usuario
 	 * @ordered
 	 */
 	
-	protected  long id;
+	protected static  BigDecimal id;
 
-	public Usuario(String nombre, String tipoDocumento, long numeroDocumento, String correo, long id) {
+	public Usuario(String nombre, String tipoDocumento, String numeroDoc, String correo, BigDecimal id) {
 		super();
 		this.nombre = nombre;
 		this.tipoDocumento = tipoDocumento;
-		this.numeroDocumento = numeroDocumento;
+		this.numeroDocumento = numeroDoc;
 		this.correo = correo;
 		this.id = id;
 	}
@@ -79,11 +80,11 @@ public class Usuario
 		this.tipoDocumento = tipoDocumento;
 	}
 
-	public long getNumeroDocumento() {
+	public String getNumeroDocumento() {
 		return numeroDocumento;
 	}
 
-	public void setNumeroDocumento(long numeroDocumento) {
+	public void setNumeroDocumento(String numeroDocumento) {
 		this.numeroDocumento = numeroDocumento;
 	}
 
@@ -95,20 +96,14 @@ public class Usuario
 		this.correo = correo;
 	}
 
-	public long getId() {
+	public BigDecimal getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigDecimal id) {
 		this.id = id;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
 	
-
+	
 }
 

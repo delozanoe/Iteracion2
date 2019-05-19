@@ -21,7 +21,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private long id;
+	private BigDecimal id;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -48,7 +48,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private Timestamp horaApertura;
+	private String horaApertura;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private Timestamp horaCierre;
+	private String horaCierre;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,7 +66,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private double capacidad;
+	private BigDecimal capacidad;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,7 +93,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private char costoIncluido;
+	private String costoIncluido;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,7 +102,7 @@ public class Servicio
 	 * @ordered
 	 */
 	
-	private long estado, idHotel, idTipoServicio;
+	private BigDecimal estado, idHotel, idTipoServicio;
 	
 	private List<ReservaServicio> reservas;
 
@@ -137,8 +137,9 @@ public class Servicio
 	
 	private List<PlanConsumo> planesDeConsumo;
 	
-
-	public Servicio(long id, String nombre, String descripcion, Timestamp horaApertura, Timestamp horaCierre, long capacidad, BigDecimal costo, char costoIncluido, long idHotel, long idTipoServicio, long estado) {
+	
+	public Servicio(BigDecimal id, String nombre, String descripcion, String horaApertura, String horaCierre, BigDecimal capacidad, BigDecimal costo, String costoIncluido, BigDecimal idHotel, BigDecimal idTipoServicio, BigDecimal estado)
+	{
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -162,17 +163,17 @@ public class Servicio
 	public Servicio()
 	{
 		super();
-		this.id = 0;
+		this.id = new BigDecimal(0);
 		this.nombre = "";
 		this.descripcion = "";
-		this.horaApertura = new Timestamp(0);
-		this.horaCierre =  new Timestamp(0);
-		this.capacidad = 0;
+		this.horaApertura = "";
+		this.horaCierre =  "";
+		this.capacidad =new BigDecimal(0);
 		this.costo = new BigDecimal(0);
-		this.costoIncluido = 0;
-		this.idHotel = 0;
-		this.idTipoServicio = 0;
-		this.estado = 0;
+		this.costoIncluido = "";
+		this.idHotel = new BigDecimal(0);
+		this.idTipoServicio = new BigDecimal(0);
+		this.estado = new BigDecimal(0);
 		
 		this.reservas = new LinkedList<>();
 		this.productos = new LinkedList<>();
@@ -181,11 +182,11 @@ public class Servicio
 		this.planesDeConsumo = new LinkedList<>();
 	}
 
-	public long getId() {
+	public BigDecimal getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigDecimal id) {
 		this.id = id;
 	}
 
@@ -205,27 +206,27 @@ public class Servicio
 		this.descripcion = descripcion;
 	}
 
-	public Timestamp getHoraApertura() {
+	public String getHoraApertura() {
 		return horaApertura;
 	}
 
-	public void setHoraApertura(Timestamp horaApertura) {
+	public void setHoraApertura(String horaApertura) {
 		this.horaApertura = horaApertura;
 	}
 
-	public Timestamp getHoraCierre() {
+	public String getHoraCierre() {
 		return horaCierre;
 	}
 
-	public void setHoraCierre(Timestamp horaCierre) {
+	public void setHoraCierre(String horaCierre) {
 		this.horaCierre = horaCierre;
 	}
 
-	public double getCapacidad() {
+	public BigDecimal getCapacidad() {
 		return capacidad;
 	}
 
-	public void setCapacidad(double capacidad) {
+	public void setCapacidad(BigDecimal capacidad) {
 		this.capacidad = capacidad;
 	}
 
@@ -245,35 +246,35 @@ public class Servicio
 		this.tipo = tipo;
 	}
 
-	public char getCostoIncluido() {
+	public String getCostoIncluido() {
 		return costoIncluido;
 	}
 
-	public void setCostoIncluido(char costoIncluido) {
+	public void setCostoIncluido(String costoIncluido) {
 		this.costoIncluido = costoIncluido;
 	}
 
-	public long getEstado() {
+	public BigDecimal getEstado() {
 		return estado;
 	}
 
-	public void setEstado(long estado) {
+	public void setEstado(BigDecimal estado) {
 		this.estado = estado;
 	}
 
-	public long getIdHotel() {
+	public BigDecimal getIdHotel() {
 		return idHotel;
 	}
 
-	public void setIdHotel(long idHotel) {
+	public void setIdHotel(BigDecimal idHotel) {
 		this.idHotel = idHotel;
 	}
 
-	public long getIdTipoServicio() {
+	public BigDecimal getIdTipoServicio() {
 		return idTipoServicio;
 	}
 
-	public void setIdTipoServicio(long idTipoServicio) {
+	public void setIdTipoServicio(BigDecimal idTipoServicio) {
 		this.idTipoServicio = idTipoServicio;
 	}
 
@@ -324,6 +325,9 @@ public class Servicio
 	public void setPlanesDeConsumo(List<PlanConsumo> planesDeConsumo) {
 		this.planesDeConsumo = planesDeConsumo;
 	}
+	
+
+
 	
 	
 	
