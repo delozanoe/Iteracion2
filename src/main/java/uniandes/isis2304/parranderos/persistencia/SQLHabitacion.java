@@ -85,7 +85,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 				"				 			GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
 				"				 			ORDER BY cantidad DESC) t2\n" + 
 				"				 WHERE t1.solicitudes = t2.cantidad\n" + 
-				"				 ORDER BY semana ASC;";
+				"				 ORDER BY semana ASC";
 		
 		
 		Query q = pm.newQuery(SQL, sql);
@@ -113,7 +113,7 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 				"				 			GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
 				"				 			ORDER BY cantidad DESC) t2\n" + 
 				"				 WHERE t1.solicitudes = t2.cantidad\n" + 
-				"				 ORDER BY semana ASC;";
+				"				 ORDER BY semana ASC";
 		
 		
 		Query q = pm.newQuery(SQL, sql);

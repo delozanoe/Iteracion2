@@ -2151,7 +2151,7 @@ public class PersistenciaCadenaHotelera
 		}
 	}
 	
-	public List<Cliente> darClientesNoHanConsumido(long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden)
+	public List<Cliente> darClientesNoHanConsumido(long idServicio, String fechaInicio, String fechaFin, String criterio, String criterioOrden)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

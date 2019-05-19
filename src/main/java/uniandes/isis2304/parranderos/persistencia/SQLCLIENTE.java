@@ -109,7 +109,7 @@ class SQLCLIENTE {
 
 	}
 
-	public List<Cliente> darClientesNoHanConsumido(PersistenceManager pm, long idServicio, Timestamp fechaInicio, Timestamp fechaFin, String criterio, String criterioOrden)
+	public List<Cliente> darClientesNoHanConsumido(PersistenceManager pm, long idServicio, String fechaInicio, String fechaFin, String criterio, String criterioOrden)
 	{
 		String sql = "";
 
@@ -122,18 +122,36 @@ class SQLCLIENTE {
 			criterio = "rs.dia";
 		}
 
-		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo\n" + 
-				"FROM" + pha.getSqlUsuario()+" u, "+ pha.getSqlCliente() + " c, " + pha.getSqlReservaServicio()+" rs\n" + 
-				"WHERE u.id = c.idUsuario\n" + 
-				"    AND c.idUsuario = rs.idCliente\n" + 
-				"    AND rs.estado = 1\n" + 
-				"    AND rs.dia BETWEEN (?) AND (?)\n" + 
-				"    AND (SELECT COUNT (*)\n" + 
-				"        FROM Cliente cli, ReservaServicio rese\n" + 
-				"        WHERE cli.idusuario = rese.idCliente\n" + 
-				"            AND c.idUsuario = cli.idUsuario\n" + 
-				"            AND rese.idServicio = ?) =0\n" + 
-				"ORDER BY ? ?;";
+		if(criterioOrden.equals("asc"))
+		{
+			sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo\n" + 
+					" FROM" + pha.getSqlUsuario()+" u, "+ pha.getSqlCliente() + " c, " + pha.getSqlReservaServicio()+" rs\n" + 
+					" WHERE u.id = c.idUsuario\n " + 
+					"    AND c.idUsuario = rs.idCliente\n" + 
+					"    AND rs.estado = 1\n" + 
+					"    AND rs.dia BETWEEN (?) AND (?)\n" + 
+					"    AND (SELECT COUNT (*)\n " + 
+					"        FROM Cliente cli, ReservaServicio rese\n " + 
+					"        WHERE cli.idusuario = rese.idCliente\n" + 
+					"            AND c.idUsuario = cli.idUsuario\n" + 
+					"            AND rese.idServicio = ?) =0\n" + 
+					" ORDER BY ? ASC;";
+		}
+		else
+		{
+			sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo\n" + 
+					" FROM" + pha.getSqlUsuario()+" u, "+ pha.getSqlCliente() + " c, " + pha.getSqlReservaServicio()+" rs\n" + 
+					" WHERE u.id = c.idUsuario\n " + 
+					"    AND c.idUsuario = rs.idCliente\n" + 
+					"    AND rs.estado = 1\n" + 
+					"    AND rs.dia BETWEEN (?) AND (?)\n" + 
+					"    AND (SELECT COUNT (*)\n " + 
+					"        FROM Cliente cli, ReservaServicio rese\n " + 
+					"        WHERE cli.idusuario = rese.idCliente\n" + 
+					"            AND c.idUsuario = cli.idUsuario\n" + 
+					"            AND rese.idServicio = ?) =0\n" + 
+					" ORDER BY ? DESC;";
+		}
 
 		Query q = pm.newQuery(SQL,sql);
 		q.setResultClass(Cliente.class);

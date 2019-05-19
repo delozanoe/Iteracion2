@@ -421,6 +421,23 @@ public class CadenaHotelera
 		
 	}
 	
+	public List<Cliente> darClientesNOHanConsumido(long idServicio, String fechaInicio, String fechaFin, String criterio, String criterioOrden)
+	{
+		System.out.println("CADENA HOTELERA");
+		return pha.darClientesNoHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+		
+		
+	}
+	
+	public List<String[]> consultarFuncionamientoServicioMasConsumido()
+	{
+		return pha.consultarFuncionamientoHabitacionMasSolicitada();
+	}
+	
+	public List<String[]> consultarFuncionamientoServicioMenosConsumido()
+	{
+		return pha.consultarFuncionamientoHabitacionMenosSolicitada();
+	}
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

@@ -82,11 +82,10 @@ public class PanelDatos extends JPanel
     
     public void actuInterfazCliente(List<Cliente> texto)
     {
-    	System.out.println("llego aca");
+    	
     	Cliente actual = null;
     	for (int i = 0; i < texto.size(); i++) 
     	{
-    		System.out.println("LLEGO ACA 2.0");
     		actual = texto.get(i);
     		textArea.setText("El id del cliente: "+ actual.getId());
     		textArea.setText("Nombre cliente: " +  actual.getNombre() );

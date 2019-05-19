@@ -216,3 +216,47 @@ ORA-01840: el valor de entrada no es lo bastante largo para el formato de fecha
 02:23:16,934 (AWT-EventQueue-0) ERROR [uniandes.isis2304.parranderos.persistencia.PersistenciaCadenaHotelera] - Exception: Error con la ejecucion de Query de SQL "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo FROM CLIENTE c, USUARIO u, RESERVASERVICIO rs WHERE c.idUsuario = u.id  AND u.id = rs.idCliente AND rs.estado = 1 AND rs.idServicio = ?  AND rs.dia BETWEEN (?) AND (?) ORDER BY ? ASC".
 ORA-01841: el valor (completo) del año debe estar entre -4713 y +9999, y no debe ser igual a 0
 
+10:18:16,426 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:18:16,448 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:19:49,278 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:19:49,300 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:24:49,225 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:24:49,326 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:30:15,384 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:30:15,435 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:41:24,349 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:41:24,385 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:46:56,771 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:46:56,794 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:54:41,767 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:54:41,800 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:59:04,268 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+10:59:04,293 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:00:34,908 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:00:34,929 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:04:48,222 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:04:48,270 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:06:32,126 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:06:32,189 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:10:32,373 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:10:32,403 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:26:47,756 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:26:47,844 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:41:19,663 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:41:19,687 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:44:25,543 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:44:25,563 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:48:26,914 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+11:48:26,935 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:14:02,298 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+12:14:02,330 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:21:37,836 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+12:21:37,860 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:51:58,817 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+12:51:58,843 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:05:38,933 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+13:05:38,959 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:11:32,272 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+13:11:32,291 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:12:25,831 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+13:12:25,851 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD

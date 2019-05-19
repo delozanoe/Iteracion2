@@ -1108,7 +1108,13 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	public void pocaDemandaServicios()
 	{
-
+		List<String []> masConsumido =cadenaHotelera.consultarFuncionamientoServicioMasConsumido();
+		for (String[] strings : masConsumido) {
+			for (String string : strings) {
+				System.out.println(string);
+			}
+		}
+		cadenaHotelera.consultarFuncionamientoServicioMenosConsumido();
 	}
 
 	public void analizarHotelAndes()
@@ -1283,6 +1289,8 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		{
 			List<Cliente> respuesta = null;
 			JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+			JPanel panelRespuesta = new  JPanel(new GridLayout(0, 1 ));
+			JTabla table = null;
 			JLabel titulo = new JLabel("Seleccione el servicio");
 			List<Servicio> servicios = cadenaHotelera.darServicios();
 			
@@ -1296,6 +1304,9 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			JTextField fechaFinal = new JTextField( );
 			JCheckBox ascendente = new JCheckBox("Ascendente"); 
 			JCheckBox descendente = new JCheckBox("Descendente"); 
+			
+			JCheckBox queSI = new JCheckBox("Buscar clientes que consumieron"); 
+			JCheckBox queNO = new JCheckBox("Buscar clientes que NO consumieron"); 
 			
 			if(servicios.isEmpty())
 			{
@@ -1324,16 +1335,19 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panel.add(ascendente);
 			panel.add(descendente);
 			
+			panel.add(new JLabel("Seleciona que tipo de cliente desea buscar"));
+			panel.add(queSI);
+			panel.add(queNO);
 			
 			int result = JOptionPane.showConfirmDialog(null, panel, "Consultar consumo",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-			System.out.println("despues del int");
+			
 			if (result == JOptionPane.OK_OPTION)
 			{
-				System.out.println("SDSS");
+				
 				if(result == 0)
 				{
-					System.out.println("Entro al segundo if");
+					
 					String orden  = "";
 					if(ascendente.isSelected())
 					{
@@ -1343,23 +1357,27 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					{
 						orden = "dsc";
 					}
-					System.out.println(servicios.get(combo.getSelectedIndex()).getNombre());
-					
-					System.out.println(convertirTimeStap((fechaInicio.getText()).toString()));
-					respuesta = cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
-					
-					if(respuesta.isEmpty())
+					if(queSI.isSelected()) {
+						System.out.println("QUE SI");
+						respuesta = cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);	
+					}
+					else 
+						if(queNO.isSelected()) 
 					{
-						System.out.println("AYUDAAAAAAAA");
+						System.out.println("QUE NO");
+						respuesta= cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
 					}
 					else
 					{
-						System.out.println("AJAJAAJAJAJAJAJAJAJAJA");
-						System.out.println(respuesta.size());
+						panelDatos.actualizarInterfaz("DEBE SELECIONAR UN TIPO DE BUSQUEDA");
 					}
-					 tabla table = new tabla(respuesta);
-					
+					panelDatos.actualizarInterfaz("Se encontraron un total de: "+ respuesta.size()+ " cliente"); 
+					table = new JTabla(respuesta);
+					 System.out.println("ACABO");
 				}
+				//LA TABLA
+				table.pack();
+				table.setVisible(true);
 			}
 			else
 			{
@@ -1373,6 +1391,8 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	
 	
 	private  Timestamp convertirTimeStap(String fecha)
 	{
