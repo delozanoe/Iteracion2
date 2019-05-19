@@ -51,27 +51,29 @@ class SQLServicio
 	
 	public List <Object[]> consultarFuncionamientoServicioMasConsumido (PersistenceManager pm)
 	{
-		String sql = "SELECT DISTINCT nombre,tipoServicio,consumos, semana"
-				+ "FROM (SELECT MAX (cantidad) as consumos, to_char(fecha, 'IW') as semana"
-				+ 		"FROM (SELECT DISTINCT COUNT(rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio) AS cantidad"
-				+ 				"FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts"
-				+ 				"WHERE rs.estado = 1"
-				+ 					"AND rs.dia BETWEEN '01/01/18' AND '31/12/18'"
-				+ 					"AND rs.idServicio = s.id"
-				+ 					"AND s.idTipoServicio = ts.id"
-				+ 				"GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre"
-				+ 				"ORDER BY cantidad DESC)"
-				+ 		"GROUP BY to_char(fecha, 'IW')"
-				+ 		"ORDER BY semana ASC) t1,"
-				+ 		"(SELECT DISTINCT COUNT(rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha) AS cantidad"
-				+ 			"FROM RESERVASERVICIO rs, SERVICIO s"
-				+ 			"WHERE rs.estado = 1"
-				+ 				"AND rs.dia BETWEEN '01/01/18' AND '31/12/18'"
-				+ 				"AND rs.idServicio = s.id"
-				+ 			"GROUP BY rs.idServicio, s.nombre, rs.dia"
-				+ 			"ORDER BY cantidad DESC) t2"
-				+ "WHERE t1.consumos = t2.cantidad"
-				+ "ORDER BY semana ASC;";
+		String sql = "SELECT DISTINCT nombre,id,tipoServicio,consumos, semana\n" + 
+				"				 FROM (SELECT MAX (cantidad) as consumos, to_char(fecha, 'IW') as semana\n" + 
+				"						FROM (SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
+				"				 				FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts\n" + 
+				"								WHERE rs.estado = 1\n" + 
+				"				 					AND rs.dia BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 					AND rs.idServicio = s.id\n" + 
+				"				 					AND s.idTipoServicio = ts.id\n" + 
+				"				 				GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
+				"				 				ORDER BY cantidad DESC)\n" + 
+				"				 		GROUP BY to_char(fecha, 'IW')\n" + 
+				"				 		ORDER BY semana ASC) t1,\n" + 
+				"				 		(SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
+				"				 			FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts\n" + 
+				"				 			WHERE rs.estado = 1\n" + 
+				"				 				AND rs.dia BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 				AND rs.idServicio = s.id\n" + 
+				"                                AND s.idTipoServicio = ts.id\n" + 
+				"				 			GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
+				"				 			ORDER BY cantidad DESC) t2\n" + 
+				"				 WHERE t1.consumos = t2.cantidad\n" + 
+				"				 ORDER BY semana ASC;\n" + 
+				"";
 		
 		
 		Query q = pm.newQuery(SQL, sql);
@@ -80,27 +82,29 @@ class SQLServicio
 	
 	public List <Object[]> consultarFuncionamientoServicioMenosConsumido (PersistenceManager pm)
 	{
-		String sql = "SELECT DISTINCT nombre,tipoServicio,consumos, semana"
-				+ "FROM (SELECT MIN (cantidad) as consumos, to_char(fecha, 'IW') as semana"
-				+ 		"FROM (SELECT DISTINCT COUNT(rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio) AS cantidad"
-				+ 				"FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts"
-				+ 				"WHERE rs.estado = 1"
-				+ 					"AND rs.dia BETWEEN '01/01/18' AND '31/12/18'"
-				+ 					"AND rs.idServicio = s.id"
-				+ 					"AND s.idTipoServicio = ts.id"
-				+ 				"GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre"
-				+ 				"ORDER BY cantidad DESC)"
-				+ 		"GROUP BY to_char(fecha, 'IW')"
-				+ 		"ORDER BY semana ASC) t1,"
-				+ 		"(SELECT DISTINCT COUNT(rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha) AS cantidad"
-				+ 			"FROM RESERVASERVICIO rs, SERVICIO s"
-				+ 			"WHERE rs.estado = 1"
-				+ 				"AND rs.dia BETWEEN '01/01/18' AND '31/12/18'"
-				+ 				"AND rs.idServicio = s.id"
-				+ 			"GROUP BY rs.idServicio, s.nombre, rs.dia"
-				+ 			"ORDER BY cantidad DESC) t2"
-				+ "WHERE t1.consumos = t2.cantidad"
-				+ "ORDER BY semana ASC;";
+		String sql = "SELECT DISTINCT nombre,id,tipoServicio,consumos, semana\n" + 
+				"				 FROM (SELECT MIN (cantidad) as consumos, to_char(fecha, 'IW') as semana\n" + 
+				"						FROM (SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
+				"				 				FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts\n" + 
+				"								WHERE rs.estado = 1\n" + 
+				"				 					AND rs.dia BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 					AND rs.idServicio = s.id\n" + 
+				"				 					AND s.idTipoServicio = ts.id\n" + 
+				"				 				GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
+				"				 				ORDER BY cantidad DESC)\n" + 
+				"				 		GROUP BY to_char(fecha, 'IW')\n" + 
+				"				 		ORDER BY semana ASC) t1,\n" + 
+				"				 		(SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
+				"				 			FROM RESERVASERVICIO rs, SERVICIO s, TIPOSERVICIO ts\n" + 
+				"				 			WHERE rs.estado = 1\n" + 
+				"				 				AND rs.dia BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 				AND rs.idServicio = s.id\n" + 
+				"                                AND s.idTipoServicio = ts.id\n" + 
+				"				 			GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
+				"				 			ORDER BY cantidad DESC) t2\n" + 
+				"				 WHERE t1.consumos = t2.cantidad\n" + 
+				"				 ORDER BY semana ASC;\n" + 
+				"";
 		
 
 		Query q = pm.newQuery(SQL, sql);

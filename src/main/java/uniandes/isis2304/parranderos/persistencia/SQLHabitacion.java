@@ -66,26 +66,26 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	
 	public List <Object[]> consultarFuncionamientoHabitacionMasSolicitada (PersistenceManager pm)
 	{
-		String sql = "SELECT DISTINCT nombre, solicitudes, semana"
-				+ "FROM (SELECT MAX (cantidad) as solicitudes, to_char(fecha, 'IW') as semana"
-				+ 		"FROM (SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
-				+ 				"FROM RESERVAHABITACION rh, TIPOHABITACION th"
-				+ 				"WHERE rh.estado = 1"
-				+ 					"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
-				+ 					"AND rh.idTipoHabitacion = th.id"
-				+ 				"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
-				+ 				"ORDER BY cantidad DESC)"
-				+ 		"GROUP BY to_char(fecha, 'IW')"
-				+ 		"ORDER BY semana ASC) t1,"
-				+ 		"(SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
-				+ 			"FROM RESERVAHABITACION rh, TIPOHABITACION th"
-				+ 			"WHERE rh.estado = 1"
-				+ 				"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
-				+ 				"AND rh.idTipoHabitacion = th.id"
-				+ 			"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
-				+ 			"ORDER BY cantidad DESC) t2"
-				+ "WHERE t1.solicitudes = t2.cantidad"
-				+ "ORDER BY semana ASC;";
+		String sql = "SELECT DISTINCT nombre, solicitudes, semana\n" + 
+				"				 FROM (SELECT MAX (cantidad) as solicitudes, to_char(to_date(fecha), 'IW') as semana\n" + 
+				"				 		FROM (SELECT DISTINCT COUNT(*) AS cantidad, rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha \n" + 
+				"				 				FROM RESERVAHABITACION rh, TIPOHABITACION th\n" + 
+				"				 				WHERE rh.estado = 1\n" + 
+				"				 					AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 					AND rh.idTipoHabitacion = th.id\n" + 
+				"				 				GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
+				"				 				ORDER BY cantidad DESC)\n" + 
+				"				 		GROUP BY to_char(to_date(fecha), 'IW')\n" + 
+				"				 		ORDER BY semana ASC) t1,\n" + 
+				"				 		(SELECT DISTINCT COUNT(*) AS cantidad, rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha\n" + 
+				"				 			FROM RESERVAHABITACION rh, TIPOHABITACION th\n" + 
+				"				 			WHERE rh.estado = 1\n" + 
+				"				 				AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 				AND rh.idTipoHabitacion = th.id\n" + 
+				"				 			GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
+				"				 			ORDER BY cantidad DESC) t2\n" + 
+				"				 WHERE t1.solicitudes = t2.cantidad\n" + 
+				"				 ORDER BY semana ASC;";
 		
 		
 		Query q = pm.newQuery(SQL, sql);
@@ -94,26 +94,26 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	
 	public List <Object[]> consultarFuncionamientoHabitacionMenosSolicitada (PersistenceManager pm)
 	{
-		String sql = "SELECT DISTINCT nombre, solicitudes, semana"
-				+ "FROM (SELECT MIN (cantidad) as solicitudes, to_char(fecha, 'IW') as semana"
-				+ 		"FROM (SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
-				+ 				"FROM RESERVAHABITACION rh, TIPOHABITACION th"
-				+ 				"WHERE rh.estado = 1"
-				+ 					"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
-				+ 					"AND rh.idTipoHabitacion = th.id"
-				+ 				"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
-				+ 				"ORDER BY cantidad DESC)"
-				+ 		"GROUP BY to_char(fecha, 'IW')"
-				+ 		"ORDER BY semana ASC) t1,"
-				+ 		"(SELECT DISTINCT COUNT(rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha) AS cantidad"
-				+ 			"FROM RESERVAHABITACION rh, TIPOHABITACION th"
-				+ 			"WHERE rh.estado = 1"
-				+ 				"AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'"
-				+ 				"AND rh.idTipoHabitacion = th.id"
-				+ 			"GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada"
-				+ 			"ORDER BY cantidad DESC) t2"
-				+ "WHERE t1.solicitudes = t2.cantidad"
-				+ "ORDER BY semana ASC;";
+		String sql = "SELECT DISTINCT nombre, solicitudes, semana\n" + 
+				"				 FROM (SELECT MIN (cantidad) as solicitudes, to_char(to_date(fecha), 'IW') as semana\n" + 
+				"				 		FROM (SELECT DISTINCT COUNT(*) AS cantidad, rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha \n" + 
+				"				 				FROM RESERVAHABITACION rh, TIPOHABITACION th\n" + 
+				"				 				WHERE rh.estado = 1\n" + 
+				"				 					AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 					AND rh.idTipoHabitacion = th.id\n" + 
+				"				 				GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
+				"				 				ORDER BY cantidad DESC)\n" + 
+				"				 		GROUP BY to_char(to_date(fecha), 'IW')\n" + 
+				"				 		ORDER BY semana ASC) t1,\n" + 
+				"				 		(SELECT DISTINCT COUNT(*) AS cantidad, rh.idTipoHabitacion AS id, th.nombre AS nombre, rh.fechaEntrada AS fecha\n" + 
+				"				 			FROM RESERVAHABITACION rh, TIPOHABITACION th\n" + 
+				"				 			WHERE rh.estado = 1\n" + 
+				"				 				AND rh.fechaEntrada BETWEEN '01/01/18' AND '31/12/18'\n" + 
+				"				 				AND rh.idTipoHabitacion = th.id\n" + 
+				"				 			GROUP BY rh.idTipoHabitacion, th.nombre, rh.fechaEntrada\n" + 
+				"				 			ORDER BY cantidad DESC) t2\n" + 
+				"				 WHERE t1.solicitudes = t2.cantidad\n" + 
+				"				 ORDER BY semana ASC;";
 		
 		
 		Query q = pm.newQuery(SQL, sql);

@@ -76,7 +76,11 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
 		sql += adicionar1;
 		sql+= "FROM" + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u, " + pha.getSqlReservaServicio() + " rs";
-		sql+= "WHERE c.idUsuario = u.id AND u.id = rs.idCliente AND rs.idServicio = ? AND rs.dia BETWEEN (?) AND (?)";
+		sql+= "WHERE c.idUsuario = u.id "
+			+ 	"AND u.id = rs.idCliente"
+			+ 	"AND rs.estado = 1"
+			+ 	"AND rs.idServicio = ? "
+			+ 	"AND rs.dia BETWEEN (?) AND (?)";
 		sql += adicionar2;
 		sql+= "ORDER BY ? ?";
 		
@@ -99,41 +103,48 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 			criterio = "rs.dia";
 		}
 		
-		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo";
-		sql+= "FROM" + pha.getSqlCliente() + " c, " + pha.getSqlUsuario() + " u";
-		sql+= "LEFT JOIN" + pha.getSqlReservaServicio()+ "rs ON c.idUsuario = rs.idClient";
-		sql+= "WHERE c.idUsuario = u.id AND rs.idServicio != ? AND rs.estado = 1 AND rs.dia BETWEEN (?) AND (?)";
-		sql+= "ORDER BY ? ?";
+		sql = "SELECT u.nombre, u.id, u.tipoDocumento, u.numeroDocumento, u.correo\n" + 
+				"FROM" + pha.getSqlUsuario()+" u, "+ pha.getSqlCliente() + " c, " + pha.getSqlReservaServicio()+" rs\n" + 
+				"WHERE u.id = c.idUsuario\n" + 
+				"    AND c.idUsuario = rs.idCliente\n" + 
+				"    AND rs.estado = 1\n" + 
+				"    AND rs.dia BETWEEN (?) AND (?)\n" + 
+				"    AND (SELECT COUNT (*)\n" + 
+				"        FROM Cliente cli, ReservaServicio rese\n" + 
+				"        WHERE cli.idusuario = rese.idCliente\n" + 
+				"            AND c.idUsuario = cli.idUsuario\n" + 
+				"            AND rese.idServicio = ?) =0\n" + 
+				"ORDER BY ? ?;";
 		
 		Query q = pm.newQuery(SQL,sql);
 		q.setResultClass(Cliente.class);
-		q.setParameters(idServicio, fechaInicio, fechaFin, criterio,criterioOrden);
+		q.setParameters(fechaInicio, fechaFin,idServicio, criterio,criterioOrden);
 		return (List<Cliente>) q.executeList();
 	}
 	
 	public List<Object[]> buenosClientes1(PersistenceManager pm)
 	{
-		String sql = "SELECT (*)"
-				+ 	"FROM (SELECT c.idUsuario as clienteBueno"
-				+ 			"FROM Cliente c, ReservaHabitacion rh"
-				+ 			"WHERE c.idUsuario = rh.idCliente"
-				+ 				"AND rh.fechaSalida < '29/05/19'"
-				+ 				"AND rh.estado = 1"
-				+ 				"AND EXTRACT (MONTH FROM rh.fechaEntrada) BETWEEN 1 AND 4) t1,"
-				+ 		"(SELECT c.idUsuario"
-				+ 			"FROM Cliente c, ReservaHabitacion rh"
-				+ 			"WHERE c.idUsuario = rh.idCliente"
-				+ 				"AND rh.fechaSalida < '29/05/19'"
-				+ 				"AND rh.estado = 1"
-				+ 				"AND EXTRACT (MONTH FROM rh.fechaEntrada) BETWEEN  5 AND 8) t2,"
-				+  		"(SELECT c.idUsuario"
-				+ 			"FROM Cliente c, ReservaHabitacion rh"
-				+ 			"WHERE c.idUsuario = rh.idCliente"
-				+ 				"AND rh.fechaSalida < '29/05/19'"
-				+ 				"AND rh.estado = 1"
-				+ 				"AND EXTRACT (MONTH FROM rh.fechaEntrada) BETWEEN 9 AND 12) t3"
-				+ 	"WHERE t1.idCliente = t2.idCliente"
-				+ 		"AND t2.idCliente = t3.idCliente;";
+		String sql = "SELECT clienteBueno1 AS BuenosClientes\n" + 
+				"FROM (SELECT c.idUsuario as clienteBueno1\n" + 
+				"    FROM Cliente c, ReservaHabitacion rh\n" + 
+				"    WHERE c.idUsuario = rh.idCliente\n" + 
+				"        AND rh.fechaSalida < '29/05/19'	\n" + 
+				"        AND rh.estado = 1\n" + 
+				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 1 AND 4) t1,\n" + 
+				"    (SELECT c.idUsuario as clienteBueno2\n" + 
+				"    FROM Cliente c, ReservaHabitacion rh\n" + 
+				"    WHERE c.idUsuario = rh.idCliente\n" + 
+				"        AND rh.fechaSalida < '29/05/19'\n" + 
+				"        AND rh.estado = 1\n" + 
+				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 5 AND 8) t2,\n" + 
+				"    (SELECT c.idUsuario as clienteBueno3\n" + 
+				"    FROM Cliente c, ReservaHabitacion rh\n" + 
+				"    WHERE c.idUsuario = rh.idCliente\n" + 
+				"        AND rh.fechaSalida < '29/05/19'\n" + 
+				"        AND rh.estado = 1\n" + 
+				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 9 AND 12) t3\n" + 
+				"WHERE clienteBueno1 = clienteBueno2\n" + 
+				"AND clienteBueno2 = clienteBueno3;";
 		
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();
@@ -141,13 +152,13 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	
 	public List<Object[]> buenosClientes2 (PersistenceManager pm)
 	{
-		String sql = "SELECT c.idUsuario"
-				+ 	"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s"
-				+ 	"WHERE c.idHabitacion = h.id"
-				+ 		"AND ch.idHabitacion =h.id"
-				+ 		"AND ch.id = chs.idConsumoHabitacion"
-				+ 		"AND chs.idServicio = s.id"
-				+ 		"AND s.costo >300000";
+		String sql = "SELECT c.idUsuario\n" + 
+				"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s\n" + 
+				"WHERE c.idHabitacion = h.id\n" + 
+				"    AND ch.id =h.idConsumoHabitacion\n" + 
+				"	AND ch.id = chs.idConsumoHabitacion\n" + 
+				"    AND chs.idServicio = s.id\n" + 
+				"    AND s.costo >100;";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();	
 	}
@@ -155,12 +166,14 @@ private final static String SQL = PersistenciaCadenaHotelera.SQL;
 	public List<Object[]> buenosClientes3 (PersistenceManager pm)
 	{
 		String sql = "SELECT c.idUsuario"
-				+ 	"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, TipoServicio ts"
-				+ 	"WHERE c.idHabitacion = h.id"
+				+ 	"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, TipoServicio ts, ReservaServicio rs"
+				+ 	"WHERE c.id = h.idConsumoHabitacion"
 				+ 		"AND ch.idHabitacion =h.id"
 				+ 		"AND ch.id = chs.idConsumoHabitacion"
 				+ 		"AND chs.idServicio = s.id"
 				+ 		"AND ts.id = s.idTipoServicio"
+				+ 		"AND rs.idCliente = c.idUsuario"
+				+ 		"AND rs.idServicio = s.id"
 				+ 		"AND ts.id = 8"
 				+ 		"OR ts.id = 11"
 				+ 		"AND rs.duracion > 240";
