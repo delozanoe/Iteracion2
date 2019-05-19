@@ -132,7 +132,8 @@ class SQLCLIENTE {
 					"    AND rs.dia BETWEEN (?) AND (?)\n" + 
 					"    AND (SELECT COUNT (*)\n " + 
 					"        FROM Cliente cli, ReservaServicio rese\n " + 
-					"        WHERE cli.idusuario = rese.idCliente\n" + 
+					"        WHERE cli.idusuario = rese.idCliente\n" +
+					"			AND rese.estado=1"+		
 					"            AND c.idUsuario = cli.idUsuario\n" + 
 					"            AND rese.idServicio = ?) =0\n" + 
 					" ORDER BY ? ASC;";

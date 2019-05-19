@@ -429,15 +429,50 @@ public class CadenaHotelera
 		
 	}
 	
-	public List<String[]> consultarFuncionamientoServicioMasConsumido()
+	//----------------------------------------------------------------------
+	//HABITACION EN C11
+	//--------------------------------------------------------
+	
+	/**
+	 * MAS SOLICITADA
+	 * @return
+	 */
+	public List<String[]> consultarFuncionamientoHabitacionMasSolicitada()
 	{
 		return pha.consultarFuncionamientoHabitacionMasSolicitada();
 	}
 	
-	public List<String[]> consultarFuncionamientoServicioMenosConsumido()
+	/**
+	 * MENOS SOLICITADA
+	 * @return
+	 */
+	public List<String[]> consultarFuncionamientoHabitacionMenosSolicitada()
 	{
 		return pha.consultarFuncionamientoHabitacionMenosSolicitada();
 	}
+	
+	//----------------------------------------------------------------
+	//SERVICIO
+	//----------------------------------------------------------------
+	
+	/**
+	 * MAS CONSUMIDO
+	 * @return
+	 */
+	public List<String[]> consultarFuncionamientoServicioMasConsumido()
+	{
+		return pha.consultarFuncionamientoServicioMasConsumido();
+	}
+	
+	/**
+	 * MENOS CONSUMIDO
+	 * @return
+	 */
+	public List<String[]> consultarFuncionamientoServicioMenosConsumido()
+	{
+		return pha.consultarFuncionamientoServicioMenosConsumido();
+	}
+	
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

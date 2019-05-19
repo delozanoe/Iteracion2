@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -50,11 +51,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import org.apache.log4j.Logger;
+import org.datanucleus.store.rdbms.table.Table;
 
 //import org.apache.log4j.Logger;
 
@@ -432,7 +438,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 		panelDatos.actualizarInterfaz(resultado);		
 	}
-	
+
 
 	public void reservarAlojamientoServicio()
 	{
@@ -477,7 +483,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			datosConvencion.add(combo);
 			datosConvencion.add(new JLabel("8. Selecione el hotel"));
 			datosConvencion.add(combo2);
-			
+
 			datosConvencion.setBorder(new TitledBorder("Datos requeridos"));
 
 			JCheckBox piscina = new JCheckBox("Piscina"); 
@@ -547,7 +553,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			if (result == JOptionPane.OK_OPTION)
 			{
-				
+
 
 				if (result != 0)
 				{
@@ -556,7 +562,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					tiposHabitacion.put(new Long(3),  new Long(Integer.parseInt(FAMILIAR.getText())));
 					tiposHabitacion.put(new Long(4),  new Long(Integer.parseInt(DOBLE.getText())));
 					tiposHabitacion.put(new Long(5),  new Long(Integer.parseInt(SENCILLA.getText())));
-					
+
 					if(piscina.isSelected())
 					{
 						tiposServicios.add(new Long(1));
@@ -607,7 +613,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 						tiposServicios.add(new Long(12));
 					}
 
-//					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
+					//					cadenaHotelera.registrarConvencion(tiposHabitacion, tiposServicios, tematica.getText(), new Long(Integer.parseInt(numeroParticipantes.getText())), convertirADate(fechaInicio.getText()), convertirADate(fechaFin.getText()), new BigDecimal(0), "T", "I", combo.getSelectedIndex(), combo2.getSelectedIndex()); 
 
 					String resultado = "En adicionarHabitacionesConvencion\n\n";
 					resultado += "Las habitaciones para convencion fue adicionada exitosamente: ";
@@ -1028,21 +1034,21 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			Date date2 = dateFormat.parse(fechafin);
 			long time2 = date2.getTime();
 			Timestamp fechaFin = new Timestamp(time2);
-			
+
 			String criterio = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento (ejemplo: identificación del cliente, fecha, numero de veces que utilizo el servicio):", "Consumo en SuperAndes", JOptionPane.QUESTION_MESSAGE);
 			String criterio2 = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento, ascendente (ASC) y descendente (DESC):", "Consumo en HotelAndes", JOptionPane.QUESTION_MESSAGE);
 
-			
+
 			//List<Cliente> lista = parranderos.consumo1(producto, fechainicio, fechafin, criterio, criterio2);
 
-//			if (lista != null){
-//			for (Cliente cliente: lista) {
-//				resp+=cliente.toString();
-//				 resp+="\n";
-//				
-//			}
-//			}
-//			panelDatos.actualizarInterfaz(resp);
+			//			if (lista != null){
+			//			for (Cliente cliente: lista) {
+			//				resp+=cliente.toString();
+			//				 resp+="\n";
+			//				
+			//			}
+			//			}
+			//			panelDatos.actualizarInterfaz(resp);
 			return resp;
 		}
 
@@ -1054,7 +1060,7 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		}
 		return resp;
 	}
-	
+
 	public String noConsumo()
 	{
 		String resp = "Los clientes que no consumieron ese producto son:\n";
@@ -1074,20 +1080,20 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			Date date2 = dateFormat.parse(fechafin);
 			long time2 = date2.getTime();
 			Timestamp fechaFin = new Timestamp(time2);
-			
+
 			String criterio = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento (ejemplo: identificación del cliente, fecha):", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
 			String criterio2 = JOptionPane.showInputDialog (this, "Ingrese el criterio de ordenamiento, ascendente (ASC) y descendente (DESC):", "Sin consumo Hotel Andes", JOptionPane.QUESTION_MESSAGE);
 
-			
-//			List<Cliente> lista = parranderos.consumo1(producto, fechainicio, fechafin, criterio, criterio2);
-//
-//			if (lista != null){
-//			for (Cliente cliente: lista) {
-//				resp+=cliente.toString();
-//				 resp+="\n";
-//				
-//			}
-//			}
+
+			//			List<Cliente> lista = parranderos.consumo1(producto, fechainicio, fechafin, criterio, criterio2);
+			//
+			//			if (lista != null){
+			//			for (Cliente cliente: lista) {
+			//				resp+=cliente.toString();
+			//				 resp+="\n";
+			//				
+			//			}
+			//			}
 			panelDatos.actualizarInterfaz(resp);
 			return resp;
 		}
@@ -1108,15 +1114,128 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	public void pocaDemandaServicios()
 	{
-		List<String []> masConsumido =cadenaHotelera.consultarFuncionamientoServicioMasConsumido();
-		for (String[] strings : masConsumido) {
-			for (String string : strings) {
-				System.out.println(string);
-			}
-		}
-		cadenaHotelera.consultarFuncionamientoServicioMenosConsumido();
+		JFrame ventana = new JFrame(); 
+		JPanel panel = new JPanel(new BorderLayout());
+		JPanel titulos= new JPanel(new GridLayout(0,2));
+		JPanel info= new JPanel(new GridLayout(0,2));
+		JPanel panelHabitaciones = new JPanel(new GridLayout(2,0));
+		JPanel panelServicios = new JPanel(new GridLayout(2,0));
+		//TITULO
+		JLabel tituloHabitaciones = new JLabel("Consultar el funcionamiento de las habitaciones");
+		JLabel tituloServicios = new JLabel("Consultar el funcionamiento de los servicios");
+
+		//Array de ‘String’ con los titulos de las COLUMNAS
+		String[] columnNamesHabitacion = {"Semana","Tipo Habitacion", "Solicitudes"};
+		String[] columnNamesServicio = {"Semana","Nombre" ,"Consumos"};
+
+
+
+		//LISTAS
+		List<String[]> habitacionesMas = cadenaHotelera.consultarFuncionamientoHabitacionMasSolicitada();
+		System.out.println(habitacionesMas.size()+ " HABITACIONES MAS SOLICITADAS");
+		
+		
+		List<String[]> habitacionesMenos = cadenaHotelera.consultarFuncionamientoHabitacionMenosSolicitada();
+		System.out.println(habitacionesMenos.size()+ " HABITACIONES MENOS SOLICITADAS");
+
+		List<String[]> serviciosMas = cadenaHotelera.consultarFuncionamientoServicioMasConsumido();
+		System.out.println(serviciosMas.size()+ " SERVICIOS MAS CONSUMIDOS");
+		
+		
+		List<String[]> serviciosMenos = cadenaHotelera.consultarFuncionamientoServicioMenosConsumido();
+		System.out.println(serviciosMenos.size()+ " SERVICIOS MENOS CONSUMIDOS");
+		//TABLAS		
+		Object[][] data =	{ { } };
+
+
+//
+		DefaultTableModel dtmHabiMax = new DefaultTableModel(data , columnNamesHabitacion);
+		DefaultTableModel dtmHabiMeno = new DefaultTableModel(data , columnNamesHabitacion);
+		
+		DefaultTableModel dtmServiMax = new DefaultTableModel(data , columnNamesServicio);
+		DefaultTableModel dtmServiMenos = new DefaultTableModel(data , columnNamesServicio);
+		
+		
+		JTable tablaHabitacionesMas = new JTable(dtmHabiMax);		
+		agregarTablaHabitacion(dtmHabiMax, habitacionesMas);
+
+		
+		JTable tablaHabitacionesMenos = new JTable(dtmHabiMeno);
+		agregarTablaHabitacion(dtmHabiMeno, habitacionesMenos);
+			
+		
+				
+		JTable tablaServicioMas = new JTable(dtmServiMax);
+		agregarTablaServicio(dtmServiMax, serviciosMas);
+
+
+		JTable tablaServicoMenos = new JTable(dtmServiMenos);
+		agregarTablaServicio(dtmServiMenos, serviciosMenos);
+		
+
+//		//Creamos un JscrollPane y le agregamos la JTable 
+
+		JScrollPane scrollPane1 = new JScrollPane(tablaHabitacionesMas);
+		JScrollPane scrollPane2 = new JScrollPane(tablaHabitacionesMenos);
+		
+		
+		JScrollPane scrollPane3 = new JScrollPane(tablaServicioMas);
+		JScrollPane scrollPane4 = new JScrollPane(tablaServicoMenos);	
+		//			
+		scrollPane1.setBorder(new TitledBorder("Tabla habitaciones mas solicitadas"));
+		scrollPane2.setBorder(new TitledBorder("Tabla habitaciones menos solicitadas"));
+		scrollPane3.setBorder(new TitledBorder("Tabla servicios mas consumidos"));
+		scrollPane4.setBorder(new TitledBorder("Tabla sevicios menos consumidos"));
+				
+
+
+		titulos.add(tituloHabitaciones);
+		titulos.add(tituloServicios);
+		panel.add(titulos, BorderLayout.NORTH);
+
+		panelHabitaciones.add(scrollPane1);
+		panelHabitaciones.add(scrollPane2);
+		//		
+		panelServicios.add(scrollPane3);
+		panelServicios.add(scrollPane4);
+		//		
+		info.add(panelHabitaciones);
+		info.add(panelServicios);
+
+		panel.add(info, BorderLayout.CENTER);
+
+
+		panel.setVisible(true);
+
+
+		ventana.add(panel);
+		ventana.setVisible(true);
+
 	}
 
+	private void agregarTablaHabitacion(DefaultTableModel dtm, List<String[]> param)
+	{
+		for (int j = 0; j < param.size(); j++)
+		{
+			String[] actual = param.get(j);
+
+
+			Object[] newRow = {actual[2], actual[0], actual[1]};
+			dtm.addRow(newRow);
+
+		}
+	}
+	private void agregarTablaServicio(DefaultTableModel dtm, List<String[]> param)
+	{
+		for (int j = 0; j < param.size(); j++)
+		{
+			String[] actual = param.get(j);	
+			Object[] newRow = {actual[3], actual[0], actual[2]};
+			dtm.addRow(newRow);
+
+
+		}
+	}
 	public void analizarHotelAndes()
 	{
 
@@ -1239,49 +1358,49 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	//METODOS PARA QUE LA INTERFAZ FUNCONE
 	public void  regReservaAlojamiento() 
 	{
-		
+
 	}
-	
+
 	public void regReservaServicio()
 	{
-		
+
 	}
-	
+
 	public void regUsuario() 
 	{
-		
+
 	}
-	
+
 	public void regTipoHabitacion()
 	{
-		
+
 	}
-	
+
 	public void regHabitacion()
 	{
-		
+
 	}
-	
+
 	public void regServHotel()
 	{
-		
+
 	}
-	
+
 	public void regPlanConsumo()
 	{
-		
+
 	}
-	
+
 	public void checkIn()
 	{
-		
+
 	}
-	
+
 	public void checkOut()
 	{
-		
+
 	}
-	
+
 	public void consumoHotelAndes()
 	{
 		//TODO CLIENTE
@@ -1293,21 +1412,21 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			JTabla table = null;
 			JLabel titulo = new JLabel("Seleccione el servicio");
 			List<Servicio> servicios = cadenaHotelera.darServicios();
-			
+
 			JLabel tituloCriterios = new JLabel("Seleccione el servicio");
 			String[] criterios = {"id", "fecha", "cantidad"};
 			JComboBox<String> criteriosCom = new JComboBox<>(criterios);
-			
-			
-//					cadenaHotelera.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+
+
+			//					cadenaHotelera.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
 			JTextField fechaInicio = new JTextField( );
 			JTextField fechaFinal = new JTextField( );
 			JCheckBox ascendente = new JCheckBox("Ascendente"); 
 			JCheckBox descendente = new JCheckBox("Descendente"); 
-			
+
 			JCheckBox queSI = new JCheckBox("Buscar clientes que consumieron"); 
 			JCheckBox queNO = new JCheckBox("Buscar clientes que NO consumieron"); 
-			
+
 			if(servicios.isEmpty())
 			{
 				System.out.println("Paila perro");
@@ -1324,30 +1443,30 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panel.add(combo);
 			panel.add(new JLabel(" Fecha inicio (Use el formato dd/mm/yyy):"));
 			panel.add(fechaInicio);
-			
+
 			panel.add(new JLabel("Fecha final (Use el formato dd/mm/yyy ):"));
 			panel.add(fechaFinal);
-			
+
 			panel.add(tituloCriterios);
 			panel.add(criteriosCom);
-			
+
 			panel.add(new JLabel("Seleciona el criterio de ordenamiento"));
 			panel.add(ascendente);
 			panel.add(descendente);
-			
+
 			panel.add(new JLabel("Seleciona que tipo de cliente desea buscar"));
 			panel.add(queSI);
 			panel.add(queNO);
-			
+
 			int result = JOptionPane.showConfirmDialog(null, panel, "Consultar consumo",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-			
+
 			if (result == JOptionPane.OK_OPTION)
 			{
-				
+
 				if(result == 0)
 				{
-					
+
 					String orden  = "";
 					if(ascendente.isSelected())
 					{
@@ -1363,17 +1482,17 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 					}
 					else 
 						if(queNO.isSelected()) 
-					{
-						System.out.println("QUE NO");
-						respuesta= cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
-					}
-					else
-					{
-						panelDatos.actualizarInterfaz("DEBE SELECIONAR UN TIPO DE BUSQUEDA");
-					}
+						{
+							System.out.println("QUE NO");
+							respuesta= cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
+						}
+						else
+						{
+							panelDatos.actualizarInterfaz("DEBE SELECIONAR UN TIPO DE BUSQUEDA");
+						}
 					panelDatos.actualizarInterfaz("Se encontraron un total de: "+ respuesta.size()+ " cliente"); 
 					table = new JTabla(respuesta);
-					 System.out.println("ACABO");
+					System.out.println("ACABO");
 				}
 				//LA TABLA
 				table.pack();
@@ -1391,9 +1510,9 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
-	
-	
+
+
+
 	private  Timestamp convertirTimeStap(String fecha)
 	{
 
@@ -1407,65 +1526,65 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 		}
 		return timestamp;
 	}
-	
+
 	public void reservarConsumoServicio()
 	{
-		
+
 	}
-	
+
 	public void recolectadoPorHabitacion()
 	{
-		
+
 	}
-	
+
 	public void servPopulares()
 	{
-		
+
 	}
-	
+
 	public void indiceOcupacion()
 	{
-		
+
 	}
-	
+
 	public void serCaracteristica()
 	{
-		
+
 	}
-	
+
 	public void consumoUsuario()
 	{
-		
+
 	}
-	
+
 	public void servPocaDemanda()
 	{
-		
+
 	}
-	
+
 	public void buenosClientesP1()
 	{
-		
+
 	}
-	
+
 	public void buenosClientesP2()
 	{
-		
+
 	}
-	
+
 	public void buenosClientesP3()
 	{
-		
+
 	}
-	
+
 	public void login()
 	{
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/* ****************************************************************
 	 * 			Programa principal
 	 *****************************************************************/

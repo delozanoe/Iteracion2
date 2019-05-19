@@ -51,6 +51,7 @@ class SQLServicio
 	
 	public List <Object[]> consultarFuncionamientoServicioMasConsumido (PersistenceManager pm)
 	{
+//		String sql ="SELEC * FROM SERVICIO1";
 		String sql = "SELECT DISTINCT nombre,id,tipoServicio,consumos, semana\n" + 
 				"				 FROM (SELECT MAX (cantidad) as consumos, to_char(fecha, 'IW') as semana\n" + 
 				"						FROM (SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
@@ -72,7 +73,7 @@ class SQLServicio
 				"				 			GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
 				"				 			ORDER BY cantidad DESC) t2\n" + 
 				"				 WHERE t1.consumos = t2.cantidad\n" + 
-				"				 ORDER BY semana ASC;\n" + 
+				"				 ORDER BY semana ASC\n" + 
 				"";
 		
 		
@@ -82,6 +83,7 @@ class SQLServicio
 	
 	public List <Object[]> consultarFuncionamientoServicioMenosConsumido (PersistenceManager pm)
 	{
+//		String sql ="SELEC * FROM SERVICIO";
 		String sql = "SELECT DISTINCT nombre,id,tipoServicio,consumos, semana\n" + 
 				"				 FROM (SELECT MIN (cantidad) as consumos, to_char(fecha, 'IW') as semana\n" + 
 				"						FROM (SELECT DISTINCT COUNT(*) AS cantidad, rs.idServicio AS id, s.nombre AS nombre, rs.dia AS fecha, ts.nombre AS tipoServicio\n" + 
@@ -103,7 +105,7 @@ class SQLServicio
 				"				 			GROUP BY rs.idServicio, s.nombre, rs.dia, ts.nombre\n" + 
 				"				 			ORDER BY cantidad DESC) t2\n" + 
 				"				 WHERE t1.consumos = t2.cantidad\n" + 
-				"				 ORDER BY semana ASC;\n" + 
+				"				 ORDER BY semana ASC\n" + 
 				"";
 		
 

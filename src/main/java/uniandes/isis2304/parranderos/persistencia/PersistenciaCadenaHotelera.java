@@ -123,23 +123,39 @@ public class PersistenciaCadenaHotelera
 		crearClasesSQL();
 
 		tablas = new LinkedList<String>();
+		//0
 		tablas.add("CadenaHotelera_sequence");
+		//1
 		tablas.add("CLIENTE");
+		//2
 		tablas.add("CONSUMOPORHABITACION");
+		//03
 		tablas.add("CONSUMOHABITACIONSERVICIO");
+		//04
 		tablas.add("CONVENCION");
+		//5
 		tablas.add("CONVENCIONCLIENTE");
+		//6
 		tablas.add("CONVENCIONHOTEL");
+		//7
 		tablas.add("EMPLEADO");
+		//8
 		tablas.add("HABITACION");
+		//9
 		tablas.add("HOTEL");
+		//10
 		tablas.add("MANTENIMIENTO");
+		//11
 		tablas.add("PLANCONSUMO");
+		//12
 		tablas.add("PLANCONSUMOSERVICIO");
+		//13
 		tablas.add("PRODUCTO");
-		
+		//14
 		tablas.add("PRODUCTOCONSUMOHABITACION");
+		//15
 		tablas.add("RESERVAHABITACION");
+		//16
 		tablas.add("RESERVASERVICIO");
 		
 		tablas.add("SERVICIO");
@@ -299,7 +315,7 @@ public class PersistenciaCadenaHotelera
 	}
 
 	public String getSqlReservaServicio() {
-		return tablas.get(15);
+		return tablas.get(16);
 	}
 
 	public String getSqlReservaHabitacion() {
@@ -311,12 +327,12 @@ public class PersistenciaCadenaHotelera
 	}
 
 	public String getSqlServicioConsumo() {
-		return tablas.get(17);
+		return tablas.get(18);
 	}
 
 	public String getSqlServicioProducto()
 	{
-		return tablas.get(18);
+		return tablas.get(19);
 	}
 
 	public String getSqlUsuario() {
@@ -2197,9 +2213,9 @@ public class PersistenciaCadenaHotelera
 			String [] datosResp = new String[5];
 
 			datosResp [0] = tupla [0].toString(); // nombre servicio
-			datosResp [1] = tupla [1].toString(); // nombre tipo de servicio
-			datosResp [2] = tupla [2].toString(); // consumos
-			datosResp [3] = tupla [3].toString(); // semana
+			datosResp [1] = tupla [2].toString(); // nombre tipo de servicio
+			datosResp [2] = tupla [3].toString(); // consumos
+			datosResp [3] = tupla [4].toString(); // semana
 			resp.add(datosResp);
 		}
 		return resp;
@@ -2222,9 +2238,9 @@ public class PersistenciaCadenaHotelera
 			String [] datosResp = new String[5];
 
 			datosResp [0] = tupla [0].toString(); // nombre servicio
-			datosResp [1] = tupla [1].toString(); // nombre tipo de servicio
-			datosResp [2] = tupla [2].toString(); // consumos
-			datosResp [3] = tupla [3].toString(); // semana
+			datosResp [1] = tupla [2].toString(); // nombre tipo de servicio
+			datosResp [2] = tupla [3].toString(); // consumos
+			datosResp [3] = tupla [4].toString(); // semana
 			resp.add(datosResp);
 		}
 		return resp;
