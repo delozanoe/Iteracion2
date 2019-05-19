@@ -2281,7 +2281,8 @@ public class PersistenciaCadenaHotelera
 		{
 			long[] datosResp = new long [2];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente	
+			datosResp[1] = 1; // razon
 			resp.add(datosResp);
 		}
 		
@@ -2297,7 +2298,8 @@ public class PersistenciaCadenaHotelera
 		{
 			long[] datosResp = new long [2];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente
+			datosResp[1] = 2; // razon
 			resp.add(datosResp);
 		}
 		
@@ -2313,7 +2315,8 @@ public class PersistenciaCadenaHotelera
 		{
 			long[] datosResp = new long [2];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente		
+			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente	
+			datosResp[1] = 3; // razon
 			resp.add(datosResp);
 		}
 		
