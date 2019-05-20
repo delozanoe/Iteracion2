@@ -2307,42 +2307,47 @@ public class PersistenciaCadenaHotelera
 			datosResp[1] = tupla[1].toString(); // nombre del cliente
 			datosResp[2] = tupla[2].toString(); // correo del cliente
 			datosResp[3] = tupla[3].toString(); // tipo de documento del cliente
-			datosResp[4] = tupla[4].toString(); // numero de documento del cliente
-			datosResp[5] = "Por hospedarse en 3 trimestres"; // razon
+			datosResp[4] = "Por hospedarse en 3 trimestres"; // razon
 			resp.add(datosResp);
 		}
 		
 		return resp;
 	}
 	
-	public List<long []> buenosClientes2()
+	public List<String []> buenosClientes2()
 	{
-		List<long[]> resp = new LinkedList <long[]>();
+		List<String[]> resp = new LinkedList <String[]>();
 		List<Object[]> tuplas = sqlCliente.buenosClientes2(pmf.getPersistenceManager());
 		
 		for(Object [] tupla: tuplas)
 		{
-			long[] datosResp = new long [2];
+			String[] datosResp = new String [5];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente
-			datosResp[1] = 2; // razon
+			datosResp[0] = tupla[0].toString(); //id del cliente	
+			datosResp[1] = tupla[1].toString(); // nombre del cliente
+			datosResp[2] = tupla[2].toString(); // correo del cliente
+			datosResp[3] = tupla[3].toString(); // tipo de documento del cliente
+			datosResp[4] = "Por usar servicios con costo mayores a 300"; // razon
 			resp.add(datosResp);
 		}
 		
 		return resp;
 	}
 	
-	public List<long []> buenosClientes3()
+	public List<String []> buenosClientes3()
 	{
-		List<long[]> resp = new LinkedList <long[]>();
+		List<String[]> resp = new LinkedList <String[]>();
 		List<Object[]> tuplas = sqlCliente.buenosClientes3(pmf.getPersistenceManager());
 		
 		for(Object [] tupla: tuplas)
 		{
-			long[] datosResp = new long [2];
+			String[] datosResp = new String [5];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente	
-			datosResp[1] = 3; // razon
+			datosResp[0] = tupla[0].toString(); //id del cliente	
+			datosResp[1] = tupla[1].toString(); // nombre del cliente
+			datosResp[2] = tupla[2].toString(); // correo del cliente
+			datosResp[3] = tupla[3].toString(); // tipo de documento del cliente
+			datosResp[4] = "Por consumo de spa o salones de reuniones por mas de 4 horas"; // razon
 			resp.add(datosResp);
 		}
 		

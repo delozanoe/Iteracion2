@@ -162,7 +162,7 @@ class SQLCLIENTE {
 
 	public List<Object[]> buenosClientes1(PersistenceManager pm)
 	{
-		String sql = "SELECT clienteBueno1 AS BuenosClientes, u.nombre, u.correo, u.tipodocumento, u.numerodocumento \n" + 
+		String sql = "SELECT DISTINCT clienteBueno1 AS BuenosClientes, u.nombre, u.correo, u.tipodocumento \n" + 
 				"				FROM (SELECT c.idUsuario as clienteBueno1 \n" + 
 				"				    FROM Cliente c, ReservaHabitacion rh\n" + 
 				"				    WHERE c.idUsuario = rh.idCliente \n" + 
@@ -192,31 +192,33 @@ class SQLCLIENTE {
 
 	public List<Object[]> buenosClientes2 (PersistenceManager pm)
 	{
-		String sql = "SELECT c.idUsuario\n" + 
-				"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s\n" + 
-				"WHERE c.idHabitacion = h.id\n" + 
-				"    AND ch.id =h.idConsumoHabitacion\n" + 
-				"	AND ch.id = chs.idConsumoHabitacion\n" + 
-				"    AND chs.idServicio = s.id\n" + 
-				"    AND s.costo >100;";
+		String sql = "SELECT DISTINCT c.idUsuario, u.nombre, u.correo, u.tipodocumento\n" + 
+				"				FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, Usuario u \n" + 
+				"				WHERE c.idHabitacion = h.id\n" + 
+				"				    AND ch.id =h.idConsumoHabitacion \n" + 
+				"					AND ch.id = chs.idConsumoHabitacion\n" + 
+				"				    AND chs.idServicio = s.id\n" + 
+				"                    AND c.idUsuario = u.id\n" + 
+				"				    AND s.costo >100";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();	
 	}
 
 	public List<Object[]> buenosClientes3 (PersistenceManager pm)
 	{
-		String sql = "SELECT c.idUsuario"
-				+ 	"FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, TipoServicio ts, ReservaServicio rs"
-				+ 	"WHERE c.id = h.idConsumoHabitacion"
-				+ 		"AND ch.idHabitacion =h.id"
-				+ 		"AND ch.id = chs.idConsumoHabitacion"
-				+ 		"AND chs.idServicio = s.id"
-				+ 		"AND ts.id = s.idTipoServicio"
-				+ 		"AND rs.idCliente = c.idUsuario"
-				+ 		"AND rs.idServicio = s.id"
-				+ 		"AND ts.id = 8"
-				+ 		"OR ts.id = 11"
-				+ 		"AND rs.duracion > 240";
+		String sql = "SELECT DISTINCT c.idUsuario, u.nombre, u.correo, u.tipodocumento\n" + 
+				"				 	FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, TipoServicio ts, ReservaServicio rs,Usuario u\n" + 
+				"				 	WHERE c.idUsuario = h.idConsumoHabitacion\n" + 
+				"				 		AND ch.id =h.idConsumoHabitacion\n" + 
+				"				 		AND ch.id = chs.idConsumoHabitacion\n" + 
+				"				 		AND chs.idServicio = s.id\n" + 
+				"				 		AND ts.id = s.idTipoServicio\n" + 
+				"				 		AND rs.idCliente = c.idUsuario\n" + 
+				"                        AND c.idUsuario = u.id\n" + 
+				"				 		AND rs.idServicio = s.id\n" + 
+				"				 		AND ts.id = 8\n" + 
+				"				 		OR ts.id = 11\n" + 
+				"                        AND rs.duracion > 240 ";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();	
 	}
