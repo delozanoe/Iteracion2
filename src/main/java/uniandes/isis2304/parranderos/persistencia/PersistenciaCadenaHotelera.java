@@ -2294,17 +2294,21 @@ public class PersistenciaCadenaHotelera
 		return resp;
 	}
 	
-	public List<long []> buenosClientes1()
+	public List<String []> buenosClientes1()
 	{
-		List<long[]> resp = new LinkedList <long[]>();
+		List<String[]> resp = new LinkedList <String[]>();
 		List<Object[]> tuplas = sqlCliente.buenosClientes1(pmf.getPersistenceManager());
 		
 		for(Object [] tupla: tuplas)
 		{
-			long[] datosResp = new long [2];
+			String[] datosResp = new String [5];
 			
-			datosResp[0] = Long.parseLong(((String)tupla [0])); //id del cliente	
-			datosResp[1] = 1; // razon
+			datosResp[0] = tupla[0].toString(); //id del cliente	
+			datosResp[1] = tupla[1].toString(); // nombre del cliente
+			datosResp[2] = tupla[2].toString(); // correo del cliente
+			datosResp[3] = tupla[3].toString(); // tipo de documento del cliente
+			datosResp[4] = tupla[4].toString(); // numero de documento del cliente
+			datosResp[5] = "Por hospedarse en 3 trimestres"; // razon
 			resp.add(datosResp);
 		}
 		

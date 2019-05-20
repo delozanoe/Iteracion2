@@ -162,27 +162,29 @@ class SQLCLIENTE {
 
 	public List<Object[]> buenosClientes1(PersistenceManager pm)
 	{
-		String sql = "SELECT clienteBueno1 AS BuenosClientes\n" + 
-				"FROM (SELECT c.idUsuario as clienteBueno1\n" + 
-				"    FROM Cliente c, ReservaHabitacion rh\n" + 
-				"    WHERE c.idUsuario = rh.idCliente\n" + 
-				"        AND rh.fechaSalida < '29/05/19'	\n" + 
-				"        AND rh.estado = 1\n" + 
-				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 1 AND 4) t1,\n" + 
-				"    (SELECT c.idUsuario as clienteBueno2\n" + 
-				"    FROM Cliente c, ReservaHabitacion rh\n" + 
-				"    WHERE c.idUsuario = rh.idCliente\n" + 
-				"        AND rh.fechaSalida < '29/05/19'\n" + 
-				"        AND rh.estado = 1\n" + 
-				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 5 AND 8) t2,\n" + 
-				"    (SELECT c.idUsuario as clienteBueno3\n" + 
-				"    FROM Cliente c, ReservaHabitacion rh\n" + 
-				"    WHERE c.idUsuario = rh.idCliente\n" + 
-				"        AND rh.fechaSalida < '29/05/19'\n" + 
-				"        AND rh.estado = 1\n" + 
-				"        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 9 AND 12) t3\n" + 
-				"WHERE clienteBueno1 = clienteBueno2\n" + 
-				"AND clienteBueno2 = clienteBueno3;";
+		String sql = "SELECT clienteBueno1 AS BuenosClientes, u.nombre, u.correo, u.tipodocumento, u.numerodocumento \n" + 
+				"				FROM (SELECT c.idUsuario as clienteBueno1 \n" + 
+				"				    FROM Cliente c, ReservaHabitacion rh\n" + 
+				"				    WHERE c.idUsuario = rh.idCliente \n" + 
+				"				        AND rh.fechaSalida < '29/05/19'	 \n" + 
+				"				        AND rh.estado = 1 \n" + 
+				"				        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 1 AND 4) t1, \n" + 
+				"				    (SELECT c.idUsuario as clienteBueno2\n" + 
+				"				    FROM Cliente c, ReservaHabitacion rh \n" + 
+				"				    WHERE c.idUsuario = rh.idCliente \n" + 
+				"				        AND rh.fechaSalida < '29/05/19'\n" + 
+				"				        AND rh.estado = 1\n" + 
+				"				        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 5 AND 8) t2, \n" + 
+				"				    (SELECT c.idUsuario as clienteBueno3 \n" + 
+				"				    FROM Cliente c, ReservaHabitacion rh \n" + 
+				"				    WHERE c.idUsuario = rh.idCliente \n" + 
+				"				        AND rh.fechaSalida < '29/05/19'\n" + 
+				"				        AND rh.estado = 1\n" + 
+				"				        AND (EXTRACT (MONTH FROM to_date(rh.fechaEntrada, 'dd/mm/yyyy')))  BETWEEN 9 AND 12) t3, \n" + 
+				"                        Usuario u\n" + 
+				"				WHERE clienteBueno1 = clienteBueno2\n" + 
+				"                    AND clienteBueno2 = clienteBueno3\n" + 
+				"                    AND clienteBueno1 = u.id";
 
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();
