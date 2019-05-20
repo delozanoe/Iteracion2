@@ -388,3 +388,7 @@ ORA-01841: el valor (completo) del año debe estar entre -4713 y +9999, y no deb
 20:50:47,187 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
 21:12:54,731 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
 21:12:54,753 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:32:32,497 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+21:32:32,519 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:35:16,925 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Interfaz
+21:35:16,954 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazHotelAndessApp] - Se encontró un archivo de configuración válido: Tablas BD

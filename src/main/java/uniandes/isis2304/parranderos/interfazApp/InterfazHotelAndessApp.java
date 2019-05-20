@@ -1752,6 +1752,11 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			receptionista = false;
 			organizador= false; 
 			gerentegeneral= false;
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Bienvenido gerente-monitor.\n"
+					+ "Esperamos que la des toda en tu trabajo con nosotros en Hotel Andes! \n"
+					+ "Recuerda tratar a tus empleados como te gustaria que te trataran a ti", "Confirmar salida", JOptionPane.OK_OPTION);
 		}
 		else if(seleccion.equals(GERETNEGENERAL))
 		{
@@ -1759,6 +1764,10 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			receptionista = false;
 			organizador= false; 
 			gerentegeneral= true;
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Bienvenido al crack de cracks.\n"
+					+ "Recuerda todo esto es tuyo asi que dala con toda para ser mas grandes!", "Confirmar salida", JOptionPane.OK_OPTION);
 		}
 		else if(seleccion.equals(ORGANIZADOR))
 		{
@@ -1766,6 +1775,10 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			receptionista = false;
 			organizador= true; 
 			gerentegeneral= false;
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Bienvenido organizador.\n"
+					+ "Te agradecemos por alegirnos para hacer tu evento, esperamos tengas la mejor experiencia con nosotros.", "Confirmar salida", JOptionPane.OK_OPTION);
 		}
 		else if(seleccion.equals(RECEPCIONISTA))
 		{
@@ -1773,6 +1786,11 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 			receptionista = true;
 			organizador= false; 
 			gerentegeneral= false;
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Bienvenido recepcionista	.\n"
+					+ "Esperamos que la des toda en tu trabajo con nosotros en Hotel Andes!", "Confirmar salida", JOptionPane.OK_OPTION);
+			
 		}
 		else
 		{
