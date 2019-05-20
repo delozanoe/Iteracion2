@@ -108,6 +108,17 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	 */
 	private static final String CONFIG_TABLAS = "./src/main/resources/config/TablaBD_A.json"; 
 
+	private static final String GERENTE ="GERENTE1234";
+
+	private static final String RECEPCIONISTA ="RECEPCION1234";
+
+	private static final String ORGANIZADOR = "ORGANIZADOR";
+
+	private static final String GERETNEGENERAL = "SOYELMASTER";
+
+	private boolean gerente, receptionista, organizador, gerentegeneral;
+
+
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
@@ -1112,130 +1123,6 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	}
 
-	public void pocaDemandaServicios()
-	{
-		JFrame ventana = new JFrame(); 
-		JPanel panel = new JPanel(new BorderLayout());
-		JPanel titulos= new JPanel(new GridLayout(0,2));
-		JPanel info= new JPanel(new GridLayout(0,2));
-		JPanel panelHabitaciones = new JPanel(new GridLayout(2,0));
-		JPanel panelServicios = new JPanel(new GridLayout(2,0));
-		//TITULO
-		JLabel tituloHabitaciones = new JLabel("Consultar el funcionamiento de las habitaciones");
-		JLabel tituloServicios = new JLabel("Consultar el funcionamiento de los servicios");
-
-		//Array de ‘String’ con los titulos de las COLUMNAS
-		String[] columnNamesHabitacion = {"Semana","Tipo Habitacion", "Solicitudes"};
-		String[] columnNamesServicio = {"Semana","Nombre" ,"Consumos"};
-
-
-
-		//LISTAS
-		List<String[]> habitacionesMas = cadenaHotelera.consultarFuncionamientoHabitacionMasSolicitada();
-		System.out.println(habitacionesMas.size()+ " HABITACIONES MAS SOLICITADAS");
-		
-		
-		List<String[]> habitacionesMenos = cadenaHotelera.consultarFuncionamientoHabitacionMenosSolicitada();
-		System.out.println(habitacionesMenos.size()+ " HABITACIONES MENOS SOLICITADAS");
-
-		List<String[]> serviciosMas = cadenaHotelera.consultarFuncionamientoServicioMasConsumido();
-		System.out.println(serviciosMas.size()+ " SERVICIOS MAS CONSUMIDOS");
-		
-		
-		List<String[]> serviciosMenos = cadenaHotelera.consultarFuncionamientoServicioMenosConsumido();
-		System.out.println(serviciosMenos.size()+ " SERVICIOS MENOS CONSUMIDOS");
-		//TABLAS		
-		Object[][] data =	{ { } };
-
-
-//
-		DefaultTableModel dtmHabiMax = new DefaultTableModel(data , columnNamesHabitacion);
-		DefaultTableModel dtmHabiMeno = new DefaultTableModel(data , columnNamesHabitacion);
-		
-		DefaultTableModel dtmServiMax = new DefaultTableModel(data , columnNamesServicio);
-		DefaultTableModel dtmServiMenos = new DefaultTableModel(data , columnNamesServicio);
-		
-		
-		JTable tablaHabitacionesMas = new JTable(dtmHabiMax);		
-		agregarTablaHabitacion(dtmHabiMax, habitacionesMas);
-
-		
-		JTable tablaHabitacionesMenos = new JTable(dtmHabiMeno);
-		agregarTablaHabitacion(dtmHabiMeno, habitacionesMenos);
-			
-		
-				
-		JTable tablaServicioMas = new JTable(dtmServiMax);
-		agregarTablaServicio(dtmServiMax, serviciosMas);
-
-
-		JTable tablaServicoMenos = new JTable(dtmServiMenos);
-		agregarTablaServicio(dtmServiMenos, serviciosMenos);
-		
-
-//		//Creamos un JscrollPane y le agregamos la JTable 
-
-		JScrollPane scrollPane1 = new JScrollPane(tablaHabitacionesMas);
-		JScrollPane scrollPane2 = new JScrollPane(tablaHabitacionesMenos);
-		
-		
-		JScrollPane scrollPane3 = new JScrollPane(tablaServicioMas);
-		JScrollPane scrollPane4 = new JScrollPane(tablaServicoMenos);	
-		//			
-		scrollPane1.setBorder(new TitledBorder("Tabla habitaciones mas solicitadas"));
-		scrollPane2.setBorder(new TitledBorder("Tabla habitaciones menos solicitadas"));
-		scrollPane3.setBorder(new TitledBorder("Tabla servicios mas consumidos"));
-		scrollPane4.setBorder(new TitledBorder("Tabla sevicios menos consumidos"));
-				
-
-
-		titulos.add(tituloHabitaciones);
-		titulos.add(tituloServicios);
-		panel.add(titulos, BorderLayout.NORTH);
-
-		panelHabitaciones.add(scrollPane1);
-		panelHabitaciones.add(scrollPane2);
-		//		
-		panelServicios.add(scrollPane3);
-		panelServicios.add(scrollPane4);
-		//		
-		info.add(panelHabitaciones);
-		info.add(panelServicios);
-
-		panel.add(info, BorderLayout.CENTER);
-
-
-		panel.setVisible(true);
-
-
-		ventana.add(panel);
-		ventana.setVisible(true);
-
-	}
-
-	private void agregarTablaHabitacion(DefaultTableModel dtm, List<String[]> param)
-	{
-		for (int j = 0; j < param.size(); j++)
-		{
-			String[] actual = param.get(j);
-
-
-			Object[] newRow = {actual[2], actual[0], actual[1]};
-			dtm.addRow(newRow);
-
-		}
-	}
-	private void agregarTablaServicio(DefaultTableModel dtm, List<String[]> param)
-	{
-		for (int j = 0; j < param.size(); j++)
-		{
-			String[] actual = param.get(j);	
-			Object[] newRow = {actual[3], actual[0], actual[2]};
-			dtm.addRow(newRow);
-
-
-		}
-	}
 	public void analizarHotelAndes()
 	{
 
@@ -1404,113 +1291,261 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 	public void consumoHotelAndes()
 	{
 		//TODO CLIENTE
-		try
-		{
-			List<Cliente> respuesta = null;
-			JPanel panel = new  JPanel(new GridLayout(0, 1 ));
-			JPanel panelRespuesta = new  JPanel(new GridLayout(0, 1 ));
-			JTabla table = null;
-			JLabel titulo = new JLabel("Seleccione el servicio");
-			List<Servicio> servicios = cadenaHotelera.darServicios();
-
-			JLabel tituloCriterios = new JLabel("Seleccione el servicio");
-			String[] criterios = {"id", "fecha", "cantidad"};
-			JComboBox<String> criteriosCom = new JComboBox<>(criterios);
-
-
-			//					cadenaHotelera.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
-			JTextField fechaInicio = new JTextField( );
-			JTextField fechaFinal = new JTextField( );
-			JCheckBox ascendente = new JCheckBox("Ascendente"); 
-			JCheckBox descendente = new JCheckBox("Descendente"); 
-
-			JCheckBox queSI = new JCheckBox("Buscar clientes que consumieron"); 
-			JCheckBox queNO = new JCheckBox("Buscar clientes que NO consumieron"); 
-
-			if(servicios.isEmpty())
+		if(receptionista == true || gerente == true || organizador== true) {
+			try
 			{
-				System.out.println("Paila perro");
-			}
-			String[] items = new String[servicios.size()];
-			for (int i = 0; i < servicios.size(); i++) 
-			{
-				items[i] = servicios.get(i).getNombre();
-			}
+				List<Cliente> respuesta = null;
+				JPanel panel = new  JPanel(new GridLayout(0, 1 ));
+				JPanel panelRespuesta = new  JPanel(new GridLayout(0, 1 ));
+				JTabla table = null;
+				JLabel titulo = new JLabel("Seleccione el servicio");
+				List<Servicio> servicios = cadenaHotelera.darServicios();
 
-			JComboBox<String> combo = new JComboBox<>(items);
+				JLabel tituloCriterios = new JLabel("Seleccione el servicio");
+				String[] criterios = {"id", "fecha", "cantidad"};
+				JComboBox<String> criteriosCom = new JComboBox<>(criterios);
 
-			panel.add(titulo);
-			panel.add(combo);
-			panel.add(new JLabel(" Fecha inicio (Use el formato dd/mm/yyy):"));
-			panel.add(fechaInicio);
 
-			panel.add(new JLabel("Fecha final (Use el formato dd/mm/yyy ):"));
-			panel.add(fechaFinal);
+				//					cadenaHotelera.darClientesHanConsumido(idServicio, fechaInicio, fechaFin, criterio, criterioOrden);
+				JTextField fechaInicio = new JTextField( );
+				JTextField fechaFinal = new JTextField( );
+				JCheckBox ascendente = new JCheckBox("Ascendente"); 
+				JCheckBox descendente = new JCheckBox("Descendente"); 
 
-			panel.add(tituloCriterios);
-			panel.add(criteriosCom);
+				JCheckBox queSI = new JCheckBox("Buscar clientes que consumieron"); 
+				JCheckBox queNO = new JCheckBox("Buscar clientes que NO consumieron"); 
 
-			panel.add(new JLabel("Seleciona el criterio de ordenamiento"));
-			panel.add(ascendente);
-			panel.add(descendente);
+				if(servicios.isEmpty())
+				{
+					System.out.println("Paila perro");
+				}
+				String[] items = new String[servicios.size()];
+				for (int i = 0; i < servicios.size(); i++) 
+				{
+					items[i] = servicios.get(i).getNombre();
+				}
 
-			panel.add(new JLabel("Seleciona que tipo de cliente desea buscar"));
-			panel.add(queSI);
-			panel.add(queNO);
+				JComboBox<String> combo = new JComboBox<>(items);
 
-			int result = JOptionPane.showConfirmDialog(null, panel, "Consultar consumo",
-					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				panel.add(titulo);
+				panel.add(combo);
+				panel.add(new JLabel(" Fecha inicio (Use el formato dd/mm/yyy):"));
+				panel.add(fechaInicio);
 
-			if (result == JOptionPane.OK_OPTION)
-			{
+				panel.add(new JLabel("Fecha final (Use el formato dd/mm/yyy ):"));
+				panel.add(fechaFinal);
 
-				if(result == 0)
+				panel.add(tituloCriterios);
+				panel.add(criteriosCom);
+
+				panel.add(new JLabel("Seleciona el criterio de ordenamiento"));
+				panel.add(ascendente);
+				panel.add(descendente);
+
+				panel.add(new JLabel("Seleciona que tipo de cliente desea buscar"));
+				panel.add(queSI);
+				panel.add(queNO);
+
+				int result = JOptionPane.showConfirmDialog(null, panel, "Consultar consumo",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+				if (result == JOptionPane.OK_OPTION)
 				{
 
-					String orden  = "";
-					if(ascendente.isSelected())
+					if(result == 0)
 					{
-						orden = "asc";
-					}
-					else
-					{
-						orden = "dsc";
-					}
-					if(queSI.isSelected()) {
-						System.out.println("QUE SI");
-						respuesta = cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);	
-					}
-					else 
-						if(queNO.isSelected()) 
+
+						String orden  = "";
+						if(ascendente.isSelected())
 						{
-							System.out.println("QUE NO");
-							respuesta= cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
+							orden = "asc";
 						}
 						else
 						{
-							panelDatos.actualizarInterfaz("DEBE SELECIONAR UN TIPO DE BUSQUEDA");
+							orden = "dsc";
 						}
-					panelDatos.actualizarInterfaz("Se encontraron un total de: "+ respuesta.size()+ " cliente"); 
-					table = new JTabla(respuesta);
-					System.out.println("ACABO");
+						if(queSI.isSelected()) {
+							System.out.println("QUE SI");
+							respuesta = cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);	
+						}
+						else 
+							if(queNO.isSelected()) 
+							{
+								System.out.println("QUE NO");
+								respuesta= cadenaHotelera.darClientesHanConsumido(combo.getSelectedIndex()+1, fechaInicio.getText(), fechaFinal.getText(), criterios[criteriosCom.getSelectedIndex()], orden);
+							}
+							else
+							{
+								panelDatos.actualizarInterfaz("DEBE SELECIONAR UN TIPO DE BUSQUEDA");
+							}
+						panelDatos.actualizarInterfaz("Se encontraron un total de: "+ respuesta.size()+ " cliente"); 
+						table = new JTabla(respuesta);
+						System.out.println("ACABO");
+					}
+					//LA TABLA
+					table.pack();
+					table.setVisible(true);
 				}
-				//LA TABLA
-				table.pack();
-				table.setVisible(true);
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
 			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
 			}
 		}
-		catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
+		else
+		{
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Usted no tiene permisos para acceder a esta informacion,\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+
 		}
+
 	}
 
+	public void pocaDemandaServicios()
+	{
+		if(gerentegeneral= true) 
+		{
+			JFrame ventana = new JFrame(); 
+			JPanel panel = new JPanel(new BorderLayout());
+			JPanel titulos= new JPanel(new GridLayout(0,2));
+			JPanel info= new JPanel(new GridLayout(0,2));
+			JPanel panelHabitaciones = new JPanel(new GridLayout(2,0));
+			JPanel panelServicios = new JPanel(new GridLayout(2,0));
+			//TITULO
+			JLabel tituloHabitaciones = new JLabel("Consultar el funcionamiento de las habitaciones");
+			JLabel tituloServicios = new JLabel("Consultar el funcionamiento de los servicios");
+
+			//Array de ‘String’ con los titulos de las COLUMNAS
+			String[] columnNamesHabitacion = {"Semana","Tipo Habitacion", "Solicitudes"};
+			String[] columnNamesServicio = {"Semana","Nombre" ,"Consumos"};
+
+
+
+			//LISTAS
+			List<String[]> habitacionesMas = cadenaHotelera.consultarFuncionamientoHabitacionMasSolicitada();
+			System.out.println(habitacionesMas.size()+ " HABITACIONES MAS SOLICITADAS");
+
+
+			List<String[]> habitacionesMenos = cadenaHotelera.consultarFuncionamientoHabitacionMenosSolicitada();
+			System.out.println(habitacionesMenos.size()+ " HABITACIONES MENOS SOLICITADAS");
+
+			List<String[]> serviciosMas = cadenaHotelera.consultarFuncionamientoServicioMasConsumido();
+			System.out.println(serviciosMas.size()+ " SERVICIOS MAS CONSUMIDOS");
+
+
+			List<String[]> serviciosMenos = cadenaHotelera.consultarFuncionamientoServicioMenosConsumido();
+			System.out.println(serviciosMenos.size()+ " SERVICIOS MENOS CONSUMIDOS");
+			//TABLAS		
+			Object[][] data =	{ { } };
+
+
+			//
+			DefaultTableModel dtmHabiMax = new DefaultTableModel(data , columnNamesHabitacion);
+			DefaultTableModel dtmHabiMeno = new DefaultTableModel(data , columnNamesHabitacion);
+
+			DefaultTableModel dtmServiMax = new DefaultTableModel(data , columnNamesServicio);
+			DefaultTableModel dtmServiMenos = new DefaultTableModel(data , columnNamesServicio);
+
+
+			JTable tablaHabitacionesMas = new JTable(dtmHabiMax);		
+			agregarTablaHabitacion(dtmHabiMax, habitacionesMas);
+
+
+			JTable tablaHabitacionesMenos = new JTable(dtmHabiMeno);
+			agregarTablaHabitacion(dtmHabiMeno, habitacionesMenos);
+
+
+
+			JTable tablaServicioMas = new JTable(dtmServiMax);
+			agregarTablaServicio(dtmServiMax, serviciosMas);
+
+
+			JTable tablaServicoMenos = new JTable(dtmServiMenos);
+			agregarTablaServicio(dtmServiMenos, serviciosMenos);
+
+
+			//		//Creamos un JscrollPane y le agregamos la JTable 
+
+			JScrollPane scrollPane1 = new JScrollPane(tablaHabitacionesMas);
+			JScrollPane scrollPane2 = new JScrollPane(tablaHabitacionesMenos);
+
+
+			JScrollPane scrollPane3 = new JScrollPane(tablaServicioMas);
+			JScrollPane scrollPane4 = new JScrollPane(tablaServicoMenos);	
+			//			
+			scrollPane1.setBorder(new TitledBorder("Tabla habitaciones mas solicitadas"));
+			scrollPane2.setBorder(new TitledBorder("Tabla habitaciones menos solicitadas"));
+			scrollPane3.setBorder(new TitledBorder("Tabla servicios mas consumidos"));
+			scrollPane4.setBorder(new TitledBorder("Tabla sevicios menos consumidos"));
+
+
+
+			titulos.add(tituloHabitaciones);
+			titulos.add(tituloServicios);
+			panel.add(titulos, BorderLayout.NORTH);
+
+			panelHabitaciones.add(scrollPane1);
+			panelHabitaciones.add(scrollPane2);
+			//		
+			panelServicios.add(scrollPane3);
+			panelServicios.add(scrollPane4);
+			//		
+			info.add(panelHabitaciones);
+			info.add(panelServicios);
+
+			panel.add(info, BorderLayout.CENTER);
+
+
+			panel.setVisible(true);
+
+
+			ventana.add(panel);
+			ventana.setVisible(true);
+		}
+		else
+		{
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Usted no tiene permisos para acceder a esta informacion,\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+
+		}
+
+	}
+
+	private void agregarTablaHabitacion(DefaultTableModel dtm, List<String[]> param)
+	{
+		for (int j = 0; j < param.size(); j++)
+		{
+			String[] actual = param.get(j);
+
+
+			Object[] newRow = {actual[2], actual[0], actual[1]};
+			dtm.addRow(newRow);
+
+		}
+	}
+	private void agregarTablaServicio(DefaultTableModel dtm, List<String[]> param)
+	{
+		for (int j = 0; j < param.size(); j++)
+		{
+			String[] actual = param.get(j);	
+			Object[] newRow = {actual[3], actual[0], actual[2]};
+			dtm.addRow(newRow);
+
+
+		}
+	}
 
 
 	private  Timestamp convertirTimeStap(String fecha)
@@ -1564,22 +1599,193 @@ public class InterfazHotelAndessApp extends JFrame implements ActionListener
 
 	public void buenosClientesP1()
 	{
+		if(gerentegeneral)
+		{
+			JFrame ventana = new JFrame(); 
+			JPanel panel = new JPanel(new BorderLayout());
+			List<String[]> listaClientes = cadenaHotelera.buenosClientes1();
 
+
+			Object[][] data =	
+				{ 
+						{
+
+						}
+				}; 
+
+			//Array de ‘String’ con los titulos de las columnas 
+			String[] columnNames = {"id","Nombre", "Tipo documento", "Numero de documento", "Correo", "Razon"};
+
+			//creamos el modelo de tabla con los datos anteriores 
+			DefaultTableModel dtm = new DefaultTableModel(data , columnNames); 
+			//se crea la tabla con el defaultablemodel 
+			JTable tabla = new JTable(dtm);
+			tablaClientes(dtm, listaClientes);
+			JScrollPane scrollPane1 = new JScrollPane(tabla);
+			scrollPane1.setBorder(new TitledBorder("Tabla de clientes"));
+
+			panel.add(scrollPane1);
+
+
+			ventana.add(panel);
+			ventana.setVisible(true);
+		}
+		else
+		{
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Usted no tiene permisos para acceder a esta informacion,\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+
+		}
+	}
+
+	private void tablaClientes(DefaultTableModel dtm, List<String[]> param )
+	{
+		for (int j = 0; j < param.size(); j++)
+		{
+			String[] actual = param.get(j);
+
+			Object[] newRow = {actual[0], actual[1], actual[3], "100."+actual[0], actual[2], actual[4]};
+			dtm.addRow(newRow);
+
+		}
 	}
 
 	public void buenosClientesP2()
 	{
+		if(gerentegeneral) {
+			JFrame ventana = new JFrame(); 
+			JPanel panel = new JPanel(new BorderLayout());
+			List<String[]> listaClientes = cadenaHotelera.buenosClientes2();
+			System.out.println(listaClientes.size());
 
+
+			Object[][] data =	
+				{ 
+						{
+
+						}
+				}; 
+
+			//Array de ‘String’ con los titulos de las columnas 
+			String[] columnNames = {"id","Nombre", "Tipo documento", "Numero de documento", "Correo", "Razon"};
+
+			//creamos el modelo de tabla con los datos anteriores 
+			DefaultTableModel dtm = new DefaultTableModel(data , columnNames); 
+			//se crea la tabla con el defaultablemodel 
+			JTable tabla = new JTable(dtm);
+			tablaClientes(dtm, listaClientes);
+			JScrollPane scrollPane1 = new JScrollPane(tabla);
+			scrollPane1.setBorder(new TitledBorder("Tabla de clientes"));
+
+			panel.add(scrollPane1);
+
+
+			ventana.add(panel);
+			ventana.setVisible(true);
+		}
+		else
+		{
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Usted no tiene permisos para acceder a esta informacion,\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+
+		}
 	}
 
 	public void buenosClientesP3()
 	{
+		if(gerentegeneral) 
+		{
+			JFrame ventana = new JFrame(); 
+			JPanel panel = new JPanel(new BorderLayout());
+			System.out.println("VA A EMPEZAR 3");
+			List<String[]> listaClientes = cadenaHotelera.buenosClientes3();
 
+
+			Object[][] data =	
+				{ 
+						{
+
+						}
+				}; 
+
+			//Array de ‘String’ con los titulos de las columnas 
+			String[] columnNames = {"id","Nombre", "Tipo documento", "Numero de documento", "Correo", "Razon"};
+
+			//creamos el modelo de tabla con los datos anteriores 
+			DefaultTableModel dtm = new DefaultTableModel(data , columnNames); 
+			//se crea la tabla con el defaultablemodel 
+			JTable tabla = new JTable(dtm);
+			tablaClientes(dtm, listaClientes);
+			JScrollPane scrollPane1 = new JScrollPane(tabla);
+			scrollPane1.setBorder(new TitledBorder("Tabla de clientes"));
+
+			panel.add(scrollPane1);
+
+
+			ventana.add(panel);
+			ventana.setVisible(true);
+		}
+		else
+		{
+			JPanel panel = new JPanel();
+
+			JOptionPane.showMessageDialog(panel, "Usted no tiene permisos para acceder a esta informacion,\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+
+		}
 	}
 
 	public void login()
 	{
+		JPanel ventana = new JPanel();
+		String seleccion = JOptionPane.showInputDialog( ventana, "Dijite su clave",  JOptionPane.QUESTION_MESSAGE);
+		if(seleccion.equals(GERENTE))
+		{
+			gerente= true;
+			receptionista = false;
+			organizador= false; 
+			gerentegeneral= false;
+		}
+		else if(seleccion.equals(GERETNEGENERAL))
+		{
+			gerente= false;
+			receptionista = false;
+			organizador= false; 
+			gerentegeneral= true;
+		}
+		else if(seleccion.equals(ORGANIZADOR))
+		{
+			gerente= false;
+			receptionista = false;
+			organizador= true; 
+			gerentegeneral= false;
+		}
+		else if(seleccion.equals(RECEPCIONISTA))
+		{
+			gerente= false;
+			receptionista = true;
+			organizador= false; 
+			gerentegeneral= false;
+		}
+		else
+		{
+			gerente= false;
+			receptionista = false;
+			organizador= false; 
+			gerentegeneral= false;
+			JPanel panel = new JPanel();
 
+			JOptionPane.showMessageDialog(panel, "Contraseña incorrecta	.\n"
+					+ "Si es un error del sistema comuniquese con el administrador del sistema ", "Confirmar salida", JOptionPane.ERROR_MESSAGE);
+
+		}
 	}
 
 

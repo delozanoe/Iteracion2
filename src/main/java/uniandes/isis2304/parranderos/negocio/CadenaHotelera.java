@@ -473,6 +473,22 @@ public class CadenaHotelera
 		return pha.consultarFuncionamientoServicioMenosConsumido();
 	}
 	
+	public List<String []> buenosClientes1()
+	{
+		return pha.buenosClientes1();
+	}
+	
+	public List<String []> buenosClientes2()
+	{
+		System.out.println("EN CADENA HOTELERA");
+		return pha.buenosClientes2();
+	}
+	
+	public List<String []> buenosClientes3()
+	{
+		return pha.buenosClientes3();
+	}
+	
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

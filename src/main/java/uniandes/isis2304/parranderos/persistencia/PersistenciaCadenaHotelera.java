@@ -61,6 +61,8 @@ public class PersistenciaCadenaHotelera
 	 * Cadena para indicar el tipo de sentencias que se va a utilizar en una consulta
 	 */
 	public final static String SQL = "javax.jdo.query.SQL";
+	
+	
 
 	private static PersistenciaCadenaHotelera instance;
 
@@ -116,6 +118,7 @@ public class PersistenciaCadenaHotelera
 
 	private SQLPlanConsumoServicio sqlPlanConsumoServicio;
 
+	
 
 	private PersistenciaCadenaHotelera()
 	{
@@ -2317,8 +2320,9 @@ public class PersistenciaCadenaHotelera
 	public List<String []> buenosClientes2()
 	{
 		List<String[]> resp = new LinkedList <String[]>();
+		System.out.println("EN PERSISTENCIA CADENA HOTELERA");
 		List<Object[]> tuplas = sqlCliente.buenosClientes2(pmf.getPersistenceManager());
-		
+		System.out.println("EN PERSISTENCIA CADENA HOTELERA 2.0");
 		for(Object [] tupla: tuplas)
 		{
 			String[] datosResp = new String [5];
@@ -2330,7 +2334,7 @@ public class PersistenciaCadenaHotelera
 			datosResp[4] = "Por usar servicios con costo mayores a 300"; // razon
 			resp.add(datosResp);
 		}
-		
+		System.out.println("EN PERSISTENCIA CADENA HOTELERA 3.0");
 		return resp;
 	}
 	

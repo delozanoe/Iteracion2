@@ -190,8 +190,9 @@ class SQLCLIENTE {
 		return q.executeList();
 	}
 
-	public List<Object[]> buenosClientes2 (PersistenceManager pm)
+	public List<Object[]> buenosClientes2(PersistenceManager pm)
 	{
+		System.out.println("CORRIENDO EL QUERY");
 		String sql = "SELECT DISTINCT c.idUsuario, u.nombre, u.correo, u.tipodocumento\n" + 
 				"				FROM Cliente c, Habitacion h, ConsumoHabitacion ch, ConsumoHabitacionServicio chs, Servicio s, Usuario u \n" + 
 				"				WHERE c.idHabitacion = h.id\n" + 
@@ -201,6 +202,7 @@ class SQLCLIENTE {
 				"                    AND c.idUsuario = u.id\n" + 
 				"				    AND s.costo >100";
 		Query q = pm.newQuery(SQL, sql);
+		System.out.println("CORRIO EL QUERY");
 		return q.executeList();	
 	}
 
